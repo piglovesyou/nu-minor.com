@@ -1,0 +1,59 @@
+
+{namespace app}
+
+
+/**
+ * @param isProduction
+ */
+{template .main}
+  <!DOCTYPE HTML>
+  <html lang="en">
+  <head>
+    {call .headContent}{/call}
+    {if $isProduction}
+      <script src="/javascripts/main-min.js"></script>
+    {else}
+      <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace"></script>
+    {/if}
+  </head>
+  <body>
+    {call .bodyContent}{/call}
+    <script>main()</script>
+  </body>
+  </html>
+{/template}
+
+
+/**
+ * Common items in head tag except <script>.
+ */
+{template .headContent}
+  <meta charset="UTF-8">
+  <title>Plovr Sample</title>
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+{/template}
+
+
+/***/
+{template .bodyContent}
+  <h1>Plovr Sample</h1>
+  <p>Decorate me by CSS and JavaScript (goog.ui.Component).</p>
+{/template}
+
+
+/**
+ * Rendered from `soyweb' command.
+ * This entry point does not contain any script tag.
+ * Designer
+ */
+{template .soyweb}
+  <!DOCTYPE HTML>
+  <html lang="en">
+  <head>
+    {call .headContent}{/call}
+  </head>
+  <body>
+    {call .bodyContent}{/call}
+  </body>
+  </html>
+{/template}

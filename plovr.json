@@ -1,0 +1,11 @@
+{
+  "id": "plovr-sample",
+  "paths": [
+	  "./public/app",
+	  "./public/javascripts"
+  ],
+  "inputs": "public/javascripts/main.js",
+  "mode": "ADVANCED",
+  "level": "VERBOSE",
+  "output-file": "public/javascripts/main-min.js"
+}
