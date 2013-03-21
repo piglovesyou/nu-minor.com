@@ -17,6 +17,7 @@
     {/if}
   </head>
   <body>
+    {if $isProduction}<p style="color:#f33">Production Mode!</p>{/if}
     {call .bodyContent}{/call}
     <script>main()</script>
   </body>
