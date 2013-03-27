@@ -8,10 +8,11 @@ Here is a list to represent which feature is hosted or not yet.
 - JSON configuration by Plovr
 - Closure Library
 - Closure Compiler
-  - Dynamic compilation by Plovr
+  - dynamically compiled by Plovr
+- Closure Stylesheets
+  - Also dynamically compiled by Plovr
 - Closure Template
   - Ready to SoyWeb development for designers by Plovr
-- (not yet) Closure Stylesheets
 - (not yet) Closure Linter
 
 To fetch libraries,

@@ -9,12 +9,9 @@
   <!DOCTYPE HTML>
   <html lang="en">
   <head>
-    {call .headContent}{/call}
-    {if $isProduction}
-      <script src="/javascripts/main-min.js"></script>
-    {else}
-      <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace"></script>
-    {/if}
+    {call .headContent}
+      {param isProduction: $isProduction /}
+    {/call}
   </head>
   <body>
     {if $isProduction}<p style="color:#f33">Production Mode!</p>{/if}
@@ -27,11 +24,18 @@
 
 /**
  * Common items in head tag except <script>.
+ * @param isProduction
  */
 {template .headContent}
   <meta charset="UTF-8">
   <title>Plovr Sample</title>
-  <link rel="stylesheet" href="/stylesheets/style.css" />
+  {if $isProduction}
+    <link rel="stylesheet" href="/stylesheets/main-min.css" />
+    <script src="/javascripts/main-min.js"></script>
+  {else}
+    <link rel="stylesheet" href="http://localhost:9810/css/plovr-sample/" />
+    <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace"></script>
+  {/if}
 {/template}
 
 

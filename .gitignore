@@ -3,3 +3,4 @@ node_modules
 /libs
 /closure
 /public/javascripts/main-min.js
+/public/stylesheets/main-min.css
