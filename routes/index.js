@@ -6,7 +6,7 @@ var isProduction = process.env.NODE_ENV === 'production';
  */
 
 exports.index = function(req, res) {
-  res.end(soy.render('app.main', {
+  res.end(soy.render('app.soy.main', {
     isProduction: isProduction
   }));
 };
