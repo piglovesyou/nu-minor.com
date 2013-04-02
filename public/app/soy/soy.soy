@@ -34,7 +34,7 @@
     <script src="/javascripts/main-min.js"></script>
   {else}
     <link rel="stylesheet" href="http://localhost:9810/css/plovr-sample/" />
-    <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace"></script>
+    <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
   {/if}
 {/template}
 
@@ -48,7 +48,7 @@
 
 /***/
 {template .soySampleForJs}
-  <p>I'm from /app/soy/app.soy.</p>
+  <p class="{css app-sampleClassName}">I'm from /app/soy/app.soy.</p>
 {/template}
 
 
