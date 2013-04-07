@@ -4,5 +4,35 @@
 
 /***/
 {template .main}
-  body
+  {call .title}{/call}
+  {call .nav}{/call}
+{/template}
+
+/***/
+{template .title}
+  <div class="row app-title">
+    <h1 class="span2">NuMinor</h1>
+  </div>
+{/template}
+
+/***/
+{template .nav}
+  <div class="row row-nav">
+    <div class="span3">
+      <a href="#" class="btn btn-large btn-block btn-danger">
+        <span class="icon-youtube">You Tube</span>
+      </a>
+    </div>
+    <div class="span3">
+      <a href="#" class="btn btn-large btn-block">
+        <span class="icon-thumbs-up">Default Button</span>
+      </a>
+    </div>
+    <div class="span3">
+      <a href="#" class="btn btn-large btn-block btn-primary">Primary Button</a>
+    </div>
+    <div class="span3">
+      <a href="#" class="btn btn-large btn-block btn-info">Info Button</a>
+    </div>
+  </div>
 {/template}

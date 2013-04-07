@@ -1,0 +1,9 @@
+[submodule "public/sass/Flat-UI"]
+	path = public/sass/Flat-UI
+	url = git://github.com/designmodo/Flat-UI.git
+[submodule "public/sass/sass-twitter-bootstrap"]
+	path = public/sass/sass-twitter-bootstrap
+	url = git://github.com/jlong/sass-twitter-bootstrap.git
+[submodule "public/sass/Font-Awesome-More"]
+	path = public/sass/Font-Awesome-More
+	url = git://github.com/gregoryloucas/Font-Awesome-More.git
