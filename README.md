@@ -29,7 +29,7 @@ $ node-dev app        # Then access http://localhost:3000/
 
 To start HTML development for designer,
 ```
-$ ./run.sh soyweb &   # Then access http://localhost:9811/soy/app.html
+$ ./run.sh soyweb &   # Then access http://localhost:9811/app/soy/
 ```
 
 To compile JavaScripts and start production server,
