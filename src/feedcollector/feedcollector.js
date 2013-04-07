@@ -16,7 +16,7 @@ Q(collectYoutubeFeeds())
 
 .then(function(items) {
   items.forEach(function(e, i) {
-    console.log(i, e.uploaded, e.title);
+    console.log(e.id);
   });
 })
 

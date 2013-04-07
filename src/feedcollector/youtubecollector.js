@@ -37,9 +37,9 @@ var saveItems = function(items) {
 var sortByUploadedDate = function(items) {
   return items.sort(function(a, b) {
     return a.uploaded < b.uploaded ? -1 :
-           a.uploaded > b.uploaded ? 1 : 0 ;
+           a.uploaded > b.uploaded ? 1 : 0;
   });
-}
+};
 
 
 
@@ -50,6 +50,7 @@ Q.when(collectFromDB())
 
 .then(get25Items)
 
+// TODO: Sort and save. Not save and sort.
 .then(sortByUploadedDate)
 
 .then(function(items) {
