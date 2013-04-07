@@ -36,15 +36,33 @@ $item-margin-bottom: 20px
   [class^="icon-"], [class*=" icon-"]
     font-weight: bold
 
-.my-row
-  div
-    +margin-bottom-normal
-    background: $gray
+.app-items
+  @for $i from 1 through $gridColumns
+    .span#{$i} iframe
+      margin-bottom: 6px
+      $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
+      width: $w
+      height: ($w / 1.777) // Youtube aspect
+      vertical-align: bottom
 
-    
-    @for $i from 1 through $gridColumns
-      &.span#{$i} iframe
-        $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
-        width: $w
-        height: ($w / 1.777) // Youtube aspect
-        vertical-align: bottom
+.app-item
+  +margin-bottom-normal
+  // background: $gray
+  .app-item-bar
+    text-align: right
+    .icon-heart-empty,
+    .icon-heart,
+    .icon-heart-empty,
+    .icon-thumbs-down
+      margin-left: 6px
+      font-size: 140%
+    .icon-heart,
+    .icon-heart-empty
+      color: red
+      &:hover
+        color: lighten(red, 20%)
+    .icon-thumbs-down
+      color: #333
+      &:hover
+        color: lighten(#333, 20%)
+      font-weight: bold

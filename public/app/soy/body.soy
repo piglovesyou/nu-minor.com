@@ -6,11 +6,15 @@
  * @param items
  */
 {template .main}
-  <div class="row my-row">
+  <div class="row app-items">
 
     {foreach $i in [9, 3, 3, 3, 3, 3, 6, 3, 3, 3, 3, 3, 3]}
-      <div class="span{$i}{if $i == 6} pull-right{/if}">
+      <div class="app-item span{$i}{if $i == 6} pull-right{/if}">
         <iframe src="http://www.youtube-nocookie.com/embed/{$items[index($i)]}?rel=0" frameborder="0" allowfullscreen></iframe>
+        <div class="app-item-bar">
+          <a href="#" class="icon-heart-empty">{$i}</a>
+          <a href="#" class="icon-thumbs-down">{$i}</a>
+        </div>
       </div>
     {/foreach}
 
