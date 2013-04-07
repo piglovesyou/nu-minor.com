@@ -8531,6 +8531,8 @@ h1 {
 
 .row-nav {
   margin-bottom: 20px; }
+  .row-nav [class^="icon-"], .row-nav [class*=" icon-"] {
+    font-weight: bold; }
 
 .my-row div {
   margin-bottom: 20px;
