@@ -42,11 +42,15 @@
 {/template}
 
 
-/***/
+/**
+ * @param items
+ */
 {template .bodyContent}
   <div class="container">
     {call app.soy.head.main}{/call}
-    {call app.soy.body.main}{/call}
+    {call app.soy.body.main}
+      {param items:$items /}
+    {/call}
   </div>
 {/template}
 
@@ -69,7 +73,36 @@
     {call .headContent}{param excludeScript: true /}{/call}
   </head>
   <body>
-    {call .bodyContent}{/call}
+
+    {call .bodyContent}
+      {param items: [
+        'j3S3Txsl2vs',
+        'kcVh-tXfwZw',
+        '-3JCESdFNyw',
+        '05ZvII57p_M',
+        'tu3IkbDvteQ',
+        'PtcqXFZFiWo',
+        'eeM5YcMUtFQ',
+        '93t1H-EkUj4',
+        'qN3kC_4xURA',
+        'f9iIgQN5uZE',
+        'tb3qxDrsA0M',
+        'RIFSuAJhTlg',
+        'NKlCIR654Ho',
+        'aryARs0szU4',
+        'duVq7cXWcYw',
+        '1dF2ZLq7oBk',
+        'QNwCojCJ3-Q',
+        '-0Xa4bHcJu8',
+        'FavUpD_IjVY',
+        'WQO-aOdJLiw',
+        'jX3iLfcMDCw',
+        'oWTgvRGwzWg',
+        'GAvS1ndtEKg',
+        '6W_ETBVdoKc',
+        'MuWTQtyKih4'
+      ] /}
+    {/call}
   </body>
   </html>
 {/template}

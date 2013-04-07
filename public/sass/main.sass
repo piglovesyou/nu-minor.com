@@ -40,8 +40,11 @@ $item-margin-bottom: 20px
   div
     +margin-bottom-normal
     background: $gray
-    &.span3
-      height: $itme-min-height
-    &.span6,
-    &.span9
-      height: $itme-min-height * 2 + $item-margin-bottom
+
+    
+    @for $i from 1 through $gridColumns
+      &.span#{$i} iframe
+        $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
+        width: $w
+        height: ($w / 1.777) // Youtube aspect
+        vertical-align: bottom

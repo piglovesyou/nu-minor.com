@@ -2,17 +2,18 @@
 {namespace app.soy.body}
 
 
-/***/
+/**
+ * @param items
+ */
 {template .main}
   <div class="row my-row">
-    <div class="span9"></div>
-    <div class="span3"></div>
-    <div class="span3"></div>
-    <div class="span3"></div>
-    <div class="span3"></div>
-    <div class="span6 pull-right"></div>
-    <div class="span3"></div>
-    <div class="span3"></div>
+
+    {foreach $i in [9, 3, 3, 3, 3, 3, 6, 3, 3, 3, 3, 3, 3]}
+      <div class="span{$i}{if $i == 6} pull-right{/if}">
+        <iframe src="http://www.youtube-nocookie.com/embed/{$items[index($i)]}?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+    {/foreach}
+
   </div>
 {/template}
 
