@@ -53,6 +53,10 @@ case $1 in
         java -jar ${PLOVR_JAR_PATH} soyweb --dir ./public
         ;;
 
+    sass)
+        sass --watch public/sass/main.sass:public/stylesheets/main.css
+        ;;
+
     serve)
         java -jar ${PLOVR_JAR_PATH} serve plovr.json
         ;;

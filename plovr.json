@@ -10,6 +10,6 @@
   "level": "VERBOSE",
   "output-file": "public/javascripts/main-min.js",
 
-  "css-inputs": "public/stylesheets/main.gss",
-  "css-output-file": "public/stylesheets/main-min.css"
+  // "css-inputs": "public/stylesheets/main.gss",
+  // "css-output-file": "public/stylesheets/main-min.css"
 }

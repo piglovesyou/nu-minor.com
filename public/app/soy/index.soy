@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/stylesheets/main-min.css" />
     <script src="/javascripts/main-min.js"></script>
   {else}
-    <link rel="stylesheet" href="http://localhost:9810/css/plovr-sample/" />
+    <link rel="stylesheet" href="/stylesheets/main.css" />
     {if not $excludeScript}
       <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
     {/if}
@@ -44,8 +44,8 @@
 
 /***/
 {template .bodyContent}
-  <h1>Plovr Sample</h1>
-  <p>Decorate me by CSS and JavaScript (goog.ui.Component).</p>
+  {call app.soy.head.main}{/call}
+  {call app.soy.body.main}{/call}
 {/template}
 
 

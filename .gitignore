@@ -1,5 +1,6 @@
 node_modules
 .DS_Store
+/.sass-cache
 /libs
 /closure
 /public/javascripts/main-min.js
