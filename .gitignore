@@ -5,3 +5,4 @@ node_modules
 /closure
 /public/javascripts/main-min.js
 /public/stylesheets/main-min.css
+/tmp.js

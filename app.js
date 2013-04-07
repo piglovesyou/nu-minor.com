@@ -13,7 +13,8 @@ var express = require('express') ,
   http = require('http') ,
   path = require('path') ,
   sass = require('node-sass'),
-  isProduction = process.env.NODE_ENV === 'production';
+  isProduction = process.env.NODE_ENV === 'production',
+  youtube = require('youtube-feeds')
 
 var app = express();
 
