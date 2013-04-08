@@ -4,6 +4,7 @@
 
 /**
  * @param isProduction
+ * @param items
  */
 {template .main}
   <!DOCTYPE HTML>
@@ -11,11 +12,14 @@
   <head>
     {call .headContent}
       {param isProduction: $isProduction /}
+      {param excludeScript: false /}
     {/call}
   </head>
   <body>
     {if $isProduction}<p style="color:#f33">Production Mode!</p>{/if}
-    {call .bodyContent}{/call}
+    {call .bodyContent}
+      {param items: $items /}
+    {/call}
     <script>main()</script>
   </body>
   </html>
@@ -70,7 +74,10 @@
   <!DOCTYPE HTML>
   <html lang="en">
   <head>
-    {call .headContent}{param excludeScript: true /}{/call}
+    {call .headContent}
+      {param isProduction: false /}
+      {param excludeScript: true /}
+    {/call}
   </head>
   <body>
 
