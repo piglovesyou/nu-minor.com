@@ -9,7 +9,7 @@
  */
 
 var express = require('express') ,
-  routes = require('./routes') ,
+  routes = require('./src/routes') ,
   http = require('http') ,
   path = require('path') ,
   sass = require('node-sass'),
