@@ -46,7 +46,9 @@ app.configure('development', function() {
 });
 
 app.get('/', routes.index.view);
-app.get('/:itemid/view', routes.eachitem.view);
+app.get('/:itemId/view', routes.eachitem.view);
+app.post('/:itemId/like', routes.eachitem.like);
+app.post('/:itemId/unlike', routes.eachitem.unlike);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

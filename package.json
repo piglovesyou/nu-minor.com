@@ -9,6 +9,10 @@
     "express": "3.1.0",
     "soynode": "*",
     "jade": "*",
+    "q": "*",
+    "mongoose": "*",
+    "underscore": "*",
+    "youtube-feeds": "*",
     "node-sass": "0.4.x"
   }
 }
