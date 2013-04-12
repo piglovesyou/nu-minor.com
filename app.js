@@ -9,12 +9,16 @@
  */
 
 var express = require('express') ,
-  routes = require('./src/routes') ,
   http = require('http') ,
   path = require('path') ,
   sass = require('node-sass'),
   isProduction = process.env.NODE_ENV === 'production',
-  youtube = require('youtube-feeds')
+  youtube = require('youtube-feeds');
+
+var routes = {
+  index: require('./src/routes'),
+  eachitem: require('./src/routes/eachitem')
+};
 
 var app = express();
 
@@ -39,7 +43,8 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
+app.get('/', routes.index.view);
+app.get('/:itemid/view', routes.eachitem.view);
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));

@@ -7,7 +7,7 @@ var isProduction = process.env.NODE_ENV === 'production';
  * GET home page.
  */
 
-exports.index = function(req, res) {
+exports.view = function(req, res) {
   db.item.find({type: 'youtube'}, function(err, items) {
 
     console.log(items[1].id);
