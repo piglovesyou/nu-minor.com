@@ -32,7 +32,7 @@ var youtube = {
 
 
 
-schemaMap.post = _.extend(youtube, {
+schemaMap.item = _.extend(youtube, {
   type: String, // youtube
   like: [ String ],
   unlike: [ String ]

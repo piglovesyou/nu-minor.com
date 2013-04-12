@@ -93,7 +93,7 @@ var insertItems = function(data) {
 var insertItem = function(item) {
   return function() {
     var d = Q.defer();
-    db.post.update({ id: item.id },
+    db.item.update({ id: item.id },
                    item,
                    { upsert: true },
                    function(err, handled, status) {

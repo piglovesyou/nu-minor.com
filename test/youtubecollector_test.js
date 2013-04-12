@@ -24,7 +24,7 @@ describe('YoutubeCollector', function() {
     })
     .then(function(total) {
       var d = Q.defer();
-      db.post.count(function(err, actual) {
+      db.item.count(function(err, actual) {
         assert(_.isNumber(actual));
         d.resolve({
           total: total,
