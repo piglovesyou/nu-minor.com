@@ -11,7 +11,7 @@ var deferredToExport = Q.defer();
 module.exports = deferredToExport.promise;
 
 // A local promise object where steps are chained in this file.
-var p;
+var promiseCollectYoutube;
 
 
 
@@ -31,12 +31,21 @@ var isEnough = function(data) {
   return data.startIndex + data.items.length > data.totalItems;
 };
 
+var whenFail = function(reason) {
+  throw new Error(reason);
+};
+
+var whenAllDone = function() {
+  deferredToExport.resolve();
+};
+
 // TODO: Refactor this.
 var fetchItems = (function(page) {
   return function() {
     var d = Q.defer();
     Q.when()
     .then(fetchRemote(page++))
+    .then(insertItems)
     .fail(whenFail)
     .done(function() {
       d.resolve();
@@ -50,27 +59,30 @@ var fetchRemote = function(page) {
     var d = Q.defer();
     youtube.feeds.videos(createOpt(page), function(err, data) {
       if (err) d.reject(err);
-      var p_ = Q.when();
-      data.items.forEach(function(item) {
-        p_.then(insertItem(item));
-      });
-      p_.fail(whenFail)
-      .done(function(result) {
-        if (!isEnough(data)) {
-          // Fetch items again.
-          p.then(fetchItems);
-        } else {
-          p.done(whenDone);
-        }
-        d.resolve(result);
-      });
+      d.resolve(data)
     });
     return d.promise;
   }
 };
 
-// var insertItems = function() {
-// }
+var insertItems = function(data) {
+  var d = Q.defer();
+  var p = Q.when();
+  data.items.forEach(function(item) {
+    p.then(insertItem(item));
+  });
+  p.fail(whenFail)
+  .done(function() {
+    if (!isEnough(data)) {
+      // Fetch items again.
+      promiseCollectYoutube.then(fetchItems);
+    } else {
+      promiseCollectYoutube.done(whenAllDone);
+    }
+    d.resolve();
+  });
+  return d.promise;
+}
 
 var insertItem = function(item) {
   return function() {
@@ -86,15 +98,7 @@ var insertItem = function(item) {
   };
 };
 
-var whenFail = function(reason) {
-  throw new Error(reason);
-};
-
-var whenDone = function() {
-  deferredToExport.resolve();
-};
-
-p = Q.when()
+promiseCollectYoutube = Q.when()
 .then(fetchItems)
 .fail(whenFail);
 
