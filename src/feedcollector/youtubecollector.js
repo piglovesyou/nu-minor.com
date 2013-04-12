@@ -15,6 +15,7 @@ var promiseCollectYoutube;
 
 
 
+// Constant and Helper Functions
 var MAX_RESULTS = 50; // Youtube max spec.
 var createOpt = function(page) {
   return {
@@ -24,8 +25,6 @@ var createOpt = function(page) {
     'start-index': (page * MAX_RESULTS) - (MAX_RESULTS - 1)
   };
 };
-
-
 
 var isEnough = function(data) {
   return data.startIndex + data.items.length > data.totalItems;
@@ -39,7 +38,9 @@ var whenAllDone = function() {
   deferredToExport.resolve();
 };
 
-// TODO: Refactor this.
+
+
+// Primary Step
 var fetchItems = (function(page) {
   return function() {
     var d = Q.defer();
@@ -54,12 +55,16 @@ var fetchItems = (function(page) {
   };
 })(1); // 1 is first page.
 
+
+
+
+// Sub Steps
 var fetchRemote = function(page) {
   return function() {
     var d = Q.defer();
     youtube.feeds.videos(createOpt(page), function(err, data) {
       if (err) d.reject(err);
-      d.resolve(data)
+      d.resolve(data);
     });
     return d.promise;
   }
@@ -69,6 +74,7 @@ var insertItems = function(data) {
   var d = Q.defer();
   var p = Q.when();
   data.items.forEach(function(item) {
+    item.type = 'youtube';
     p.then(insertItem(item));
   });
   p.fail(whenFail)
@@ -82,7 +88,7 @@ var insertItems = function(data) {
     d.resolve();
   });
   return d.promise;
-}
+};
 
 var insertItem = function(item) {
   return function() {
@@ -98,7 +104,8 @@ var insertItem = function(item) {
   };
 };
 
+
+
 promiseCollectYoutube = Q.when()
 .then(fetchItems)
 .fail(whenFail);
-
