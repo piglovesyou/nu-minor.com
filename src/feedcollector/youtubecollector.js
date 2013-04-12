@@ -35,15 +35,27 @@ var isEnough = function(data) {
 var fetchItems = (function(page) {
   return function() {
     var d = Q.defer();
-    youtube.feeds.videos(createOpt(page++), function(err, data) {
+    Q.when()
+    .then(fetchRemote(page++))
+    .fail(whenFail)
+    .done(function() {
+      d.resolve();
+    });
+    return d.promise;
+  };
+})(1); // 1 is first page.
+
+var fetchRemote = function(page) {
+  return function() {
+    var d = Q.defer();
+    youtube.feeds.videos(createOpt(page), function(err, data) {
       if (err) d.reject(err);
       var p_ = Q.when();
       data.items.forEach(function(item) {
         p_.then(insertItem(item));
       });
-      p_.fail(function(err) {
-        d.reject(err);
-      }).done(function(result) {
+      p_.fail(whenFail)
+      .done(function(result) {
         if (!isEnough(data)) {
           // Fetch items again.
           p.then(fetchItems);
@@ -54,8 +66,11 @@ var fetchItems = (function(page) {
       });
     });
     return d.promise;
-  };
-})(1); // 1 is first page.
+  }
+};
+
+// var insertItems = function() {
+// }
 
 var insertItem = function(item) {
   return function() {
@@ -71,13 +86,15 @@ var insertItem = function(item) {
   };
 };
 
+var whenFail = function(reason) {
+  throw new Error(reason);
+};
+
 var whenDone = function() {
   deferredToExport.resolve();
 };
 
 p = Q.when()
 .then(fetchItems)
-.fail(function(err) {
-  throw new Error(err);
-});
+.fail(whenFail);
 
