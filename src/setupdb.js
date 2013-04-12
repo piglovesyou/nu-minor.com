@@ -1,18 +1,20 @@
 
 var mongoose = require('mongoose');
 var conn = mongoose.connect('mongodb://localhost/numinor');
+var _ = require('underscore');
 
 
+var schemaMap = {};
+var modelMap = {};
 
-var ItemSchema = {
+
+var youtube = {
   id: String,
   title: String,
-  id: String,
   uploaded: String,
   updated: String,
   uploader: String,
   category: String,
-  title: String,
   description: String,
   thumbnail: Object,
   player: Object,
@@ -30,16 +32,27 @@ var ItemSchema = {
 
 
 
-var itemModel;
-try {
-  itemModel = mongoose.model('Item', ItemSchema) 
-} catch (e) {
-  itemModel = mongoose.model('Item') 
-}
+schemaMap.post = _.extend(youtube, {
+  type: String, // youtube
+  like: [ String ],
+  unlike: [ String ]
+});
 
-var db = module.exports = {
-  conn: conn,
-  items: itemModel
+
+
+// Initialize models and export them
+_.each(schemaMap, function(schema, name) {
+  try {
+    modelMap[name] = mongoose.model(name, schema) 
+  } catch (e) {
+    modelMap[name] = mongoose.model(name) 
+  }
+})
+
+module.exports = {
+  conn: conn
 };
 
-// db.foo.ensureIndex({x:1}, {unique:true}); 
+_.each(modelMap, function(model, name) {
+  module.exports[name] = model;
+})

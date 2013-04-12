@@ -10,8 +10,7 @@ var db = require('../src/setupdb');
 describe('YoutubeCollector', function() {
 
   it('should have all items saved in DB.', function(done) {
-    Q.when()
-    .then(require('../src/feedcollector/youtubecollector'))
+    Q(require('../src/feedcollector/youtubecollector'))
     .then(function() {
       var d = Q.defer();
       youtube.feeds.videos({
@@ -25,7 +24,7 @@ describe('YoutubeCollector', function() {
     })
     .then(function(total) {
       var d = Q.defer();
-      db.items.count(function(err, actual) {
+      db.post.count(function(err, actual) {
         assert(_.isNumber(actual));
         d.resolve({
           total: total,
