@@ -1,12 +1,43 @@
 
 {namespace app.soy.auth}
 
-/***/
+/**
+ * @param isProduction
+ *
+ */
 {template .index}
-  yeah
+  {call app.soy.layout_}
+    {param isProduction: $isProduction /}
+    {param excludeScript: false /}
+    {param body}
+      {call .main}{/call}
+    {/param}
+  {/call}
 {/template}
 
 /***/
 {template .soyweb}
-  {call .index}ohh{/call}
+  {call app.soy.layout_}
+    {param isProduction: false /}
+    {param excludeScript: true /}
+    {param body}
+      {call .main}{/call}
+    {/param}
+  {/call}
 {/template}
+
+/***/
+{template .main}
+  <div class="container" style="width:480px">
+    {call app.soy.head.main}{/call}
+    <div class="row">
+      <div class="span6" style="text-align: center;">
+        <h2>loging with twitter</h2>
+      </div>
+      <a href="/auth/auth" class="span4 offset1 btn btn-large">
+        <span class="icon-twitter"> login with twitter</span>
+      </a>
+    </div>
+  </div>
+{/template}
+

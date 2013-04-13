@@ -12,6 +12,7 @@ exports.view = function(req, res) {
 
     res.end(soy.render('app.soy.index', {
       isProduction: isProduction,
+      isAuthed: req.session.oauth && req.session.oauth.access_token,
       items: items
     }));
 

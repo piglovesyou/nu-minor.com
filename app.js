@@ -38,8 +38,8 @@ app.configure(function() {
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  // app.use(express.cookieParser('your secret here'));
-  // app.use(express.session());
+  app.use(express.cookieParser('your secret here'));
+  app.use(express.session());
   app.use(app.router);
   sass.middleware({
     src: __dirname + '/public/sass',
@@ -55,6 +55,9 @@ app.configure('development', function() {
 
 app.get('/', routes.index.view);
 app.get('/auth', routes.auth.index);
+app.get('/auth/auth', routes.auth.auth);
+app.get('/auth/callback', routes.auth.callback);
+app.get('/auth/logout', routes.auth.logout);
 app.get('/:itemid/view', routes.eachitem.view);
 
 http.createServer(app).listen(app.get('port'), function() {

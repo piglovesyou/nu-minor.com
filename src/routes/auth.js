@@ -3,11 +3,6 @@ var soy = require('../soynode.js');
 var isProduction = process.env.NODE_ENV === 'production';
 
 SECRET = require('secret-strings').NU_MINOR;
-// Edit below.
-var SECRET = {
-  CONSUMER_KEY: 'your consumer key',
-  CONSUMER_SECRET: 'you consumer secret',
-};
 
 var OAuth  = require('oauth').OAuth;
 var oa = new OAuth(
@@ -16,14 +11,15 @@ var oa = new OAuth(
     SECRET.CONSUMER_KEY,
     SECRET.CONSUMER_SECRET,
     "1.0",
-    "http://localhost.com:3000/auth/twitter/callback",
+    "http://nu-minor.com/auth/callback",
     "HMAC-SHA1");
 
-// '/auth'
+// /auth
 exports.index = function (req, res) {
   if(req.session.oauth && req.session.oauth.access_token) {
+    res.end('you look already authorized.');
   } else {
-    res.end(soy.render('app.soy.auth', {
+    res.end(soy.render('app.soy.auth.index', {
       isProduction: isProduction
     }));
   }
@@ -62,25 +58,25 @@ exports.callback = function(req, res, next){
     next(new Error("you're not supposed to be here."));
 };
 
-exports.post = function (req, res) {
-  if(req.session.oauth && req.session.oauth.access_token) {
-    var text = req.body.text;
-    oa.post(
-      'https://api.twitter.com/1/statuses/update.json',
-      req.session.oauth.access_token, 
-      req.session.oauth.access_token_secret,
-      {"status": text},
-      function (err, data, response) {
-        if (err) {
-          res.send('too bad.' + JSON.stringify(err));
-        } else {
-          res.send('posted successfully...!');
-        }
-      });
-  } else {
-    res.send('fail.');
-  }
-};
+// exports.post = function (req, res) {
+//   if(req.session.oauth && req.session.oauth.access_token) {
+//     var text = req.body.text;
+//     oa.post(
+//       'https://api.twitter.com/1/statuses/update.json',
+//       req.session.oauth.access_token, 
+//       req.session.oauth.access_token_secret,
+//       {"status": text},
+//       function (err, data, response) {
+//         if (err) {
+//           res.send('too bad.' + JSON.stringify(err));
+//         } else {
+//           res.send('posted successfully...!');
+//         }
+//       });
+//   } else {
+//     res.send('fail.');
+//   }
+// };
 
 exports.logout = function (req, res) {
   req.session.destroy();
