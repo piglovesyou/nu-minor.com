@@ -6,62 +6,48 @@
  * @param isProduction
  * @param items
  */
-{template .main}
+{template .index}
+  {call .layout_}
+    {param isProduction: $isProduction /}
+    {param excludeScript: false /}
+    {param body}
+      <div class="container">
+        {call app.soy.head.main}{/call}
+        {call app.soy.body.main}
+          {param items:$items /}
+        {/call}
+      </div>
+      <script>main()</script>
+    {/param}
+  {/call}
+{/template}
+
+
+/**
+ * @param isProduction
+ * @param excludeScript
+ * @param body
+ */
+{template .layout_}
   <!DOCTYPE HTML>
   <html lang="en">
   <head>
-    {call .headContent}
-      {param isProduction: $isProduction /}
-      {param excludeScript: false /}
-    {/call}
+    <meta charset="UTF-8">
+    <title>Plovr Sample</title>
+    {if $isProduction}
+      <link rel="stylesheet" href="/stylesheets/main-min.css" />
+      <script src="/javascripts/main-min.js"></script>
+    {else}
+      <link rel="stylesheet" href="/stylesheets/main.css" />
+      {if not $excludeScript}
+        <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
+      {/if}
+    {/if}
   </head>
   <body>
-    {if $isProduction}<p style="color:#f33">Production Mode!</p>{/if}
-    {call .bodyContent}
-      {param items: $items /}
-    {/call}
-    <script>main()</script>
+    {$body|noescape}
   </body>
   </html>
-{/template}
-
-
-/**
- * Common items in head tag except <script>.
- * @param isProduction
- * @param excludeScript
- */
-{template .headContent}
-  <meta charset="UTF-8">
-  <title>Plovr Sample</title>
-  {if $isProduction}
-    <link rel="stylesheet" href="/stylesheets/main-min.css" />
-    <script src="/javascripts/main-min.js"></script>
-  {else}
-    <link rel="stylesheet" href="/stylesheets/main.css" />
-    {if not $excludeScript}
-      <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
-    {/if}
-  {/if}
-{/template}
-
-
-/**
- * @param items
- */
-{template .bodyContent}
-  <div class="container">
-    {call app.soy.head.main}{/call}
-    {call app.soy.body.main}
-      {param items:$items /}
-    {/call}
-  </div>
-{/template}
-
-
-/***/
-{template .soySampleForJs}
-  <p class="{css app-sampleClassName}">I'm from /app/soy/app.soy.</p>
 {/template}
 
 
@@ -71,45 +57,43 @@
  * Designer
  */
 {template .soyweb}
-  <!DOCTYPE HTML>
-  <html lang="en">
-  <head>
-    {call .headContent}
-      {param isProduction: false /}
-      {param excludeScript: true /}
-    {/call}
-  </head>
-  <body>
-
-    {call .bodyContent}
-      {param items: [
-        'j3S3Txsl2vs',
-        'kcVh-tXfwZw',
-        '-3JCESdFNyw',
-        '05ZvII57p_M',
-        'tu3IkbDvteQ',
-        'PtcqXFZFiWo',
-        'eeM5YcMUtFQ',
-        '93t1H-EkUj4',
-        'qN3kC_4xURA',
-        'f9iIgQN5uZE',
-        'tb3qxDrsA0M',
-        'RIFSuAJhTlg',
-        'NKlCIR654Ho',
-        'aryARs0szU4',
-        'duVq7cXWcYw',
-        '1dF2ZLq7oBk',
-        'QNwCojCJ3-Q',
-        '-0Xa4bHcJu8',
-        'FavUpD_IjVY',
-        'WQO-aOdJLiw',
-        'jX3iLfcMDCw',
-        'oWTgvRGwzWg',
-        'GAvS1ndtEKg',
-        '6W_ETBVdoKc',
-        'MuWTQtyKih4'
-      ] /}
-    {/call}
-  </body>
-  </html>
+  {call .layout_}
+    {param isProduction: false /}
+    {param excludeScript: true /}
+    {param body}
+      <div class="container">
+        {call app.soy.head.main}{/call}
+        {call app.soy.body.main}
+          {param items: [
+            ['id': 'j3S3Txsl2vs'],
+            ['id': 'kcVh-tXfwZw'],
+            ['id': '-3JCESdFNyw'],
+            ['id': '05ZvII57p_M'],
+            ['id': 'tu3IkbDvteQ'],
+            ['id': 'PtcqXFZFiWo'],
+            ['id': 'eeM5YcMUtFQ'],
+            ['id': '93t1H-EkUj4'],
+            ['id': 'qN3kC_4xURA'],
+            ['id': 'f9iIgQN5uZE'],
+            ['id': 'tb3qxDrsA0M'],
+            ['id': 'RIFSuAJhTlg'],
+            ['id': 'NKlCIR654Ho'],
+            ['id': 'aryARs0szU4'],
+            ['id': 'duVq7cXWcYw'],
+            ['id': '1dF2ZLq7oBk'],
+            ['id': 'QNwCojCJ3-Q'],
+            ['id': '-0Xa4bHcJu8'],
+            ['id': 'FavUpD_IjVY'],
+            ['id': 'WQO-aOdJLiw'],
+            ['id': 'jX3iLfcMDCw'],
+            ['id': 'oWTgvRGwzWg'],
+            ['id': 'GAvS1ndtEKg'],
+            ['id': '6W_ETBVdoKc'],
+            ['id': 'MuWTQtyKih4']
+          ] /}
+        {/call}
+      </div>
+      <script>main()</script>
+    {/param}
+  {/call}
 {/template}
