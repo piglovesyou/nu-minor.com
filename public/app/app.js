@@ -3,14 +3,19 @@ goog.provide('App');
 
 goog.require('app.soy');
 goog.require('goog.dom');
+goog.require('app.Items');
 
 App = function() {
-  var body = goog.dom.getDocument().body;
+  // var body = goog.dom.getDocument().body;
+  // goog.dom.appendChild(body,
+  //     goog.dom.createDom('div', null, 'I\'m from /app/app.js.'));
+  // goog.dom.appendChild(body,
+  //     goog.dom.htmlToDocumentFragment(
+  //       app.soy.soySampleForJs()));
 
-  goog.dom.appendChild(body,
-      goog.dom.createDom('div', null, 'I\'m from /app/app.js.'));
+  var itemsWrapEl = goog.dom.getElementByClass('app-items');
 
-  goog.dom.appendChild(body,
-      goog.dom.htmlToDocumentFragment(
-        app.soy.soySampleForJs()));
+  var items = new app.Items();
+  items.decorate(itemsWrapEl);
+
 };
