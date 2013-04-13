@@ -31,7 +31,7 @@ app.Items.prototype.decorateInternal = function(element) {
   var itemElms = this.getElementsByClass('app-item');
   goog.array.forEach(itemElms, function(itemEl) {
     var item = new app.items.Item(dh);
-    item.decorateInternal(itemEl);
+    item.canDecorate(itemEl) && item.decorateInternal(itemEl);
     this.addChild(item);
   }, this)
 };
