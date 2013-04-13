@@ -2,22 +2,39 @@
 {namespace app.soy.head}
 
 
-/***/
+/**
+ * @param isAuthed
+ */
 {template .main}
-  {call .title}{/call}
+  {call .title}
+    {param useLogoutLink: $isAuthed /}
+    {param useFollowButton: true /}
+  {/call}
   {call .nav}{/call}
 {/template}
 
-/***/
+/**
+ * @param useLogoutLink
+ * @param useFollowButton
+ */
 {template .title}
   <div class="row app-title">
     <h1 class="span2">NuMinor</h1>
     <p class="span4">the site description is here</p>
-    <div class="span2 pull-right">
-      <a href="#" class="btn icon-twitter">
-        follow us
-      </a>
-    </div>
+    {if $useFollowButton}
+      <div class="span2 pull-right">
+        <a href="#" class="btn icon-twitter">
+          follow us
+        </a>
+      </div>
+    {/if}
+    {if $useLogoutLink}
+      <div style="text-align: right;" class="span2 pull-right">
+        <a href="/auth/logout">
+          logout
+        </a>
+      </div>
+    {/if}
   </div>
 {/template}
 

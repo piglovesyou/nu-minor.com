@@ -20,6 +20,8 @@
 var express = require('express') ,
   http = require('http') ,
   path = require('path') ,
+  RedisStore = require('connect-redis')(express),
+  SECRET = require('secret-strings').NU_MINOR;
   sass = require('node-sass'),
   isProduction = process.env.NODE_ENV === 'production',
   youtube = require('youtube-feeds');
@@ -38,8 +40,12 @@ app.configure(function() {
   app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.cookieParser('your secret here'));
-  app.use(express.session());
+  app.use(express.cookieParser());
+  app.use(express.session({
+    secret: SECRET.SESSION_SECRET,
+    store: new RedisStore(),
+    cookie: {maxAge: 3600 * 1000}
+  }));
   app.use(app.router);
   sass.middleware({
     src: __dirname + '/public/sass',

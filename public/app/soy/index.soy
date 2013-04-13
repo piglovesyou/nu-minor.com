@@ -4,6 +4,7 @@
 
 /**
  * @param isProduction
+ * @param isAuthed
  * @param items
  */
 {template .index}
@@ -12,7 +13,9 @@
     {param excludeScript: false /}
     {param body}
       <div class="container">
-        {call app.soy.head.main}{/call}
+        {call app.soy.head.main}
+          {param isAuthed:$isAuthed /}
+        {/call}
         {call app.soy.body.main}
           {param items:$items /}
         {/call}
@@ -62,7 +65,9 @@
     {param excludeScript: true /}
     {param body}
       <div class="container">
-        {call app.soy.head.main}{/call}
+        {call app.soy.head.main}
+          {param isAuthed: true /}
+        {/call}
         {call app.soy.body.main}
           {param items: [
             ['id': 'j3S3Txsl2vs'],

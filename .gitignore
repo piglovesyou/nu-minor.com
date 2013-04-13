@@ -6,3 +6,4 @@ node_modules
 /public/javascripts/main-min.js
 /public/stylesheets/main-min.css
 /tmp.js
+/var
