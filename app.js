@@ -26,6 +26,7 @@ var express = require('express') ,
 
 var routes = {
   index: require('./src/routes'),
+  auth: require('./src/routes/auth'),
   eachitem: require('./src/routes/eachitem')
 };
 
@@ -53,6 +54,7 @@ app.configure('development', function() {
 });
 
 app.get('/', routes.index.view);
+app.get('/auth', routes.auth.index);
 app.get('/:itemid/view', routes.eachitem.view);
 
 http.createServer(app).listen(app.get('port'), function() {
