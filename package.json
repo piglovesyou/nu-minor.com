@@ -9,6 +9,7 @@
     "express": "3.1.0",
     "soynode": "*",
     "jade": "*",
+    "oauth": "*",
     "node-sass": "0.4.x"
   }
 }
