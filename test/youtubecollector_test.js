@@ -37,6 +37,7 @@ describe('YoutubeCollector', function() {
       throw new Error(err);
     })
     .done(function(result) {
+      console.log(result.total, result.actual);
       assert.equal(result.total, result.actual);
       done();
     });

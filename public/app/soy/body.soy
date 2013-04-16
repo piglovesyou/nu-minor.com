@@ -11,11 +11,12 @@
     {foreach $i in [9, 3, 3, 3, 3, 3, 6, 3, 3, 3, 3, 3, 3]}
       {let $item: $items[index($i)] /}
       <div data-itemid="{$item.id}" class="app-item span{$i}{if $i == 6} pull-right{/if}">
-        <iframe src="http://www.youtube-nocookie.com/embed/{$item.id}?rel=0" frameborder="0" allowfullscreen></iframe>
+        <div style="height :2em; background: #666;"></div>
+        // <iframe src="http://www.youtube-nocookie.com/embed/{$item.id}?rel=0" frameborder="0" allowfullscreen></iframe>
         // <iframe src="#" frameborder="0" style="overflow:hidden;background:#666;"> abc</iframe>
         <div class="app-item-bar">
-          <a href="#" class="app-item-like icon-heart-empty">{$item.like.length}</a>
-          <a href="#" class="app-item-unlike icon-thumbs-down">{$item.unlike.length}</a>
+          <a href="#" class="{call .likeUserClassName}{param userLiked: $item.userLiked /}{/call}">{$item.like.length}</a>
+          <a href="#" class="app-item-bad icon-thumbs-down">{$item.bad.length}</a>
         </div>
       </div>
     {/foreach}
@@ -23,3 +24,9 @@
   </div>
 {/template}
 
+/**
+ * @param userLiked
+ */
+{template .likeUserClassName}
+app-item-like {if $userLiked}icon-heart{else}icon-heart-empty{/if}
+{/template}

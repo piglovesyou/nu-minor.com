@@ -2,6 +2,7 @@
 goog.provide('app.items.Item');
 
 goog.require('app.dom');
+goog.require('app.soy.body');
 goog.require('app.model');
 goog.require('goog.dom.dataset');
 goog.require('goog.ui.Component');
@@ -30,7 +31,7 @@ app.items.Item.prototype.likeButtonElm_;
 
 
 /** @type {Element} */
-app.items.Item.prototype.unlikeButtonElm_;
+app.items.Item.prototype.badButtonElm_;
 
 
 /** @inheritDoc */
@@ -51,10 +52,10 @@ app.items.Item.prototype.canDecorate = function(element) {
   if (goog.dom.classes.has(element, 'app-item')) {
     var dh = this.getDomHelper();
     var like = dh.getElementByClass('app-item-like');
-    var unlike = dh.getElementByClass('app-item-unlike');
-    if (like && unlike) {
+    var bad = dh.getElementByClass('app-item-bad');
+    if (like && bad) {
       this.likeButtonElm_ = like;
-      this.unlikeButtonElm_ = unlike;
+      this.badButtonElm_ = bad;
       return true;
     }
   }
@@ -80,8 +81,8 @@ app.items.Item.prototype.handleClick_ = function(e) {
 
   if (getAncestor(el, 'app-item-like', et) === this.likeButtonElm_) {
     this.handleLikeClick_(e);
-  } else if (getAncestor(el, 'app-item-unlike', et) === this.unlikeButtonElm_) {
-    this.handleUnlikeClick_(e);
+  } else if (getAncestor(el, 'app-item-bad', et) === this.badButtonElm_) {
+    this.handleBadClick_(e);
   }
 };
 
@@ -91,16 +92,38 @@ app.items.Item.prototype.handleClick_ = function(e) {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleLikeClick_ = function(e) {
-  console.log('like');
+  app.model.like(this.getId(), this.handleLikeComplete_, this);
 };
+
+
+/**
+ * @private
+ * @param {boolean} err .
+ */
+app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
+  goog.asserts.assertNumber(json.currentLike);
+  this.updateLikeButton_(json['currentLike'], !!json['userLiked']);
+};
+
+
+/**
+ * @param {number} n .
+ * @param {boolean} userLiked .
+ */
+app.items.Item.prototype.updateLikeButton_ = function(n, userLiked) {
+  var dh = this.getDomHelper();
+  dh.setTextContent(this.likeButtonElm_, n);
+  goog.dom.classes.set(this.likeButtonElm_,
+      app.soy.body.likeUserClassName({'userLiked': userLiked}));
+}
 
 
 /**
  * @private
  * @param {goog.events.Event} e .
  */
-app.items.Item.prototype.handleUnlikeClick_ = function(e) {
-  console.log('unlike');
+app.items.Item.prototype.handleBadClick_ = function(e) {
+  console.log('bad');
 };
 
 

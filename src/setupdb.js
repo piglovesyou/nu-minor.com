@@ -35,7 +35,7 @@ var youtube = {
 schemaMap.item = _.extend(youtube, {
   type: String, // youtube
   like: {type: [ String ], default: [] },
-  unlike: {type: [ String ], default: [] }
+  bad: {type: [ String ], default: [] }
 });
 
 

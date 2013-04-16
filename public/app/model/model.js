@@ -35,9 +35,23 @@ app.Model.prototype.like = function(itemId, callback, opt_obj) {
 
 
 /**
+ * I want to use 'app.model' namespace for app.Model instance in global.
+ */
+var ref = app.model.Xhr;
+
+goog.exportSymbol('app.model');
+
+/**
+ * I want this name space in global.
  * @type {app.Model}
  */
 app.model = app.Model.getInstance();
+goog.global['app']['model'] = app.model;
+
+/**
+ */
+app.model.Xhr = ref;
+
 
 
 }); // goog.scope

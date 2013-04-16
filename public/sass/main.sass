@@ -16,9 +16,6 @@ $item-margin-bottom: 20px
   margin-bottom: $item-margin-bottom
   
 
-// body
-//   color: blue
-
 .app-title
   line-height: 40px
   h1
@@ -50,10 +47,9 @@ $item-margin-bottom: 20px
   // background: $gray
   .app-item-bar
     text-align: right
-    .icon-heart-empty,
-    .icon-heart,
-    .icon-heart-empty,
-    .icon-thumbs-down
+
+    .app-item-like,
+    .app-item-bad
       margin-left: 6px
       font-size: 140%
     .icon-heart,
@@ -66,3 +62,8 @@ $item-margin-bottom: 20px
       &:hover
         color: lighten(#333, 20%)
       font-weight: bold
+
+    // .icon-heart-empty,
+    // .icon-heart,
+    // .icon-heart-empty,
+    // .icon-thumbs-down

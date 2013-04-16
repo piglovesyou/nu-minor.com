@@ -28,13 +28,17 @@
         </a>
       </div>
     {/if}
-    {if $useLogoutLink}
-      <div style="text-align: right;" class="span2 pull-right">
+    <div style="text-align: right;" class="span2 pull-right">
+      {if $useLogoutLink}
         <a href="/auth/logout">
           logout
         </a>
-      </div>
-    {/if}
+      {else}
+        <a href="/auth/auth">
+          login
+        </a>
+      {/if}
+    </div>
   </div>
 {/template}
 
