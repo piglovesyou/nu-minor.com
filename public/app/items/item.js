@@ -2,8 +2,8 @@
 goog.provide('app.items.Item');
 
 goog.require('app.dom');
-goog.require('app.soy.body');
 goog.require('app.model');
+goog.require('app.soy.body');
 goog.require('goog.dom.dataset');
 goog.require('goog.ui.Component');
 
@@ -22,16 +22,16 @@ var getAncestor = app.dom.getAncestorFromEventTargetByClass;
  */
 app.items.Item = function(opt_domHelper) {
   goog.base(this, opt_domHelper);
+
+
+  /** @type {Element} */
+  this.likeButtonElm_;
+
+
+  /** @type {Element} */
+  this.badButtonElm_;
 };
 goog.inherits(app.items.Item, goog.ui.Component);
-
-
-/** @type {Element} */
-app.items.Item.prototype.likeButtonElm_;
-
-
-/** @type {Element} */
-app.items.Item.prototype.badButtonElm_;
 
 
 /** @inheritDoc */
@@ -51,8 +51,8 @@ app.items.Item.prototype.decorateInternal = function(element) {
 app.items.Item.prototype.canDecorate = function(element) {
   if (goog.dom.classes.has(element, 'app-item')) {
     var dh = this.getDomHelper();
-    var like = dh.getElementByClass('app-item-like');
-    var bad = dh.getElementByClass('app-item-bad');
+    var like = dh.getElementByClass('app-item-like', element);
+    var bad = dh.getElementByClass('app-item-bad', element);
     if (like && bad) {
       this.likeButtonElm_ = like;
       this.badButtonElm_ = bad;
@@ -76,6 +76,7 @@ app.items.Item.prototype.enterDocument = function() {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleClick_ = function(e) {
+
   var el = this.getElement();
   var et = /**@type{Element}*/(e.target);
 
@@ -99,6 +100,7 @@ app.items.Item.prototype.handleLikeClick_ = function(e) {
 /**
  * @private
  * @param {boolean} err .
+ * @param {Object} json .
  */
 app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
   goog.asserts.assertNumber(json.currentLike);
@@ -115,7 +117,7 @@ app.items.Item.prototype.updateLikeButton_ = function(n, userLiked) {
   dh.setTextContent(this.likeButtonElm_, n);
   goog.dom.classes.set(this.likeButtonElm_,
       app.soy.body.likeUserClassName({'userLiked': userLiked}));
-}
+};
 
 
 /**
