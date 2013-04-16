@@ -16,5 +16,6 @@ exports.view = function(req, res) {
       items: items
     }));
 
-  })
+  });
 };
+

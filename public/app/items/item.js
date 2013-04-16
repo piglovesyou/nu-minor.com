@@ -2,6 +2,7 @@
 goog.provide('app.items.Item');
 
 goog.require('app.dom');
+goog.require('app.model');
 goog.require('goog.dom.dataset');
 goog.require('goog.ui.Component');
 

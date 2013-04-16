@@ -78,6 +78,21 @@ exports.callback = function(req, res, next){
 //   }
 // };
 
+exports.requireAuthMW = function(req, res, next){
+  if (req.session.oauth &&
+      req.session.oauth.access_token &&
+      req.session.twitter &&
+      req.session.twitter.user_id) {
+    next();
+    return;
+  }
+  res.status(401);
+  res.end(JSON.stringify({
+    error: 1,
+    reason: 'require auth'
+  }));
+};
+
 exports.logout = function (req, res) {
   req.session.destroy();
   res.end(soy.render('app.soy.auth.logout', {

@@ -59,8 +59,8 @@ app.model.Xhr.prototype.getId_ = function(uri, opt_content) {
  * @param {string} method .
  * @param {string} uri .
  * @param {?string} content .
- * @param {Function(?goog.net.XhrIo, ?Object)} callback If error, the first
- *                                              argument will be xhrio object.
+ * @param {Function} callback If error, the first
+ *                   argument will be xhrio object.
  * @param {Object=} opt_obj .
  * @private
  */
@@ -100,3 +100,9 @@ app.model.Xhr.extractResponse_ = function(xhrio) {
         xhrio.getResponseJson() :
         xhrio.getResponseText();
 };
+
+
+/**
+ * @type {app.model.Xhr}
+ */
+app.model.xhr = app.model.Xhr.getInstance();

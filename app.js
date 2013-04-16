@@ -59,12 +59,19 @@ app.configure('development', function() {
   app.use(express.errorHandler());
 });
 
+
+
 app.get('/', routes.index.view);
+
 app.get('/auth', routes.auth.index);
 app.get('/auth/auth', routes.auth.auth);
 app.get('/auth/callback', routes.auth.callback);
 app.get('/auth/logout', routes.auth.logout);
-app.get('/:itemid/view', routes.eachitem.view);
+
+app.get('/:itemId/view', routes.eachitem.itemExistsMW, routes.eachitem.view);
+app.post('/:itemId/like', routes.auth.requireAuthMW, routes.eachitem.itemExistsMW, routes.eachitem.like);
+
+
 
 http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server listening on port ' + app.get('port'));
