@@ -88,6 +88,8 @@ app.items.Item.prototype.handleClick_ = function(e) {
   } else if (getAncestor(el, 'app-item-bad', et) === this.badButtonElm_) {
     this.handleBadClick_(e);
   }
+
+  e.preventDefault();
 };
 
 
