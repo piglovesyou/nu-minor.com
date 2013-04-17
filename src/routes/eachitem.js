@@ -57,16 +57,14 @@ exports.like = function(req, res) {
     }, updateArg);
   })
   .fail(whenFail(res))
-  .done(function(numberAffected) {
+  .done(function(result) {
     assert(!_.isNull(usePush));
-    var resultJSON = !!numberAffected ? {
+    assert(result[1].n === 1); // numberAffected by update
+    var resultJSON = {
       success: 1,
       userLiked: usePush ? 1 : 0,
       currentLike: usePush ? ++length : --length,
       message: 'Succeeded to push/pull.'
-    } : {
-      error: 1,
-      reason: 'something wrong.'
     };
     res.end(JSON.stringify(resultJSON));
   });

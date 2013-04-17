@@ -25,11 +25,12 @@ app.items.Item = function(opt_domHelper) {
 
 
   /** @type {Element} */
-  this.likeButtonElm_;
+  this.likeButtonElm_ = null;
 
 
   /** @type {Element} */
-  this.badButtonElm_;
+  this.badButtonElm_ = null;
+
 };
 goog.inherits(app.items.Item, goog.ui.Component);
 
@@ -125,7 +126,7 @@ app.items.Item.prototype.updateLikeButton_ = function(n, userLiked) {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleBadClick_ = function(e) {
-  console.log('bad');
+  // console.log('bad');
 };
 
 

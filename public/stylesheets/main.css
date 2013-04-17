@@ -8525,6 +8525,19 @@ ul.icons {
 .icon-yelp:before {
   content: "\f328"; }
 
+@font-face {
+  font-family: "Fantasy-Clipart-2";
+  src: url("../sass/resources/fantasy_clipart_2-webfont.eot?v=3.0.1");
+  src: url("../sass/resources/fantasy_clipart_2-webfont.eot?#iefix&v=3.0.1") format("embedded-opentype"), url("../sass/resources/fantasy_clipart_2-webfont.woff?v=3.0.1") format("woff"), url("../sass/resources/fantasy_clipart_2-webfont.ttf?v=3.0.1") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+.icon-skull {
+  font-family: "Fantasy-Clipart-2"; }
+
+.icon-skull:before {
+  content: "S"; }
+
 .app-title {
   line-height: 40px;
   margin-top: 40px;
@@ -8606,20 +8619,26 @@ ul.icons {
   margin-bottom: 20px; }
   .app-item .app-item-bar {
     text-align: right; }
-    .app-item .app-item-bar .icon-heart-empty,
-    .app-item .app-item-bar .icon-heart,
-    .app-item .app-item-bar .icon-heart-empty,
-    .app-item .app-item-bar .icon-thumbs-down {
+    .app-item .app-item-bar .app-item-like,
+    .app-item .app-item-bar .app-item-bad {
       margin-left: 6px;
-      font-size: 140%; }
+      -webkit-transition: font-size 0.8s ease; }
     .app-item .app-item-bar .icon-heart,
     .app-item .app-item-bar .icon-heart-empty {
       color: red; }
       .app-item .app-item-bar .icon-heart:hover,
       .app-item .app-item-bar .icon-heart-empty:hover {
         color: #ff6666; }
-    .app-item .app-item-bar .icon-thumbs-down {
+    .app-item .app-item-bar .icon-thumbs-down,
+    .app-item .app-item-bar .icon-skull {
       color: #333333;
       font-weight: bold; }
-      .app-item .app-item-bar .icon-thumbs-down:hover {
+      .app-item .app-item-bar .icon-thumbs-down:hover,
+      .app-item .app-item-bar .icon-skull:hover {
         color: #666666; }
+    .app-item .app-item-bar .icon-heart-empty,
+    .app-item .app-item-bar .icon-skull {
+      font-size: 140%; }
+    .app-item .app-item-bar .icon-heart,
+    .app-item .app-item-bar .icon-skull {
+      font-size: 220%; }
