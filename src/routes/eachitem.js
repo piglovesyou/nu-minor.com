@@ -78,8 +78,10 @@ var swapUserId = function(itemId, userId, toPush, toPull) {
   })
   .then(function(result) {
     assert.equal(result[0], 1); // numberAffected by update
+    var wasPushed = pushInc > 0;
     return {
-      wasPushed: pushInc > 0,
+      wasPushed: wasPushed,
+      wasOppositePulled: wasPushed && pullInc < 0,
       currentLike: toPush === 'like' ? (itemRef.like.length + pushInc) : (itemRef.like.length + pullInc),
       currentBad: toPush === 'bad' ? (itemRef.bad.length + pushInc) : (itemRef.bad.length + pullInc)
     };

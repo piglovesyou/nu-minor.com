@@ -104,8 +104,20 @@ app.items.Item.prototype.handleLikeClick_ = function(e) {
  */
 app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
   goog.asserts.assertNumber(json.currentLike);
-  this.updateButton_(this.likeButtonElm_, json['currentLike'],
-      !!json['userLiked'], 'icon-heart', 'icon-heart-empty');
+  goog.asserts.assertNumber(json.currentBad);
+  var dh = this.getDomHelper();
+  var el = this.likeButtonElm_;
+
+  dh.setTextContent(el, json.currentLike);
+  var fromClass = json.wasPushed ? 'icon-heart-empty' : 'icon-heart';
+  var toClass = json.wasPushed ? 'icon-heart' : 'icon-heart-empty';
+  goog.dom.classes.swap(el, fromClass, toClass);
+
+  if (json.wasOppositePulled) {
+    var oppositEl = this.badButtonElm_;
+    dh.setTextContent(oppositEl, json.currentBad);
+    goog.dom.classes.swap(oppositEl, 'icon-skull', 'icon-thumbs-down');
+  }
 };
 
 
@@ -113,7 +125,7 @@ app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
  * @private
  * @param {goog.events.Event} e .
  */
-app.items.Item.prototype.handleBadClick_ = function(e) {
+app.items.Item.prototype.handleBadClick_ = function(err, json) {
   app.model.action(this.getId(), 'bad', this.handleBadComplete_, this);
 };
 
@@ -124,29 +136,41 @@ app.items.Item.prototype.handleBadClick_ = function(e) {
  * @param {Object} json .
  */
 app.items.Item.prototype.handleBadComplete_ = function(err, json) {
+  goog.asserts.assertNumber(json.currentLike);
   goog.asserts.assertNumber(json.currentBad);
-  this.updateButton_(this.badButtonElm_, json['currentBad'],
-      !!json['userMarkedBad'], 'icon-skull', 'icon-thumbs-down');
-};
-
-
-/**
- * @private
- * @param {Element} el .
- * @param {number} n .
- * @param {boolean} active .
- * @param {string} whenActive .
- * @param {string} whenInactive .
- */
-app.items.Item.prototype.updateButton_ = function(el, n, active,
-                                                  whenActive, whenInactive) {
   var dh = this.getDomHelper();
-  dh.setTextContent(el, n);
+  var el = this.badButtonElm_;
 
-  var from = active ? whenInactive : whenActive;
-  var to = active ? whenActive : whenInactive;
-  goog.dom.classes.swap(el, from, to);
+  dh.setTextContent(el, json.currentBad);
+  var fromClass = json.wasPushed ? 'icon-thumbs-down' : 'icon-skull';
+  var toClass = json.wasPushed ? 'icon-skull' : 'icon-thumbs-down';
+  goog.dom.classes.swap(el, fromClass, toClass);
+
+  if (json.wasOppositePulled) {
+    var oppositEl = this.likeButtonElm_;
+    dh.setTextContent(oppositEl, json.currentLike);
+    goog.dom.classes.swap(oppositEl, 'icon-heart', 'icon-heart-empty');
+  }
 };
+
+
+
+app.items.Item.getLikeClassName = function(active) {
+  return active ? 'icon-heart' : 'icon-heart-empty';
+};
+
+
+app.items.Item.getBadClassName = function(active) {
+  return active ? 'icon-skull' : 'icon-thumbs-down';
+};
+
+
+
+
+
+
+
+
 
 
 /** @inheritDoc */
