@@ -3,7 +3,7 @@ goog.provide('app.json');
 
 
 /**
- * @type { {
+ * @typedef { {
  *   "wasPushed": boolean,
  *   "wasOppositePulled": boolean,
  *   "currentLike": number,

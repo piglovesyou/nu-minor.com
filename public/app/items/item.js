@@ -45,7 +45,9 @@ app.items.Item.prototype.createDom = function() {
 /** @inheritDoc */
 app.items.Item.prototype.decorateInternal = function(element) {
   goog.base(this, 'decorateInternal', element);
-  this.setId(goog.dom.dataset.get(element, 'itemid'));
+  var id = goog.dom.dataset.get(element, 'itemid');
+  goog.asserts.assertString(id);
+  this.setId(id);
 };
 
 
@@ -120,7 +122,7 @@ app.items.Item.prototype.handleBadClick_ = function(e) {
 /**
  * @private
  * @param {boolean} err .
- * @param {Object} json .
+ * @param {app.json.ItemActionResponse} json .
  */
 app.items.Item.prototype.handleBadComplete_ = function(err, json) {
   this.updateButtons_(false, json);
@@ -149,7 +151,7 @@ app.items.Item.prototype.updateButtons_ = function(isLike, json) {
       app.items.Item.getLikeClassName_ : app.items.Item.getBadClassName_;
   fromClass = classNameGetter(!json.wasPushed);
   toClass = classNameGetter(json.wasPushed);
-  dh.setTextContent(el, num);
+  dh.setTextContent(el, num.toString());
   goog.dom.classes.swap(el, fromClass, toClass);
 
   if (json.wasOppositePulled) {
@@ -159,7 +161,7 @@ app.items.Item.prototype.updateButtons_ = function(isLike, json) {
         app.items.Item.getLikeClassName_ : app.items.Item.getBadClassName_;
     fromClass = classNameGetter(true);
     toClass = classNameGetter(false);
-    dh.setTextContent(el, num);
+    dh.setTextContent(el, num.toString());
     goog.dom.classes.swap(el, fromClass, toClass);
   }
 

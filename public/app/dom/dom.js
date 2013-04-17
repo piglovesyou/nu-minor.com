@@ -6,7 +6,7 @@ goog.provide('app.dom');
  * @param {Element} end .
  * @param {string} hookCssName .
  * @param {Node} et .
- * @return {?Element} .
+ * @return {?Node} .
  */
 app.dom.getAncestorFromEventTargetByClass = function(end, hookCssName, et) {
   while (et && et != end && !goog.dom.classes.has(et, hookCssName)) {
@@ -20,7 +20,7 @@ app.dom.getAncestorFromEventTargetByClass = function(end, hookCssName, et) {
  * @param {Element} end .
  * @param {string} nodeName .
  * @param {Node} et .
- * @return {?Element} .
+ * @return {?Node} .
  */
 app.dom.getAncestorFromEventTargetByTagName = function(end, nodeName, et) {
   while (et && et != end && et.nodeName != nodeName) {
