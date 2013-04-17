@@ -73,6 +73,47 @@ exports.like = function(req, res) {
 
 
 
+// POST handlers
+exports.bad = function(req, res) {
+
+  res.writeHead(200, {'Content-Type': 'application/json;charset=UTF8'});
+  var itemId = req.params.itemId;
+  var userId = req.session.twitter.user_id;
+  var length;
+  var usePush = null;
+  var q = findOne({
+    id: itemId
+  })
+  .then(function(item) {
+    usePush = !_.contains(item.bad, userId);
+    length = item.bad.length;
+    assert(_.isNumber(length));
+    var updateArg = usePush ? {
+      $addToSet: { bad: userId }
+    } : {
+      $pull: { bad: userId }
+    };
+    return update({
+      id: itemId
+    }, updateArg);
+  })
+  .fail(whenFail(res))
+  .done(function(result) {
+    assert(!_.isNull(usePush));
+    assert(result[1].n === 1); // numberAffected by update
+    var resultJSON = {
+      success: 1,
+      userMarkedBad: usePush ? 1 : 0,
+      currentBad: usePush ? ++length : --length,
+      message: 'Succeeded to push/pull.'
+    };
+    res.end(JSON.stringify(resultJSON));
+  });
+
+};
+
+
+
 // Middleware.
 exports.itemExistsMW = function(req, res, next) {
 

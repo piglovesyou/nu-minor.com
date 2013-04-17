@@ -70,6 +70,7 @@ app.get('/auth/logout', routes.auth.logout);
 
 app.get('/:itemId/view', routes.eachitem.itemExistsMW, routes.eachitem.view);
 app.post('/:itemId/like', routes.auth.requireAuthMW, routes.eachitem.itemExistsMW, routes.eachitem.like);
+app.post('/:itemId/bad', routes.auth.requireAuthMW, routes.eachitem.itemExistsMW, routes.eachitem.bad);
 
 
 

@@ -25,36 +25,16 @@ goog.addSingletonGetter(app.Model);
 
 
 /**
- * @param {string} itemId .
- * @param {Function} callback .
- * @param {Object=} opt_obj .
- */
-app.Model.prototype.like = function(itemId, callback, opt_obj) {
-  this.itemAction_('like', itemId, callback, opt_obj);
-};
-
-
-/**
- * @param {string} itemId .
- * @param {Function} callback .
- * @param {Object=} opt_obj .
- */
-app.Model.prototype.bad = function(itemId, callback, opt_obj) {
-  this.itemAction_('bad', itemId, callback, opt_obj);
-};
-
-
-/**
  * @param {string} action .
  * @param {string} itemId .
  * @param {Function} callback .
  * @param {Object=} opt_obj .
  */
-app.Model.prototype.itemAction_ = function(action, itemId, callback, opt_obj) {
+app.Model.prototype.action = function(itemId, action, callback, opt_obj) {
   goog.asserts.assert(!goog.string.contains(action, ' '));
   var uri = new goog.Uri('/' + itemId + '/' + action);
   xhr.post(uri, {}, callback, opt_obj);
-}
+};
 
 
 /**

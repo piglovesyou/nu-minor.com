@@ -93,7 +93,7 @@ app.items.Item.prototype.handleClick_ = function(e) {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleLikeClick_ = function(e) {
-  app.model.like(this.getId(), this.handleLikeComplete_, this);
+  app.model.action(this.getId(), 'like', this.handleLikeComplete_, this);
 };
 
 
@@ -114,7 +114,19 @@ app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleBadClick_ = function(e) {
-  // console.log('bad');
+  app.model.action(this.getId(), 'bad', this.handleBadComplete_, this);
+};
+
+
+/**
+ * @private
+ * @param {boolean} err .
+ * @param {Object} json .
+ */
+app.items.Item.prototype.handleBadComplete_ = function(err, json) {
+  goog.asserts.assertNumber(json.currentBad);
+  this.updateButton_(this.badButtonElm_, json['currentBad'],
+      !!json['userMarkedBad'], 'icon-skull', 'icon-thumbs-down');
 };
 
 
