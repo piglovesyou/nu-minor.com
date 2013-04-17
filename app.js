@@ -44,7 +44,7 @@ app.configure(function() {
   app.use(express.session({
     secret: SECRET.SESSION_SECRET,
     store: new RedisStore(),
-    cookie: {maxAge: 3600 * 1000}
+    cookie: {maxAge: 60 * 60 * 1000}
   }));
   app.use(app.router);
   sass.middleware({
