@@ -64,31 +64,33 @@ $item-margin-bottom: 20px
 .app-item
   +margin-bottom-normal
   // background: $gray
-  .app-item-bar
-    text-align: right
+.app-item-bar
+  text-align: right
+  height: 1.8em
+  overflow: visible
 
-    .app-item-like,
-    .app-item-bad
-      margin-left: 6px
-      -webkit-transition: font-size .8s ease
+.app-item-like,
+.app-item-bad
+  margin-left: 6px
+  -webkit-transition: font-size .2s ease-out
+  vertical-align: middle
 
-    .icon-heart,
-    .icon-heart-empty
-      color: red
-      &:hover
-        color: lighten(red, 20%)
+  &.icon-heart,
+  &.icon-heart-empty
+    color: red
+    &:hover
+      color: lighten(red, 20%)
 
-    .icon-thumbs-down,
-    .icon-skull
-      color: #333
-      &:hover
-        color: lighten(#333, 20%)
-      font-weight: bold
+  &.icon-thumbs-down,
+  &.icon-skull
+    color: #333
+    &:hover
+      color: lighten(#333, 20%)
 
-    .icon-heart-empty,
-    .icon-skull
-      font-size: 140%
+  &.icon-heart-empty,
+  &.icon-thumbs-down
+    font-size: 140%
 
-    .icon-heart,
-    .icon-skull
-      font-size: 220%
+  &.icon-heart,
+  &.icon-skull
+    font-size: 220%

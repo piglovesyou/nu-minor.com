@@ -77,7 +77,6 @@ app.items.Item.prototype.enterDocument = function() {
  * @param {goog.events.Event} e .
  */
 app.items.Item.prototype.handleClick_ = function(e) {
-
   var el = this.getElement();
   var et = /**@type{Element}*/(e.target);
 
@@ -105,19 +104,8 @@ app.items.Item.prototype.handleLikeClick_ = function(e) {
  */
 app.items.Item.prototype.handleLikeComplete_ = function(err, json) {
   goog.asserts.assertNumber(json.currentLike);
-  this.updateLikeButton_(json['currentLike'], !!json['userLiked']);
-};
-
-
-/**
- * @param {number} n .
- * @param {boolean} userLiked .
- */
-app.items.Item.prototype.updateLikeButton_ = function(n, userLiked) {
-  var dh = this.getDomHelper();
-  dh.setTextContent(this.likeButtonElm_, n);
-  goog.dom.classes.set(this.likeButtonElm_,
-      app.soy.body.likeUserClassName({'userLiked': userLiked}));
+  this.updateButton_(this.likeButtonElm_, json['currentLike'],
+      !!json['userLiked'], 'icon-heart', 'icon-heart-empty');
 };
 
 
@@ -127,6 +115,25 @@ app.items.Item.prototype.updateLikeButton_ = function(n, userLiked) {
  */
 app.items.Item.prototype.handleBadClick_ = function(e) {
   // console.log('bad');
+};
+
+
+/**
+ * @private
+ * @param {Element} el .
+ * @param {number} n .
+ * @param {boolean} active .
+ * @param {string} whenActive .
+ * @param {string} whenInactive .
+ */
+app.items.Item.prototype.updateButton_ = function(el, n, active,
+                                                  whenActive, whenInactive) {
+  var dh = this.getDomHelper();
+  dh.setTextContent(el, n);
+
+  var from = active ? whenInactive : whenActive;
+  var to = active ? whenActive : whenInactive;
+  goog.dom.classes.swap(el, from, to);
 };
 
 
