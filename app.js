@@ -23,14 +23,15 @@ var express = require('express') ,
   RedisStore = require('connect-redis')(express),
   SECRET = require('secret-strings').NU_MINOR;
   sass = require('node-sass'),
+  _ = require('underscore');
   isProduction = process.env.NODE_ENV === 'production',
   youtube = require('youtube-feeds');
 
-var routes = {
-  index: require('./src/routes'),
+var routes = require('./src/routes');
+_.extend(routes, {
   auth: require('./src/routes/auth'),
   eachitem: require('./src/routes/eachitem')
-};
+});
 
 var app = express();
 
@@ -61,7 +62,9 @@ app.configure('development', function() {
 
 
 
-app.get('/', routes.index.view);
+// Routes
+
+app.get('/', routes.index);
 
 app.get('/auth', routes.auth.index);
 app.get('/auth/auth', routes.auth.auth);

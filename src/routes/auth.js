@@ -1,6 +1,8 @@
 
 var soy = require('../soynode.js');
 var isProduction = process.env.NODE_ENV === 'production';
+var Q = require('q');
+var db = require('../setupdb');
 
 SECRET = require('secret-strings').NU_MINOR;
 
@@ -14,6 +16,10 @@ var oa = new OAuth(
     "http://nu-minor.com/auth/callback",
     "HMAC-SHA1");
 
+var getOAuthRequestToken = Q.denodeify(oa.getOAuthRequestToken.bind(oa));
+var getOAuthAccessToken = Q.denodeify(oa.getOAuthAccessToken.bind(oa));
+
+
 // /auth
 exports.index = function (req, res) {
   if(req.session.oauth && req.session.oauth.access_token) {
@@ -26,15 +32,19 @@ exports.index = function (req, res) {
 };
 
 exports.auth = function(req, res){
-  oa.getOAuthRequestToken(function(error, oauth_token, oauth_token_secret, results){
-    if (error) {
-      res.send("yeah no. didn't work.")
-    } else {
-      req.session.oauth = {};
-      req.session.oauth.token = oauth_token;
-      req.session.oauth.token_secret = oauth_token_secret;
-      res.redirect('https://twitter.com/oauth/authenticate?oauth_token='+oauth_token)
-    }
+  getOAuthRequestToken()
+  .fail(function(reason) {
+    res.send("yeah no. didn't work.")
+  })
+  .then(function(r){
+    var oauth_token = r[0];
+    var oauth_token_secret = r[1];
+    var results = r[2];
+
+    req.session.oauth = {};
+    req.session.oauth.token = oauth_token;
+    req.session.oauth.token_secret = oauth_token_secret;
+    res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token)
   });
 };
 
@@ -42,18 +52,19 @@ exports.callback = function(req, res, next){
   if (req.session.oauth) {
     req.session.oauth.verifier = req.query.oauth_verifier;
     var oauth = req.session.oauth;
-    oa.getOAuthAccessToken(oauth.token, oauth.token_secret, oauth.verifier, 
-        function(error, oauth_access_token, oauth_access_token_secret, results){
-          if (error){
-            res.send("yeah something broke.");
-          } else {
-            req.session.oauth.access_token = oauth_access_token;
-            req.session.oauth.access_token_secret = oauth_access_token_secret;
-            req.session.twitter = results;
-            res.redirect("/");
-          }
-        }
-    );
+    getOAuthAccessToken(oauth.token, oauth.token_secret, oauth.verifier)
+    .fail(function(reason) {
+      res.send("yeah something broke.");
+    })
+    .then(function(r) {
+      var oauth_access_token = r[0],
+          oauth_access_token_secret = r[1],
+          results = r[2];
+      req.session.oauth.access_token = oauth_access_token;
+      req.session.oauth.access_token_secret = oauth_access_token_secret;
+      req.session.twitter = results;
+      res.redirect("/");
+    })
   } else
     next(new Error("you're not supposed to be here."));
 };

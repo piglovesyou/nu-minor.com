@@ -8,18 +8,35 @@
 {template .main}
   <div class="row app-items">
 
-    {foreach $i in [9, 3, 3, 3, 3, 3, 6, 3, 3, 3, 3, 3, 3]}
-      {let $item: $items[index($i)] /}
-      <div data-itemid="{$item.id}" class="app-item span{$i}{if $i == 6} pull-right{/if}">
-        <div style="height :2em; background: #666;"></div>
-        // <iframe src="http://www.youtube-nocookie.com/embed/{$item.id}?rel=0" frameborder="0" allowfullscreen></iframe>
-        <div class="app-item-bar">
-          <a href="#" class="{call .likeUserClassName}{param userLiked: $item.userLiked /}{/call}">{$item.like.length}</a>
-          <a href="#" class="app-item-bad icon-thumbs-down">{$item.bad.length}</a>
-        </div>
-      </div>
+    {let $featureList: [9, 3, 3, 3, 3, 3, 6, 3, 3] /}
+    {foreach $span in $featureList}
+      {let $item: $items[index($span)] /}
+      {call .item data="$item"}{param span: $span /}{/call}
     {/foreach}
+    {for $i in range(length($featureList), length($items))}
+      {let $item: $items[$i] /}
+      {call .item data="$item"}{param span: 3 /}{/call}
+    {/for}
 
+  </div>
+{/template}
+
+/**
+ * @param id ''
+ * @param span ''
+ * @param userLiked n
+ * @param userMarkedBad n
+ * @param like []
+ * @param bad []
+ */
+{template .item}
+  <div data-itemid="{$id}" class="app-item span{$span}{if $span == 6} pull-right{/if}">
+    <div style="height :2em; background: #666;"></div>
+    // <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
+    <div class="app-item-bar">
+      <a href="/{$id}/like" class="{call .likeUserClassName data="all" /}">{$like.length}</a>
+      <a href="/{$id}/bad" class="{call .badUserClassName data="all" /}">{$bad.length}</a>
+    </div>
   </div>
 {/template}
 
@@ -28,4 +45,11 @@
  */
 {template .likeUserClassName}
 app-item-like {if $userLiked}icon-heart{else}icon-heart-empty{/if}
+{/template}
+
+/**
+ * @param userMarkedBad
+ */
+{template .badUserClassName}
+app-item-bad {if $userMarkedBad}icon-skull{else}icon-thumbs-down{/if}
 {/template}

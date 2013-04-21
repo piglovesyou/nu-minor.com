@@ -8,39 +8,16 @@ var schemaMap = {};
 var modelMap = {};
 
 
-var youtube = {
-  id: String,
-  title: String,
-  uploaded: String,
-  updated: String,
-  uploader: String,
-  category: String,
-  description: String,
-  thumbnail: Object,
-  player: Object,
-  content: Object,
-  duration: Number,
-  aspectRatio: String,
-  rating: Number,
-  likeCount: String,
-  ratingCount: Number,
-  viewCount: Number,
-  favoriteCount: Number,
-  commentCount: Number,
-  accessControl: Object
-};
+// user schema
+schemaMap.user = require('./schema/user');
+
+// item schema
+schemaMap.item = _.extend(require('./schema/youtube'),
+    require('./schema/itembase'));
 
 
 
-schemaMap.item = _.extend(youtube, {
-  type: String, // youtube
-  like: {type: [ String ], default: [] },
-  bad: {type: [ String ], default: [] }
-});
-
-
-
-// Initialize models and export them
+// Initialize models
 _.each(schemaMap, function(schema, name) {
   try {
     modelMap[name] = mongoose.model(name, schema) 
@@ -49,10 +26,9 @@ _.each(schemaMap, function(schema, name) {
   }
 })
 
-module.exports = {
-  conn: conn
-};
+module.exports.conn = conn;
 
 _.each(modelMap, function(model, name) {
   module.exports[name] = model;
 })
+

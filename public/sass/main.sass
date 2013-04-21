@@ -55,7 +55,7 @@ $item-margin-bottom: 20px
 .app-items
   @for $i from 1 through $gridColumns
     .span#{$i} iframe
-      margin-bottom: 6px
+      // margin-bottom: 6px
       $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
       width: $w
       height: ($w / 1.777) // Youtube aspect
@@ -66,13 +66,15 @@ $item-margin-bottom: 20px
   // background: $gray
 .app-item-bar
   text-align: right
-  height: 1.8em
+  height: 2.8em
+  line-height: 2.8em
   overflow: visible
 
 .app-item-like,
 .app-item-bad
   margin-left: 6px
-  -webkit-transition: font-size .2s ease-out
+  +user-select(none)
+  +transition(font-size .05s ease-out)
   vertical-align: middle
 
   &.icon-heart,
@@ -89,7 +91,7 @@ $item-margin-bottom: 20px
 
   &.icon-heart-empty,
   &.icon-thumbs-down
-    font-size: 140%
+    font-size: 110%
 
   &.icon-heart,
   &.icon-skull
