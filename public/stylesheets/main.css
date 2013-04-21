@@ -8546,7 +8546,21 @@ ul.icons {
     margin-top: 0;
     margin-bottom: 0; }
   .app-title .icon-twitter {
-    font-size: 150%; }
+    font-size: 150%;
+    vertical-align: middle;
+    margin-right: 10px; }
+  .app-title .pull-right {
+    text-align: right; }
+
+.app-userprofile {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none; }
+  .app-userprofile img {
+    width: 28px;
+    margin-right: 3px; }
 
 .row-nav {
   display: none;

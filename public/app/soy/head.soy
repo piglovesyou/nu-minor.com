@@ -4,34 +4,34 @@
 
 /**
  * @param isAuthed
+ * @param twitter
  */
 {template .main}
-  {call .title}
-    {param useLogoutLink: $isAuthed /}
+  {call .title data="all"}
     {param useFollowButton: true /}
   {/call}
   {call .nav}{/call}
 {/template}
 
 /**
- * @param useLogoutLink
+ * @param isAuthed
  * @param useFollowButton
+ * @param twitter
  */
 {template .title}
   <div class="row app-title">
     <h1 class="span2">NuMinor</h1>
     <p class="span4">the site description is here</p>
-    {if $useFollowButton}
-      <div class="span2 pull-right">
+
+    <div class="span4 pull-right">
+      {if $useFollowButton}
         <a href="#" class="btn icon-twitter">
           follow us
         </a>
-      </div>
-    {/if}
-    <div style="text-align: right;" class="span2 pull-right">
-      {if $useLogoutLink}
-        <a href="/auth/logout">
-          logout
+      {/if}
+      {if $isAuthed}
+        <a href="/auth/logout" class="app-userprofile">
+          <img src="{$twitter.profile_image_url}" alt="{$twitter.screen_name}" />{$twitter.screen_name}
         </a>
       {else}
         <a href="/auth/auth">

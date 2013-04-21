@@ -97,7 +97,7 @@ exports.like = function(req, res) {
   res.writeHead(200, {'Content-Type': 'application/json;charset=UTF8'});
 
   var itemId = req.params.itemId;
-  var userId = req.session.twitter.user_id;
+  var userId = req.session.twitter.id;
   swapUserId(itemId, userId, 'like', 'bad')
   .fail(whenFail(res))
   .done(function(result) {
@@ -118,7 +118,7 @@ exports.bad = function(req, res) {
   res.writeHead(200, {'Content-Type': 'application/json;charset=UTF8'});
 
   var itemId = req.params.itemId;
-  var userId = req.session.twitter.user_id;
+  var userId = req.session.twitter.id;
   swapUserId(itemId, userId, 'bad', 'like')
   .fail(whenFail(res))
   .done(function(result) {

@@ -68,8 +68,9 @@
 {template .authlayout}
   <div class="container" style="width:480px">
     {call app.soy.head.title}
-      {param useLogoutLink: false /}
+      {param isAuthed: false /}
       {param useFollowButton: false /}
+      {param twitter: [] /}
     {/call}
     <div class="row">
       {$body|noescape}

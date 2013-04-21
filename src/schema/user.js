@@ -2,7 +2,7 @@
 // https://api.twitter.com/1/users/show.json?id=${id}
 
 module.exports = {
-  id: Number,
+  id: String, // Actually it's Number
   id_str: String,
   name: String,
   screen_name: String,

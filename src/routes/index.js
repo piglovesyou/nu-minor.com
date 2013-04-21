@@ -8,6 +8,12 @@ var _ = require('underscore');
 
 var find = Q.denodeify(db.item.find.bind(db.item));
 
+var isAuthed = function(req) {
+  // Means we have already authed, fetched user profile.
+  return !!(req.session &&
+            req.session.twitter &&
+            req.session.twitter.id);
+};
 
 /*
  * GET home page.
@@ -15,10 +21,8 @@ var find = Q.denodeify(db.item.find.bind(db.item));
 
 exports.index = function(req, res) {
 
-  var userId = req.session.oauth &&
-      req.session.oauth.access_token &&
-      req.session.twitter &&
-      req.session.twitter.user_id;
+  var isAuthed_ = isAuthed(req),
+      userId = isAuthed_ && req.session.twitter.id;
 
   find({type: 'youtube'}, null, { limit: 25 })
   .then(function(items) {
@@ -32,7 +36,8 @@ exports.index = function(req, res) {
 
     res.end(soy.render('app.soy.index', {
       isProduction: isProduction,
-      isAuthed: req.session.oauth && req.session.oauth.access_token,
+      isAuthed: !!(isAuthed_ && req.session.oauth.access_token),
+      twitter: isAuthed_ ? req.session.twitter : null,
       items: items
     }));
 

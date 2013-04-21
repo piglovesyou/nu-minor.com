@@ -5,6 +5,7 @@
 /**
  * @param isProduction
  * @param isAuthed
+ * @param twitter
  * @param items
  */
 {template .index}
@@ -13,12 +14,8 @@
     {param excludeScript: false /}
     {param body}
       <div class="container">
-        {call app.soy.head.main}
-          {param isAuthed:$isAuthed /}
-        {/call}
-        {call app.soy.body.main}
-          {param items:$items /}
-        {/call}
+        {call app.soy.head.main data="all"}{/call}
+        {call app.soy.body.main data="all"}{/call}
       </div>
       <script> main()</script>
     {/param}
@@ -67,6 +64,11 @@
       <div class="container">
         {call app.soy.head.main}
           {param isAuthed: true /}
+          {param twitter: [
+            ['id': '8383838'],
+            ['screen_name': 'yeahyeah'],
+            ['profile_image_url': 'xxx.jpg']
+          ] /}
         {/call}
         {call app.soy.body.main}
           {param items: [

@@ -1,28 +1,31 @@
 
+
 var soy = require('../soynode.js');
 var isProduction = process.env.NODE_ENV === 'production';
 var Q = require('q');
 var db = require('../setupdb');
 
-SECRET = require('secret-strings').NU_MINOR;
 
-var OAuth  = require('oauth').OAuth;
-var oa = new OAuth(
-    "https://twitter.com/oauth/request_token",
-    "https://twitter.com/oauth/access_token", 
+var SECRET = require('secret-strings').NU_MINOR;
+var oa = new (require('oauth').OAuth)(
+    'https://twitter.com/oauth/request_token',
+    'https://twitter.com/oauth/access_token',
     SECRET.CONSUMER_KEY,
     SECRET.CONSUMER_SECRET,
-    "1.0",
-    "http://nu-minor.com/auth/callback",
-    "HMAC-SHA1");
+    '1.0',
+    'http://nu-minor.com/auth/callback',
+    'HMAC-SHA1');
 
 var getOAuthRequestToken = Q.denodeify(oa.getOAuthRequestToken.bind(oa));
 var getOAuthAccessToken = Q.denodeify(oa.getOAuthAccessToken.bind(oa));
+var getWithOAuth = Q.denodeify(oa.get.bind(oa));
 
+var findOne = Q.denodeify(db.user.findOne.bind(db.user));
+var updateUser = Q.denodeify(db.user.update.bind(db.user));
 
 // /auth
-exports.index = function (req, res) {
-  if(req.session.oauth && req.session.oauth.access_token) {
+exports.index = function(req, res) {
+  if (req.session.oauth && req.session.oauth.access_token) {
     res.end('you look already authorized.');
   } else {
     res.end(soy.render('app.soy.auth.index', {
@@ -31,12 +34,12 @@ exports.index = function (req, res) {
   }
 };
 
-exports.auth = function(req, res){
+exports.auth = function(req, res) {
   getOAuthRequestToken()
   .fail(function(reason) {
-    res.send("yeah no. didn't work.")
+    res.send("yeah no. didn't work.");
   })
-  .then(function(r){
+  .then(function(r) {
     var oauth_token = r[0];
     var oauth_token_secret = r[1];
     var results = r[2];
@@ -44,29 +47,51 @@ exports.auth = function(req, res){
     req.session.oauth = {};
     req.session.oauth.token = oauth_token;
     req.session.oauth.token_secret = oauth_token_secret;
-    res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token)
+    res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token);
   });
 };
 
-exports.callback = function(req, res, next){
-  if (req.session.oauth) {
-    req.session.oauth.verifier = req.query.oauth_verifier;
-    var oauth = req.session.oauth;
-    getOAuthAccessToken(oauth.token, oauth.token_secret, oauth.verifier)
-    .fail(function(reason) {
-      res.send("yeah something broke.");
-    })
-    .then(function(r) {
-      var oauth_access_token = r[0],
-          oauth_access_token_secret = r[1],
-          results = r[2];
-      req.session.oauth.access_token = oauth_access_token;
-      req.session.oauth.access_token_secret = oauth_access_token_secret;
-      req.session.twitter = results;
-      res.redirect("/");
-    })
-  } else
-    next(new Error("you're not supposed to be here."));
+exports.callback = function(req, res, next) {
+  if (!req.session.oauth) next(new Error("you're not supposed to be here."));
+
+  req.session.oauth.verifier = req.query.oauth_verifier;
+  var oauth = req.session.oauth;
+
+  getOAuthAccessToken(oauth.token, oauth.token_secret, oauth.verifier)
+  .fail(function(reason) {
+    res.send('yeah something broke.');
+  })
+  .then(function(r) {
+    req.session.oauth.access_token = r[0];
+    req.session.oauth.access_token_secret = r[1];
+    req.session.twitter = {
+      user_id: r[2].user_id,
+      screen_name: r[2].screen_name
+    };
+    return findOne({id: req.session.twitter.user_id});
+  })
+  .then(function(user) {
+    if (user && user.id) {
+      _.extend(req.session.twitter, user);
+      return;
+    }
+    var userId = req.session.twitter.user_id;
+    return getWithOAuth(
+      'http://api.twitter.com/1/users/show.json?id=' + userId,
+      req.session.oauth.access_token,
+      req.session.oauth.access_token_secret)
+    .then(function(results) {
+      var user = JSON.parse(results[0]);
+      _.extend(req.session.twitter, user);
+      // We won't wait this step.
+      updateUser({ id: userId }, user, { upsert: true });
+      return;
+    }).done();
+  })
+  .then(function() {
+    res.redirect('/');
+  });
+
 };
 
 // exports.post = function (req, res) {
@@ -74,7 +99,7 @@ exports.callback = function(req, res, next){
 //     var text = req.body.text;
 //     oa.post(
 //       'https://api.twitter.com/1/statuses/update.json',
-//       req.session.oauth.access_token, 
+//       req.session.oauth.access_token,
 //       req.session.oauth.access_token_secret,
 //       {"status": text},
 //       function (err, data, response) {
@@ -89,11 +114,11 @@ exports.callback = function(req, res, next){
 //   }
 // };
 
-exports.requireAuthMW = function(req, res, next){
+exports.requireAuthMW = function(req, res, next) {
   if (req.session.oauth &&
       req.session.oauth.access_token &&
       req.session.twitter &&
-      req.session.twitter.user_id) {
+      req.session.twitter.id) {
     next();
     return;
   }
@@ -104,7 +129,7 @@ exports.requireAuthMW = function(req, res, next){
   }));
 };
 
-exports.logout = function (req, res) {
+exports.logout = function(req, res) {
   req.session.destroy();
   res.end(soy.render('app.soy.auth.logout', {
     isProduction: isProduction
