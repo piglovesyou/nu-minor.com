@@ -14,6 +14,7 @@ goog.scope(function() {
 
 // Aliase namespaces only for this JavaScript file.
 var getAncestor = app.dom.getAncestorFromEventTargetByClass;
+var soy = app.soy;
 
 
 /**
@@ -30,7 +31,15 @@ app.items.Item = function(opt_domHelper) {
 
 
   /** @type {Element} */
+  this.likeButtonInnerElm_ = null;
+
+
+  /** @type {Element} */
   this.badButtonElm_ = null;
+
+
+  /** @type {Element} */
+  this.badButtonInnerElm_ = null;
 
 };
 goog.inherits(app.items.Item, goog.ui.Component);
@@ -55,12 +64,16 @@ app.items.Item.prototype.decorateInternal = function(element) {
 app.items.Item.prototype.canDecorate = function(element) {
   if (goog.dom.classes.has(element, 'app-item')) {
     var dh = this.getDomHelper();
-    var like = dh.getElementByClass('app-item-like', element);
-    var bad = dh.getElementByClass('app-item-bad', element);
+    var like = this.likeButtonElm_ = dh.getElementByClass('app-item-like', element);
+    var bad = this.badButtonElm_ = dh.getElementByClass('app-item-bad', element);
     if (like && bad) {
-      this.likeButtonElm_ = like;
-      this.badButtonElm_ = bad;
-      return true;
+      var likeInner = dh.getElementByClass('app-item-like-inner', like);
+      var badInner = dh.getElementByClass('app-item-bad-inner', bad);
+      if (likeInner && badInner) {
+        this.likeButtonInnerElm_ = likeInner;
+        this.badButtonInnerElm_ = badInner
+        return true;
+      }
     }
   }
   return false;
@@ -141,52 +154,25 @@ app.items.Item.prototype.updateButtons_ = function(isLike, json) {
   goog.asserts.assertNumber(json.currentLike);
   goog.asserts.assertNumber(json.currentBad);
   var dh = this.getDomHelper();
-  var el;
-  var num;
-  var classNameGetter;
-  var fromClass;
-  var toClass;
 
-  el = isLike ? this.likeButtonElm_ : this.badButtonElm_;
-  num = isLike ? json.currentLike : json.currentBad;
-  classNameGetter = isLike ?
-      app.items.Item.getLikeClassName_ : app.items.Item.getBadClassName_;
-  fromClass = classNameGetter(!json.wasPushed);
-  toClass = classNameGetter(json.wasPushed);
-  dh.setTextContent(el, num.toString());
-  goog.dom.classes.swap(el, fromClass, toClass);
+  var arg = {
+    like: {length: json.currentLike},
+    bad: {length: json.currentBad},
+    userLiked: isLike ? json.wasPushed : !json.wasOppositePulled,
+    userMarkedBad: !isLike ? json.wasPushed : !json.wasOppositePulled
+  };
 
+  var el = isLike ? this.likeButtonElm_ : this.badButtonElm_;
+  var renderer = isLike ? soy.body.likeInner : soy.body.badInner;
+  goog.dom.classes.enable(el, 'btn-primary', json.wasPushed);
+
+  el.innerHTML = renderer(arg);
   if (json.wasOppositePulled) {
     el = !isLike ? this.likeButtonElm_ : this.badButtonElm_;
-    num = !isLike ? json.currentLike : json.currentBad;
-    classNameGetter = !isLike ?
-        app.items.Item.getLikeClassName_ : app.items.Item.getBadClassName_;
-    fromClass = classNameGetter(true);
-    toClass = classNameGetter(false);
-    dh.setTextContent(el, num.toString());
-    goog.dom.classes.swap(el, fromClass, toClass);
+    renderer = !isLike ? soy.body.likeInner : soy.body.badInner;
+    goog.dom.classes.enable(el, 'btn-primary', false);
+    el.innerHTML = renderer(arg);
   }
-
-};
-
-
-/**
- * @private
- * @param {boolean} active .
- * @return {string} .
- */
-app.items.Item.getLikeClassName_ = function(active) {
-  return active ? 'icon-heart' : 'icon-heart-empty';
-};
-
-
-/**
- * @private
- * @param {boolean} active .
- * @return {string} .
- */
-app.items.Item.getBadClassName_ = function(active) {
-  return active ? 'icon-skull' : 'icon-thumbs-down';
 };
 
 

@@ -23,6 +23,18 @@ $fontResourcePath:   "../sass/resources"
 .icon-skull:before
   content: "S"
 
+=user-drag($drag)
+  -webkit-user-drag: $drag
+  -moz-user-drag: $drag
+  -ms-user-drag: $drag
+  -o-user-drag: $drag
+  user-drag: $drag
+
+=display-box
+  display: -webkit-box
+  display: -moz-box
+  display: -ms-box
+  display: box
 
 
 
@@ -51,8 +63,10 @@ $item-margin-bottom: 20px
     
 
 .app-userprofile
-  +user-select(none)
+  display: inline-block
   img
+    +user-select(none)
+    +user-drag(none)
     width: 28px
     margin-right: 3px
 
@@ -75,34 +89,37 @@ $item-margin-bottom: 20px
   +margin-bottom-normal
   // background: $gray
 .app-item-bar
-  text-align: right
-  height: 2.8em
-  line-height: 2.8em
-  overflow: visible
+  display: block
+  .btn-group
+    float: right
 
-.app-item-like,
-.app-item-bad
-  margin-left: 6px
-  +user-select(none)
-  +transition(font-size .05s ease-out)
-  vertical-align: middle
+  input[type="text"]
+    width: 110px
+    vertical-align: middle
+    padding-top: 2px
+    padding-bottom: 2px
 
-  &.icon-heart,
-  &.icon-heart-empty
-    color: red
-    &:hover
-      color: lighten(red, 20%)
+  .app-item-like,
+  .app-item-bad
+    +user-select(none)
+    vertical-align: middle
 
-  &.icon-thumbs-down,
-  &.icon-skull
-    color: #333
-    &:hover
-      color: lighten(#333, 20%)
+  // &.icon-heart,
+  // &.icon-heart-empty
+  //   color: red
+  //   &:hover
+  //     color: lighten(red, 20%)
 
-  &.icon-heart-empty,
-  &.icon-thumbs-down
-    font-size: 110%
+  // &.icon-thumbs-down,
+  // &.icon-skull
+  //   color: #333
+  //   &:hover
+  //     color: lighten(#333, 20%)
 
-  &.icon-heart,
-  &.icon-skull
-    font-size: 220%
+  // &.icon-heart-empty,
+  // &.icon-thumbs-down
+  //   font-size: 110%
+
+  // &.icon-heart,
+  // &.icon-skull
+  //   font-size: 220%

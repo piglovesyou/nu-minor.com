@@ -8553,12 +8553,18 @@ ul.icons {
     text-align: right; }
 
 .app-userprofile {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none; }
+  display: inline-block; }
   .app-userprofile img {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -moz-user-drag: none;
+    -ms-user-drag: none;
+    -o-user-drag: none;
+    user-drag: none;
     width: 28px;
     margin-right: 3px; }
 
@@ -8621,46 +8627,19 @@ ul.icons {
   margin-bottom: 20px; }
 
 .app-item-bar {
-  text-align: right;
-  height: 2.8em;
-  line-height: 2.8em;
-  overflow: visible; }
-
-.app-item-like,
-.app-item-bad {
-  margin-left: 6px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -o-user-select: none;
-  user-select: none;
-  -webkit-transition: font-size 0.05s ease-out;
-  -moz-transition: font-size 0.05s ease-out;
-  -o-transition: font-size 0.05s ease-out;
-  transition: font-size 0.05s ease-out;
-  -webkit-backface-visibility: hidden;
-  vertical-align: middle; }
-  .app-item-like.icon-heart, .app-item-like.icon-heart-empty,
-  .app-item-bad.icon-heart,
-  .app-item-bad.icon-heart-empty {
-    color: red; }
-    .app-item-like.icon-heart:hover, .app-item-like.icon-heart-empty:hover,
-    .app-item-bad.icon-heart:hover,
-    .app-item-bad.icon-heart-empty:hover {
-      color: #ff6666; }
-  .app-item-like.icon-thumbs-down, .app-item-like.icon-skull,
-  .app-item-bad.icon-thumbs-down,
-  .app-item-bad.icon-skull {
-    color: #333333; }
-    .app-item-like.icon-thumbs-down:hover, .app-item-like.icon-skull:hover,
-    .app-item-bad.icon-thumbs-down:hover,
-    .app-item-bad.icon-skull:hover {
-      color: #666666; }
-  .app-item-like.icon-heart-empty, .app-item-like.icon-thumbs-down,
-  .app-item-bad.icon-heart-empty,
-  .app-item-bad.icon-thumbs-down {
-    font-size: 110%; }
-  .app-item-like.icon-heart, .app-item-like.icon-skull,
-  .app-item-bad.icon-heart,
-  .app-item-bad.icon-skull {
-    font-size: 220%; }
+  display: block; }
+  .app-item-bar .btn-group {
+    float: right; }
+  .app-item-bar input[type="text"] {
+    width: 110px;
+    vertical-align: middle;
+    padding-top: 2px;
+    padding-bottom: 2px; }
+  .app-item-bar .app-item-like,
+  .app-item-bar .app-item-bad {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    vertical-align: middle; }

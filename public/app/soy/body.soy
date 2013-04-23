@@ -31,25 +31,34 @@
  */
 {template .item}
   <div data-itemid="{$id}" class="app-item span{$span}{if $span == 6} pull-right{/if}">
+
     <div style="height :2em; background: #666;"></div>
     // <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
-    <div class="app-item-bar">
-      <a href="/{$id}/like" class="{call .likeUserClassName data="all" /}">{$like.length}</a>
-      <a href="/{$id}/bad" class="{call .badUserClassName data="all" /}">{$bad.length}</a>
+
+    <div class="app-item-bar input-append">
+      <div class="btn-group">
+        <a href="/{$id}/like" class="app-item-like btn{if $userLiked} btn-primary{/if} ">{call .likeInner data="all" /}</a>
+        <a href="/{$id}/bad" class="app-item-bad btn{if $userMarkedBad} btn-primary{/if}">{call .badInner data="all" /}</a>
+      </div>
+      <form action="">
+        <input type="text" value="" placeholder="comment.." />
+      </form>
     </div>
   </div>
 {/template}
 
 /**
  * @param userLiked
+ * @param like
  */
-{template .likeUserClassName}
-app-item-like {if $userLiked}icon-heart{else}icon-heart-empty{/if}
+{template .likeInner}
+<span class="app-item-like-inner {if $userLiked}icon-heart{else}icon-heart-empty{/if}">{$like.length}</span>
 {/template}
 
 /**
  * @param userMarkedBad
+ * @param bad
  */
-{template .badUserClassName}
-app-item-bad {if $userMarkedBad}icon-skull{else}icon-thumbs-down{/if}
+{template .badInner}
+<span class="app-item-bad-inner {if $userMarkedBad}icon-thumbs-down{else}icon-thumbs-down{/if}">{$bad.length}</span>
 {/template}
