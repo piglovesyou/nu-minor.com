@@ -2,6 +2,9 @@
 var db = require('../setupdb');
 var youtube = require('youtube-feeds');
 var Q = require('q');
+var _ = require('underscore');
+
+var update = Q.denodeify(db.item.update.bind(db.item));
 
 // A deferred object which is resolved when
 // all step is done in this file.
@@ -16,53 +19,28 @@ var promiseCollectYoutube;
 
 
 // Constant and Helper Functions
-var MAX_RESULTS = 50; // Youtube max spec.
-var createOpt = function(page) {
+var PER_PAGE = 50; // Youtube max spec.
+var createOpt = function(pageIndex) {
   return {
     'author': 'cyriak',
-    'max-results': MAX_RESULTS,
+    'max-results': PER_PAGE,
     // 1, 11, 21, 31 ...
-    'start-index': (page * MAX_RESULTS) - (MAX_RESULTS - 1)
+    'start-index': ((pageIndex + 1) * PER_PAGE) - (PER_PAGE - 1)
   };
-};
-
-var isEnough = function(data) {
-  return data.startIndex + data.items.length > data.totalItems;
 };
 
 var whenFail = function(reason) {
   throw new Error(reason);
 };
 
-var whenAllDone = function() {
-  deferredToExport.resolve();
+var whenAllDone = function(length) {
+  deferredToExport.resolve(length);
 };
 
-
-
-// Primary Step
-var fetchItems = (function(page) {
+var fetchRemote = function(pageIndex) {
   return function() {
     var d = Q.defer();
-    Q.when()
-    .then(fetchRemote(page++))
-    .then(insertItems)
-    .fail(whenFail)
-    .done(function() {
-      d.resolve();
-    });
-    return d.promise;
-  };
-})(1); // 1 is first page.
-
-
-
-
-// Sub Steps
-var fetchRemote = function(page) {
-  return function() {
-    var d = Q.defer();
-    youtube.feeds.videos(createOpt(page), function(err, data) {
+    youtube.feeds.videos(createOpt(pageIndex), function(err, data) {
       if (err) d.reject(err);
       d.resolve(data);
     });
@@ -70,42 +48,52 @@ var fetchRemote = function(page) {
   }
 };
 
-var insertItems = function(data) {
+var fetchRestOfAll = function(data) {
+  var d = Q.defer();
+
+  var rest = data.totalItems - data.itemsPerPage;
+  var times = Math.ceil(rest / PER_PAGE);
+  var remotes = [];
+
+  for (var i = 1; i <= times; i++) {
+    remotes.push(fetchRemote(i));
+  }
+  Q.allResolved(remotes)
+  .spread(function() {
+    return data.items.concat(_.toArray(arguments));
+  })
+  .fail(whenFail)
+  .done(function(items) {
+    d.resolve(items);
+  });
+
+  return d.promise;
+};
+
+var insertItems = function(items) {
   var d = Q.defer();
   var p = Q.when();
-  data.items.forEach(function(item) {
+  items.forEach(function(item) {
     item.nm_type = 'youtube';
     p.then(insertItem(item));
   });
   p.fail(whenFail)
   .done(function() {
-    if (!isEnough(data)) {
-      // Fetch items again.
-      promiseCollectYoutube.then(fetchItems);
-    } else {
-      promiseCollectYoutube.done(whenAllDone);
-    }
-    d.resolve();
+    d.resolve(items.length);
   });
   return d.promise;
 };
 
 var insertItem = function(item) {
-  return function() {
-    var d = Q.defer();
-    db.item.update({ id: item.id },
-                   item,
-                   { upsert: true },
-                   function(err, handled, status) {
-      if (err) d.reject(err);
-      d.resolve();
-    });
-    return d.promise;
-  };
+  return update({ id: item.id },
+    item, { upsert: true });
 };
 
 
 
 promiseCollectYoutube = Q.when()
-.then(fetchItems)
-.fail(whenFail);
+.then(fetchRemote(0))
+.then(fetchRestOfAll)
+.then(insertItems)
+.fail(whenFail)
+.done(whenAllDone);
