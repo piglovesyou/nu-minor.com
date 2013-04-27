@@ -74,7 +74,7 @@ var insertItems = function(data) {
   var d = Q.defer();
   var p = Q.when();
   data.items.forEach(function(item) {
-    item.type = 'youtube';
+    item.nm_type = 'youtube';
     p.then(insertItem(item));
   });
   p.fail(whenFail)

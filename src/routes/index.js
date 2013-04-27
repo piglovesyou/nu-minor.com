@@ -24,13 +24,13 @@ exports.index = function(req, res) {
   var isAuthed_ = isAuthed(req),
       userId = isAuthed_ && req.session.twitter.id;
 
-  find({type: 'youtube'}, null, { limit: 25 })
+  find({nm_type: 'youtube'}, null, { limit: 25 })
   .then(function(items) {
 
     if (userId) {
       _.each(items, function(item) {
-        item.userLiked = _.contains(item.like, userId);
-        item.userMarkedBad = _.contains(item.bad, userId);
+        item.userLiked = _.contains(item.nm_like, userId);
+        item.userMarkedBad = _.contains(item.nm_bad, userId);
       });
     }
 

@@ -57,7 +57,7 @@ $item-margin-bottom: 20px
   .icon-twitter
     font-size: 150%
     vertical-align: middle
-    margin-right: 10px
+    margin-right: 20px
   .pull-right
     text-align: right
     
@@ -68,7 +68,7 @@ $item-margin-bottom: 20px
     +user-select(none)
     +user-drag(none)
     width: 28px
-    margin-right: 3px
+    margin-right: 6px
 
 .row-nav
   display: none
@@ -90,8 +90,14 @@ $item-margin-bottom: 20px
   // background: $gray
 .app-item-bar
   display: block
+  background: #d7dce0
   .btn-group
     float: right
+
+  // override flat-ui
+  .btn-group > .btn:first-child,
+  .btn-group > .btn:last-child
+    border-radius: 0
 
   input[type="text"]
     width: 110px

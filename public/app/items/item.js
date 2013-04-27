@@ -156,8 +156,8 @@ app.items.Item.prototype.updateButtons_ = function(isLike, json) {
   var dh = this.getDomHelper();
 
   var arg = {
-    like: {length: json.currentLike},
-    bad: {length: json.currentBad},
+    nm_like: {length: json.currentLike},
+    nm_bad: {length: json.currentBad},
     userLiked: isLike ? json.wasPushed : !json.wasOppositePulled,
     userMarkedBad: !isLike ? json.wasPushed : !json.wasOppositePulled
   };

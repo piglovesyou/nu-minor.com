@@ -82,8 +82,8 @@ var swapUserId = function(itemId, userId, toPush, toPull) {
     return {
       wasPushed: wasPushed,
       wasOppositePulled: wasPushed && pullInc < 0,
-      currentLike: toPush === 'like' ? (itemRef.like.length + pushInc) : (itemRef.like.length + pullInc),
-      currentBad: toPush === 'bad' ? (itemRef.bad.length + pushInc) : (itemRef.bad.length + pullInc)
+      currentLike: toPush === 'nm_like' ? (itemRef.nm_like.length + pushInc) : (itemRef.nm_like.length + pullInc),
+      currentBad: toPush === 'nm_bad' ? (itemRef.nm_bad.length + pushInc) : (itemRef.nm_bad.length + pullInc)
     };
   });
   return q; 
@@ -98,7 +98,7 @@ exports.like = function(req, res) {
 
   var itemId = req.params.itemId;
   var userId = req.session.twitter.id;
-  swapUserId(itemId, userId, 'like', 'bad')
+  swapUserId(itemId, userId, 'nm_like', 'nm_bad')
   .fail(whenFail(res))
   .done(function(result) {
     _.extend(result, {
@@ -119,7 +119,7 @@ exports.bad = function(req, res) {
 
   var itemId = req.params.itemId;
   var userId = req.session.twitter.id;
-  swapUserId(itemId, userId, 'bad', 'like')
+  swapUserId(itemId, userId, 'nm_bad', 'nm_like')
   .fail(whenFail(res))
   .done(function(result) {
     _.extend(result, {

@@ -8548,7 +8548,7 @@ ul.icons {
   .app-title .icon-twitter {
     font-size: 150%;
     vertical-align: middle;
-    margin-right: 10px; }
+    margin-right: 20px; }
   .app-title .pull-right {
     text-align: right; }
 
@@ -8566,7 +8566,7 @@ ul.icons {
     -o-user-drag: none;
     user-drag: none;
     width: 28px;
-    margin-right: 3px; }
+    margin-right: 6px; }
 
 .row-nav {
   display: none;
@@ -8627,9 +8627,13 @@ ul.icons {
   margin-bottom: 20px; }
 
 .app-item-bar {
-  display: block; }
+  display: block;
+  background: #d7dce0; }
   .app-item-bar .btn-group {
     float: right; }
+  .app-item-bar .btn-group > .btn:first-child,
+  .app-item-bar .btn-group > .btn:last-child {
+    border-radius: 0; }
   .app-item-bar input[type="text"] {
     width: 110px;
     vertical-align: middle;
