@@ -6,8 +6,6 @@ var _ = require('underscore');
 
 var update = Q.denodeify(db.item.update.bind(db.item));
 
-// A deferred object which is resolved when
-// all step is done in this file.
 var deferredToExport = Q.defer();
 
 /** @type {Object} */
@@ -18,14 +16,14 @@ var promiseCollectYoutube;
 
 
 
-// Constant and Helper Functions
-var PER_PAGE = 50; // Youtube max spec.
-var createOpt = function(pageIndex) {
+// Youtube returns crazy response
+var PER_PAGE = 20; // Youtube max spec.
+var createOpt = function(pageIndex, perPage) {
   return {
     'author': 'cyriak',
-    'max-results': PER_PAGE,
+    'max-results': perPage,
     // 1, 11, 21, 31 ...
-    'start-index': ((pageIndex + 1) * PER_PAGE) - (PER_PAGE - 1)
+    'start-index': pageIndex * PER_PAGE + 1
   };
 };
 
@@ -37,10 +35,11 @@ var whenAllDone = function(length) {
   deferredToExport.resolve(length);
 };
 
-var fetchRemote = function(pageIndex) {
+var fetchRemote = function(pageIndex, perPage) {
   return function() {
     var d = Q.defer();
-    youtube.feeds.videos(createOpt(pageIndex), function(err, data) {
+    var o = createOpt(pageIndex, perPage);
+    youtube.feeds.videos(o, function(err, data) {
       if (err) d.reject(err);
       d.resolve(data);
     });
@@ -51,19 +50,26 @@ var fetchRemote = function(pageIndex) {
 var fetchRestOfAll = function(data) {
   var d = Q.defer();
 
+  var items = data.items;
   var rest = data.totalItems - data.itemsPerPage;
-  var times = Math.ceil(rest / PER_PAGE);
   var remotes = [];
+  var i = 1;
 
-  for (var i = 1; i <= times; i++) {
-    remotes.push(fetchRemote(i));
+  while (rest > 0) {
+    var perPage = Math.min(rest, PER_PAGE); // fuck youtube api
+    remotes.push(fetchRemote(i++, perPage)());
+    rest -= perPage;
   }
+
   Q.allResolved(remotes)
   .spread(function() {
-    return data.items.concat(_.toArray(arguments));
+    _.each(arguments, function(data) {
+      items = items.concat(data.items);
+    })
+    return;
   })
   .fail(whenFail)
-  .done(function(items) {
+  .done(function() {
     d.resolve(items);
   });
 
@@ -72,12 +78,11 @@ var fetchRestOfAll = function(data) {
 
 var insertItems = function(items) {
   var d = Q.defer();
-  var p = Q.when();
-  items.forEach(function(item) {
+  Q.allResolved(items.map(function(item, i) {
     item.nm_type = 'youtube';
-    p.then(insertItem(item));
-  });
-  p.fail(whenFail)
+    return insertItem(item);
+  }))
+  .fail(whenFail)
   .done(function() {
     d.resolve(items.length);
   });
@@ -92,7 +97,7 @@ var insertItem = function(item) {
 
 
 promiseCollectYoutube = Q.when()
-.then(fetchRemote(0))
+.then(fetchRemote(0, PER_PAGE))
 .then(fetchRestOfAll)
 .then(insertItems)
 .fail(whenFail)
