@@ -7,15 +7,19 @@ var _ = require('underscore');
 
 var db = require('../src/setupdb');
 var count = Q.denodeify(db.item.count.bind(db.item));
+var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 
 describe('YoutubeCollector', function() {
 
   it('should have all items saved in DB.', function(done) {
     Q(require('../src/feedcollector/youtubecollector'))
-    .then(function(total) {
+    .then(function() {
+      return videos({ 'author': 'cyriak', 'max-results': 1 })
+    })
+    .then(function(data) {
       return count().then(function(actual) {
         return {
-          total: total,
+          total: data.totalItems,
           actual: actual
         };
       });

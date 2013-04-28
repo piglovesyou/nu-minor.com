@@ -5,6 +5,7 @@ var Q = require('q');
 var _ = require('underscore');
 
 var update = Q.denodeify(db.item.update.bind(db.item));
+var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 
 var deferredToExport = Q.defer();
 
@@ -17,14 +18,17 @@ var promiseCollectYoutube;
 
 
 // Youtube returns crazy response
-var PER_PAGE = 20; // Youtube max spec.
+var PER_PAGE = 20;
 var createOpt = function(pageIndex, perPage) {
   return {
     'author': 'cyriak',
     'max-results': perPage,
-    // 1, 11, 21, 31 ...
     'start-index': pageIndex * PER_PAGE + 1
   };
+};
+
+var fetchRemote = function(pageIndex, perPage) {
+  return videos(createOpt(pageIndex, perPage));
 };
 
 var whenFail = function(reason) {
@@ -35,41 +39,28 @@ var whenAllDone = function(length) {
   deferredToExport.resolve(length);
 };
 
-var fetchRemote = function(pageIndex, perPage) {
-  return function() {
-    var d = Q.defer();
-    var o = createOpt(pageIndex, perPage);
-    youtube.feeds.videos(o, function(err, data) {
-      if (err) d.reject(err);
-      d.resolve(data);
-    });
-    return d.promise;
-  }
-};
-
 var fetchRestOfAll = function(data) {
   var d = Q.defer();
 
-  var items = data.items;
-  var rest = data.totalItems - data.itemsPerPage;
+  var firstItems = data.items;
   var remotes = [];
+  var rest = data.totalItems - data.itemsPerPage;
   var i = 1;
 
   while (rest > 0) {
     var perPage = Math.min(rest, PER_PAGE); // fuck youtube api
-    remotes.push(fetchRemote(i++, perPage)());
+    remotes.push(fetchRemote(i++, perPage));
     rest -= perPage;
   }
 
   Q.allResolved(remotes)
   .spread(function() {
-    _.each(arguments, function(data) {
-      items = items.concat(data.items);
-    })
-    return;
+    return _.reduce(arguments, function(arr, data) {
+      return arr.concat(data.items);
+    }, firstItems);
   })
   .fail(whenFail)
-  .done(function() {
+  .done(function(items) {
     d.resolve(items);
   });
 
@@ -97,7 +88,7 @@ var insertItem = function(item) {
 
 
 promiseCollectYoutube = Q.when()
-.then(fetchRemote(0, PER_PAGE))
+.then(fetchRemote.bind(null, 0, PER_PAGE))
 .then(fetchRestOfAll)
 .then(insertItems)
 .fail(whenFail)
