@@ -77,9 +77,9 @@ $item-margin-bottom: 20px
     font-weight: bold
 
 .app-items
+  // Youtube
   @for $i from 1 through $gridColumns
-    .span#{$i} iframe
-      // margin-bottom: 6px
+    .app-item-youtube.span#{$i} iframe
       $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
       width: $w
       height: ($w / 1.777) // Youtube aspect
@@ -87,7 +87,6 @@ $item-margin-bottom: 20px
 
 .app-item
   +margin-bottom-normal
-  // background: $gray
 .app-item-bar
   display: block
   background: #d7dce0

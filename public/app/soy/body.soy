@@ -23,6 +23,7 @@
 
 /**
  * @param id ''
+ * @param nm_type ''
  * @param span ''
  * @param userLiked n
  * @param userMarkedBad n
@@ -30,20 +31,64 @@
  * @param nm_bad []
  */
 {template .item}
+  {if $nm_type == 'youtube'}
+    {call .youtube data="all"}{/call}
+  {elseif $nm_type == 'soundcloud'}
+    {call .soundcloud data="all"}{/call}
+  {/if}
+{/template}
+
+/**
+ * @param id ''
+ * @param span ''
+ * @param userLiked n
+ * @param userMarkedBad n
+ * @param nm_like []
+ * @param nm_bad []
+ */
+{template .soundcloud}
   <div data-itemid="{$id}" class="app-item span{$span}{if $span == 6} pull-right{/if}">
+
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>
+
+    {call .appItemBar data="all"}{/call}
+
+  </div>
+{/template}
+
+/**
+ * @param id ''
+ * @param span ''
+ * @param userLiked n
+ * @param userMarkedBad n
+ * @param nm_like []
+ * @param nm_bad []
+ */
+{template .youtube}
+  <div data-itemid="{$id}" class="app-item app-item-youtube span{$span}{if $span == 6} pull-right{/if}">
 
     // <div style="height :2em; background: #666;"></div>
     <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
 
-    <div class="app-item-bar clearfix">
-      <div class="btn-group">
-        <a href="/{$id}/like" class="app-item-like btn{if $userLiked} btn-primary{/if} ">{call .likeInner data="all" /}</a>
-        <a href="/{$id}/bad" class="app-item-bad btn{if $userMarkedBad} btn-primary{/if}">{call .badInner data="all" /}</a>
-      </div>
+    {call .appItemBar data="all"}{/call}
 
-      // Comment
-      // <input type="text" value="" placeholder="comment.." />
+  </div>
+{/template}
+
+/**
+ * @param id ''
+ * @param userLiked n
+ * @param userMarkedBad n
+ */
+{template .appItemBar}
+  <div class="app-item-bar clearfix">
+    <div class="btn-group">
+      <a href="/{$id}/like" class="app-item-like btn{if $userLiked} btn-primary{/if} ">{call .likeInner data="all" /}</a>
+      <a href="/{$id}/bad" class="app-item-bad btn{if $userMarkedBad} btn-primary{/if}">{call .badInner data="all" /}</a>
     </div>
+
+    // Comment
+    // <input type="text" value="" placeholder="comment.." />
   </div>
 {/template}
 

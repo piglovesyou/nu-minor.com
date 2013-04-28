@@ -67,6 +67,11 @@ var fetchRestOfAll = function(data) {
   return d.promise;
 };
 
+var insertItem = function(item) {
+  return update({ id: item.id },
+    item, { upsert: true });
+};
+
 var insertItems = function(items) {
   var d = Q.defer();
   Q.allResolved(items.map(function(item, i) {
@@ -78,11 +83,6 @@ var insertItems = function(items) {
     d.resolve(items.length);
   });
   return d.promise;
-};
-
-var insertItem = function(item) {
-  return update({ id: item.id },
-    item, { upsert: true });
 };
 
 

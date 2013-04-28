@@ -24,9 +24,21 @@ exports.index = function(req, res) {
   var isAuthed_ = isAuthed(req),
       userId = isAuthed_ && req.session.twitter.id;
 
-  find({nm_type: 'youtube'}, null, { limit: 25 })
-  .then(function(items) {
+  var feature = [
+    '-3JCESdFNyw',
+    'j3S3Txsl2vs',
+    'WQO-aOdJLiw',
+    'tb3qxDrsA0M',
+    '89726554',
+    '89728820',
+    '93t1H-EkUj4',
+    // 'kcVh-tXfwZw',
+    // 'RIFSuAJhTlg',
+    // '4SBXcybIo3o'
+  ];
 
+  find({id: {$in: feature}}, null, { })
+  .then(function(items) {
     if (userId) {
       _.each(items, function(item) {
         item.userLiked = _.contains(item.nm_like, userId);
@@ -40,7 +52,6 @@ exports.index = function(req, res) {
       twitter: isAuthed_ ? req.session.twitter : null,
       items: items
     }));
-
   });
 
 };

@@ -20,15 +20,15 @@ schemaMap.item = _.extend(require('./schema/youtube'),
 // Initialize models
 _.each(schemaMap, function(schema, name) {
   try {
-    modelMap[name] = mongoose.model(name, schema) 
+    modelMap[name] = mongoose.model(name, schema);
   } catch (e) {
-    modelMap[name] = mongoose.model(name) 
+    modelMap[name] = mongoose.model(name);
   }
-})
+});
 
 module.exports.conn = conn;
 
 _.each(modelMap, function(model, name) {
   module.exports[name] = model;
-})
+});
 
