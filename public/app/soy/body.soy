@@ -35,7 +35,37 @@
     {call .youtube data="all"}{/call}
   {elseif $nm_type == 'soundcloud'}
     {call .soundcloud data="all"}{/call}
+  {elseif $nm_type == 'twitter'}
+    {call .twitter data="all"}{/call}
   {/if}
+{/template}
+
+/**
+ * @param id ''
+ * @param span ''
+ * @param userLiked n
+ * @param userMarkedBad n
+ * @param nm_like []
+ * @param nm_bad []
+ *
+ * @param from_user
+ * @param from_user_name
+ * @param profile_image_url
+ * @param text
+ */
+{template .twitter}
+  <div data-itemid="{$id}" class="app-item span{$span}{if $span == 6} pull-right{/if}">
+
+    <div style="background:#3498db; color: white;">
+      <img style="float: left;" src="{$profile_image_url}" alt="" />
+      <p style="font-size: 200%">{$text}</p>
+      <p>{$from_user}</p>
+      <p>{$from_user_name}</p>
+    </div>
+
+    {call .appItemBar data="all"}{/call}
+
+  </div>
 {/template}
 
 /**

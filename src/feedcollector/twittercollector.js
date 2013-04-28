@@ -3,7 +3,7 @@ var Q = require('q');
 var db = require('../setupdb');
 var querystring = require('querystring');
 var http = require('../denodeify/http');
-var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
+// var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 
 var update = Q.denodeify(db.item.update.bind(db.item));
 
@@ -18,13 +18,12 @@ var promiseCollectYoutube;
 
 var createUrl = function(path, param) {
   if (!param) param = {};
-  param.client_id = CLIENT_ID;
-  return 'http://api.soundcloud.com' +
+  return 'http://search.twitter.com' +
       path + '?' + querystring.stringify(param);
 };
 
-var get = function(path) {
-  return http.get(createUrl(path));
+var get = function(path, param) {
+  return http.get(createUrl(path, param));
 };
 module.exports.get = get;
 
@@ -45,7 +44,7 @@ var insertItems = function(items) {
 
   var d = Q.defer();
   Q.allResolved(items.map(function(item, i) {
-    item.nm_type = 'soundcloud';
+    item.nm_type = 'twitter';
     return insertItem(item);
   }))
   .fail(whenFail)
@@ -58,10 +57,12 @@ var insertItems = function(items) {
 
 promiseCollectYoutube = Q.when()
 .then(function() {
-  return get('/users/piglovesyou/tracks.json');
+  return get('/search.json', {
+    q: '#DBZ'
+  });
 })
 .then(function(res) {
-  return res.json;
+  return res.json.results;
 })
 .then(insertItems)
 .fail(whenFail)

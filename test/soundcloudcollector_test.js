@@ -6,7 +6,6 @@ var assert = require('assert');
 var db = require('../src/setupdb');
 var http = require('../src/denodeify/http');
 var count = Q.denodeify(db.item.count.bind(db.item));
-var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 
 describe('SoundCloudCollector', function() {
 

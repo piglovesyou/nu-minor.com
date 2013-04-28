@@ -12,7 +12,10 @@ var modelMap = {};
 schemaMap.user = require('./schema/user');
 
 // item schema
-schemaMap.item = _.extend(require('./schema/youtube'),
+schemaMap.item = _.extend(
+    require('./schema/youtube'),
+    require('./schema/soundcloud'),
+    require('./schema/twitter'),
     require('./schema/itembase'));
 
 
