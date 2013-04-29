@@ -40,6 +40,9 @@ exports.index = function(req, res) {
 
   find({id: {$in: feature}}, null, { })
   .then(function(items) {
+
+    items = _.shuffle(items);
+
     if (userId) {
       _.each(items, function(item) {
         item.userLiked = _.contains(item.nm_like, userId);
