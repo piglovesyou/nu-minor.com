@@ -18,6 +18,7 @@ app.ui.util.getChildIndex = function(parent, child) {
 
 /**
  * @param {goog.ui.Component} component
+ * @param {!Function} parentComponent .
  * @return {string}
  */
 app.ui.util.getBelongingId = function(component, parentComponent) {
@@ -29,8 +30,8 @@ app.ui.util.getBelongingId = function(component, parentComponent) {
 
 /**
  * @param {goog.ui.Component} component
- * @param {Function} parentComponent
- * @return {?app.ui.Tab}
+ * @param {!Function} parentComponent .
+ * @return {goog.ui.Component}
  */
 app.ui.util.getBelongingComponent = function(component, parentComponent) {
   while (component && !(component instanceof parentComponent)) {

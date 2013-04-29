@@ -4,6 +4,9 @@ goog.provide('app.items.LikeBad');
 goog.require('goog.ui.Component');
 goog.require('app.model');
 goog.require('app.ui.util');
+goog.require('app.soy');
+goog.require('app.items.LikeButton');
+goog.require('app.items.BadButton');
 
 
 
@@ -13,6 +16,7 @@ goog.scope(function() {
 var getAncestor = app.dom.getAncestorFromEventTargetByClass;
 var soy = app.soy;
 
+
 /**
  * @constructor
  * @param {goog.dom.DomHelper=} opt_domHelper .
@@ -21,20 +25,19 @@ var soy = app.soy;
 app.items.LikeBad = function(opt_domHelper) {
   goog.base(this, opt_domHelper);
 
-  /** @type {Element} */
-  this.likeButtonElm_ = null;
+  var dh = this.getDomHelper();
 
+  /**
+   * @type {app.items.LikeButton}
+   */
+  this.likeButton_ = new app.items.LikeButton(dh);
+  this.addChild(this.likeButton_);
 
-  /** @type {Element} */
-  this.likeButtonInnerElm_ = null;
-
-
-  /** @type {Element} */
-  this.badButtonElm_ = null;
-
-
-  /** @type {Element} */
-  this.badButtonInnerElm_ = null;
+  /**
+   * @type {app.items.BadButton}
+   */
+  this.badButton_ = new app.items.BadButton(dh);
+  this.addChild(this.badButton_);
 };
 goog.inherits(app.items.LikeBad, goog.ui.Component);
 
@@ -49,10 +52,8 @@ app.items.LikeBad.prototype.createDom = function() {
 app.items.LikeBad.prototype.decorateInternal = function(element) {
   goog.base(this, 'decorateInternal', element);
 
-  this.likeButtonElm_ = this.getElementByClass('app-item-like');
-  this.likeButtonInnerElm_ = this.getElementByClass('app-item-like-inner');
-  this.badButtonElm_ = this.getElementByClass('app-item-bad');
-  this.badButtonInnerElm_ = this.getElementByClass('app-item-bad-inner');
+  this.likeButton_.decorate(this.getElementByClass('app-item-like'));
+  this.badButton_.decorate(this.getElementByClass('app-item-bad'));
 };
 
 
@@ -81,9 +82,9 @@ app.items.LikeBad.prototype.handleClick_ = function(e) {
   var el = this.getElement();
   var et = /**@type{Element}*/(e.target);
 
-  if (getAncestor(el, 'app-item-like', et) === this.likeButtonElm_) {
+  if (getAncestor(el, 'app-item-like', et) === this.likeButton_.getElement()) {
     this.handleLikeClick_(e);
-  } else if (getAncestor(el, 'app-item-bad', et) === this.badButtonElm_) {
+  } else if (getAncestor(el, 'app-item-bad', et) === this.badButton_.getElement()) {
     this.handleBadClick_(e);
   }
 
@@ -149,16 +150,14 @@ app.items.LikeBad.prototype.updateButtons_ = function(isLike, json) {
     userMarkedBad: !isLike ? json.wasPushed : !json.wasOppositePulled
   };
 
-  var el = isLike ? this.likeButtonElm_ : this.badButtonElm_;
-  var renderer = isLike ? soy.body.likeInner : soy.body.badInner;
-  goog.dom.classes.enable(el, 'btn-primary', json.wasPushed);
+  var button = isLike ? this.likeButton_ : this.badButton_;
+  button.update(arg);
+  button.enablePrimary(json.wasPushed);
 
-  el.innerHTML = renderer(arg);
   if (json.wasOppositePulled) {
-    el = !isLike ? this.likeButtonElm_ : this.badButtonElm_;
-    renderer = !isLike ? soy.body.likeInner : soy.body.badInner;
-    goog.dom.classes.enable(el, 'btn-primary', false);
-    el.innerHTML = renderer(arg);
+    var opposite = !isLike ? this.likeButton_ : this.badButton_;
+    opposite.update(arg);
+    opposite.enablePrimary(false);
   }
 };
 
