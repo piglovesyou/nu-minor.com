@@ -25,20 +25,20 @@ goog.addSingletonGetter(app.Model);
 
 
 /**
- * @param {string} action .
  * @param {string} itemId .
+ * @param {string} action .
  * @param {Function} callback .
  * @param {Object=} opt_obj .
  */
-app.Model.prototype.action = function(itemId, action, callback, opt_obj) {
+app.Model.prototype.items = function(itemId, action, callback, opt_obj) {
   goog.asserts.assert(!goog.string.contains(action, ' '));
-  var uri = new goog.Uri('/' + itemId + '/' + action);
+  var uri = new goog.Uri('/items/' + itemId + '/' + action);
   xhr.post(uri.toString(), {}, callback, opt_obj);
 };
 
 
 /**
- * I want this name space in global.
+ * I want this name space to be global.
  * @type {app.Model}
  */
 app.model = app.Model.getInstance();

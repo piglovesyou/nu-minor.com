@@ -11,30 +11,49 @@ goog.require('goog.ui.Popup');
  * @inheritDoc
  * @extends {goog.ui.Popup}
  */
-app.items.Popup = function(targetElement) {
+app.items.Popup = function(triggerElement) {
 
   goog.base(this, null,
-      new goog.positioning.AnchoredPosition(targetElement,
+      new goog.positioning.AnchoredPosition(triggerElement,
         goog.positioning.Corner.BOTTOM_RIGHT));
 
+  this.triggerElement_ = triggerElement;
   this.dh_ = goog.dom.getDomHelper();
-  var dh = this.dh_;
+  this.eh_ = new goog.events.EventHandler(this);
+
+  this.setup_();
+};
+goog.inherits(app.items.Popup, goog.ui.Popup);
+
+
+/**
+ * @private
+ */
+app.items.Popup.prototype.setup_ = function() {
   this.createDomInternal_();
-  var element = this.getElement();
-  dh.append(dh.getDocument().body, element);
+  this.dh_.append(this.triggerElement_, this.getElement());
 
   // Setup.
   // width: 207px
-  this.setMargin(0, 0, 0, -(targetElement.offsetWidth + 207) / 2);
+  this.setMargin(0, 0, 0, -(this.triggerElement_.offsetWidth + 207) / 2);
   this.setHideOnEscape(true);
   this.setAutoHide(true);
-  this.setTransition(
-    new goog.fx.css3.Transition(element, 1000, { opacity: 0 }, { opacity: 1 },
-      {property: 'opacity', duration: 1, timing: 'lenear', delay: 0}),
-    new goog.fx.css3.Transition(element, 1000, { opacity: 1 }, { opacity: 0 },
-      {property: 'opacity', duration: 1, timing: 'lenear', delay: 0}));
+  this.setupTransition_();
 };
-goog.inherits(app.items.Popup, goog.ui.Popup);
+
+
+/**
+ * @private
+ */
+app.items.Popup.prototype.setupTransition_ = function() {
+  var element = this.getElement();
+  var prop = { property: 'opacity', duration: 1, timing: 'lenear', delay: 0};
+  var begin = new goog.fx.css3.Transition(element, .15,
+      { opacity: 0 }, { opacity: 1 }, prop);
+  var end = new goog.fx.css3.Transition(element, .15,
+      { opacity: 1 }, { opacity: 0 }, prop);
+  this.setTransition(begin, end);
+};
 
 
 /**

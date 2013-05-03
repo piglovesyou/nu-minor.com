@@ -1739,7 +1739,7 @@ table th[class*="span"],
 .table-hover tbody tr.info:hover > td {
   background-color: #c4e3f3; }
 
-[class^="icon-"],
+[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after,
 [class*=" icon-"] {
   display: inline-block;
   width: 14px;
@@ -1755,19 +1755,28 @@ table th[class*="span"],
 /* White icons with optional class, or on hover/focus/active states of certain elements */
 .icon-white,
 .nav-pills > .active > a > [class^="icon-"],
+.app-item-twitter .nav-pills > .active > a > .app-item-twitter-inner:after,
 .nav-pills > .active > a > [class*=" icon-"],
 .nav-list > .active > a > [class^="icon-"],
+.app-item-twitter .nav-list > .active > a > .app-item-twitter-inner:after,
 .nav-list > .active > a > [class*=" icon-"],
 .navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .app-item-twitter .nav > .active > a > .app-item-twitter-inner:after,
+.app-item-twitter .navbar-inverse .nav > .active > a > .app-item-twitter-inner:after,
 .navbar-inverse .nav > .active > a > [class*=" icon-"],
 .dropdown-menu > li > a:hover > [class^="icon-"],
+.app-item-twitter .dropdown-menu > li > a:hover > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:focus > [class^="icon-"],
+.app-item-twitter .dropdown-menu > li > a:focus > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > li > a:focus > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
+.app-item-twitter .dropdown-menu > .active > a > .app-item-twitter-inner:after,
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
+.app-item-twitter .dropdown-submenu:hover > a > .app-item-twitter-inner:after,
 .dropdown-submenu:focus > a > [class^="icon-"],
+.app-item-twitter .dropdown-submenu:focus > a > .app-item-twitter-inner:after,
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
   background-image: url("../img/glyphicons-halflings-white.png"); }
@@ -2538,7 +2547,7 @@ button.close {
   -moz-border-radius: 6px;
   border-radius: 6px; }
 
-.btn-large [class^="icon-"],
+.btn-large [class^="icon-"], .btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-large .app-item-twitter-inner:after,
 .btn-large [class*=" icon-"] {
   margin-top: 4px; }
 
@@ -2549,11 +2558,11 @@ button.close {
   -moz-border-radius: 3px;
   border-radius: 3px; }
 
-.btn-small [class^="icon-"],
+.btn-small [class^="icon-"], .btn-small .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-small .app-item-twitter-inner:after,
 .btn-small [class*=" icon-"] {
   margin-top: 0; }
 
-.btn-mini [class^="icon-"],
+.btn-mini [class^="icon-"], .btn-mini .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-mini .app-item-twitter-inner:after,
 .btn-mini [class*=" icon-"] {
   margin-top: -1px; }
 
@@ -3094,7 +3103,7 @@ input[type="submit"].btn {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   background-color: #0088cc; }
 
-.nav-list [class^="icon-"],
+.nav-list [class^="icon-"], .nav-list .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-list .app-item-twitter-inner:after,
 .nav-list [class*=" icon-"] {
   margin-right: 2px; }
 
@@ -7408,7 +7417,7 @@ body.vjs-full-window {
 
 /*  Font Awesome styles
  *  ------------------------------------------------------- */
-[class^="icon-"],
+[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after,
 [class*=" icon-"] {
   font-family: FontAwesome;
   font-weight: normal;
@@ -7429,27 +7438,34 @@ body.vjs-full-window {
 /* more sprites.less reset */
 .icon-white,
 .nav-pills > .active > a > [class^="icon-"],
+.app-item-twitter .nav-pills > .active > a > .app-item-twitter-inner:after,
 .nav-pills > .active > a > [class*=" icon-"],
 .nav-list > .active > a > [class^="icon-"],
+.app-item-twitter .nav-list > .active > a > .app-item-twitter-inner:after,
 .nav-list > .active > a > [class*=" icon-"],
 .navbar-inverse .nav > .active > a > [class^="icon-"],
+.navbar-inverse .app-item-twitter .nav > .active > a > .app-item-twitter-inner:after,
+.app-item-twitter .navbar-inverse .nav > .active > a > .app-item-twitter-inner:after,
 .navbar-inverse .nav > .active > a > [class*=" icon-"],
 .dropdown-menu > li > a:hover > [class^="icon-"],
+.app-item-twitter .dropdown-menu > li > a:hover > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
+.app-item-twitter .dropdown-menu > .active > a > .app-item-twitter-inner:after,
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
+.app-item-twitter .dropdown-submenu:hover > a > .app-item-twitter-inner:after,
 .dropdown-submenu:hover > a > [class*=" icon-"] {
   background-image: none; }
 
-[class^="icon-"]:before,
+[class^="icon-"]:before, .app-item-twitter .app-item-twitter-inner:after,
 [class*=" icon-"]:before {
   text-decoration: inherit;
   display: inline-block;
   speak: none; }
 
 /* makes sure icons active on rollover in links */
-a [class^="icon-"],
+a [class^="icon-"], a .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter a .app-item-twitter-inner:after,
 a [class*=" icon-"] {
   display: inline-block; }
 
@@ -7458,38 +7474,38 @@ a [class*=" icon-"] {
   vertical-align: -10%;
   font-size: 1.33333em; }
 
-.btn [class^="icon-"],
-.btn [class*=" icon-"], .nav [class^="icon-"],
+.btn [class^="icon-"], .btn .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn .app-item-twitter-inner:after,
+.btn [class*=" icon-"], .nav [class^="icon-"], .nav .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav .app-item-twitter-inner:after,
 .nav [class*=" icon-"] {
   display: inline;
   /* keeps button heights with and without icons the same */ }
-  .btn [class^="icon-"].icon-large,
-  .btn [class*=" icon-"].icon-large, .nav [class^="icon-"].icon-large,
+  .btn [class^="icon-"].icon-large, .btn .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-large.app-item-twitter-inner:after,
+  .btn [class*=" icon-"].icon-large, .nav [class^="icon-"].icon-large, .nav .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav .icon-large.app-item-twitter-inner:after,
   .nav [class*=" icon-"].icon-large {
     line-height: 0.9em; }
-  .btn [class^="icon-"].icon-spin,
-  .btn [class*=" icon-"].icon-spin, .nav [class^="icon-"].icon-spin,
+  .btn [class^="icon-"].icon-spin, .btn .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.app-item-twitter-inner:after,
+  .btn [class*=" icon-"].icon-spin, .nav [class^="icon-"].icon-spin, .nav .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .nav .icon-spin.app-item-twitter-inner:after,
   .nav [class*=" icon-"].icon-spin {
     display: inline-block; }
 
-.nav-tabs [class^="icon-"],
-.nav-tabs [class*=" icon-"], .nav-pills [class^="icon-"],
+.nav-tabs [class^="icon-"], .nav-tabs .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-tabs .app-item-twitter-inner:after,
+.nav-tabs [class*=" icon-"], .nav-pills [class^="icon-"], .nav-pills .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-pills .app-item-twitter-inner:after,
 .nav-pills [class*=" icon-"] {
   /* keeps button heights with and without icons the same */
   line-height: 0.9em; }
-  .nav-tabs [class^="icon-"].icon-large,
-  .nav-tabs [class*=" icon-"].icon-large, .nav-pills [class^="icon-"].icon-large,
+  .nav-tabs [class^="icon-"].icon-large, .nav-tabs .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-tabs .icon-large.app-item-twitter-inner:after,
+  .nav-tabs [class*=" icon-"].icon-large, .nav-pills [class^="icon-"].icon-large, .nav-pills .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-pills .icon-large.app-item-twitter-inner:after,
   .nav-pills [class*=" icon-"].icon-large {
     line-height: 0.9em; }
 
-li [class^="icon-"],
-li [class*=" icon-"], .nav li [class^="icon-"],
+li [class^="icon-"], li .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter li .app-item-twitter-inner:after,
+li [class*=" icon-"], .nav li [class^="icon-"], .nav li .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav li .app-item-twitter-inner:after,
 .nav li [class*=" icon-"] {
   display: inline-block;
   width: 1.25em;
   text-align: center; }
-  li [class^="icon-"].icon-large,
-  li [class*=" icon-"].icon-large, .nav li [class^="icon-"].icon-large,
+  li [class^="icon-"].icon-large, li .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter li .icon-large.app-item-twitter-inner:after,
+  li [class*=" icon-"].icon-large, .nav li [class^="icon-"].icon-large, .nav li .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav li .icon-large.app-item-twitter-inner:after,
   .nav li [class*=" icon-"].icon-large {
     /* increased font size for icon-large */
     width: 1.5625em; }
@@ -7497,7 +7513,7 @@ li [class*=" icon-"], .nav li [class^="icon-"],
 ul.icons {
   list-style-type: none;
   text-indent: -0.75em; }
-  ul.icons li [class^="icon-"],
+  ul.icons li [class^="icon-"], ul.icons li .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter ul.icons li .app-item-twitter-inner:after,
   ul.icons li [class*=" icon-"] {
     width: 0.75em; }
 
@@ -7541,37 +7557,37 @@ ul.icons {
 .pull-left {
   float: left; }
 
-[class^="icon-"].pull-left,
+[class^="icon-"].pull-left, .app-item-twitter .pull-left.app-item-twitter-inner:after,
 [class*=" icon-"].pull-left {
   margin-right: 0.3em; }
-[class^="icon-"].pull-right,
+[class^="icon-"].pull-right, .app-item-twitter .pull-right.app-item-twitter-inner:after,
 [class*=" icon-"].pull-right {
   margin-left: 0.3em; }
 
-.btn [class^="icon-"].pull-left.icon-2x, .btn [class^="icon-"].pull-right.icon-2x,
+.btn [class^="icon-"].pull-left.icon-2x, .btn .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-left.icon-2x.app-item-twitter-inner:after, .btn [class^="icon-"].pull-right.icon-2x, .btn .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-right.icon-2x.app-item-twitter-inner:after,
 .btn [class*=" icon-"].pull-left.icon-2x,
 .btn [class*=" icon-"].pull-right.icon-2x {
   margin-top: 0.18em; }
-.btn [class^="icon-"].icon-spin.icon-large,
+.btn [class^="icon-"].icon-spin.icon-large, .btn .app-item-twitter .icon-spin.icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.icon-large.app-item-twitter-inner:after,
 .btn [class*=" icon-"].icon-spin.icon-large {
   line-height: 0.8em; }
 
-.btn.btn-small [class^="icon-"].pull-left.icon-2x, .btn.btn-small [class^="icon-"].pull-right.icon-2x,
+.btn.btn-small [class^="icon-"].pull-left.icon-2x, .btn.btn-small .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-small [class^="icon-"].pull-right.icon-2x, .btn.btn-small .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-right.icon-2x.app-item-twitter-inner:after,
 .btn.btn-small [class*=" icon-"].pull-left.icon-2x,
 .btn.btn-small [class*=" icon-"].pull-right.icon-2x {
   margin-top: 0.25em; }
 
-.btn.btn-large [class^="icon-"],
+.btn.btn-large [class^="icon-"], .btn.btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .app-item-twitter-inner:after,
 .btn.btn-large [class*=" icon-"] {
   margin-top: 0; }
-  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large [class^="icon-"].pull-right.icon-2x,
+  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after,
   .btn.btn-large [class*=" icon-"].pull-left.icon-2x,
   .btn.btn-large [class*=" icon-"].pull-right.icon-2x {
     margin-top: 0.05em; }
-  .btn.btn-large [class^="icon-"].pull-left.icon-2x,
+  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after,
   .btn.btn-large [class*=" icon-"].pull-left.icon-2x {
     margin-right: 0.2em; }
-  .btn.btn-large [class^="icon-"].pull-right.icon-2x,
+  .btn.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after,
   .btn.btn-large [class*=" icon-"].pull-right.icon-2x {
     margin-left: 0.2em; }
 
@@ -8065,7 +8081,7 @@ ul.icons {
 .icon-phone-sign:before {
   content: "\f098"; }
 
-.icon-twitter:before {
+.icon-twitter:before, .app-item-twitter .app-item-twitter-inner:after {
   content: "\f099"; }
 
 .icon-facebook:before {
@@ -8571,7 +8587,7 @@ ul.icons {
 .row-nav {
   display: none;
   margin-bottom: 20px; }
-  .row-nav [class^="icon-"], .row-nav [class*=" icon-"] {
+  .row-nav [class^="icon-"], .row-nav .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .row-nav .app-item-twitter-inner:after, .row-nav [class*=" icon-"] {
     font-weight: bold; }
 
 .app-items .app-item-youtube.span1 iframe {
@@ -8647,3 +8663,31 @@ ul.icons {
     -o-user-select: none;
     user-select: none;
     vertical-align: middle; }
+
+.app-item-twitter .from_user {
+  margin-right: 4px; }
+.app-item-twitter .from_user_name {
+  font-size: 80%;
+  opacity: 0.8; }
+  .app-item-twitter .from_user_name s {
+    text-decoration: none; }
+.app-item-twitter .app-item-twitter-inner {
+  position: relative; }
+  .app-item-twitter .app-item-twitter-inner > img {
+    border-radius: 2px;
+    margin: 4px; }
+  .app-item-twitter .app-item-twitter-inner > .text {
+    margin: 0 4px;
+    font-size: 200%;
+    opacity: 0.8; }
+  .app-item-twitter .app-item-twitter-inner > .username {
+    margin: 0 4px;
+    padding: 0.2em 0; }
+  .app-item-twitter .app-item-twitter-inner:after {
+    position: absolute;
+    display: block;
+    bottom: 0;
+    right: 5px;
+    color: white;
+    opacity: 0.6;
+    font-size: 400%; }

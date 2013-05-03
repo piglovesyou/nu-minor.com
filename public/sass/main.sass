@@ -109,22 +109,38 @@ $item-margin-bottom: 20px
     +user-select(none)
     vertical-align: middle
 
-  // &.icon-heart,
-  // &.icon-heart-empty
-  //   color: red
-  //   &:hover
-  //     color: lighten(red, 20%)
+.app-item-twitter
 
-  // &.icon-thumbs-down,
-  // &.icon-skull
-  //   color: #333
-  //   &:hover
-  //     color: lighten(#333, 20%)
+  .from_user
+    margin-right: 4px
+  .from_user_name
+    font-size: 80%
+    opacity: .8
+    s
+      text-decoration: none
 
-  // &.icon-heart-empty,
-  // &.icon-thumbs-down
-  //   font-size: 110%
+  .app-item-twitter-inner
+    position: relative
+    > img
+      border-radius: 2px
+      margin: 4px
+    > .text
+      margin: 0 4px
+      font-size: 200%
+      opacity: .8
+    > .username
+      margin: 0 4px
+      padding: .2em 0
+    &:after
+      position: absolute
+      display: block
+      bottom: 0
+      right: 5px
+      color: white
+      opacity: .6
+      font-size: 400%
 
-  // &.icon-heart,
-  // &.icon-skull
-  //   font-size: 220%
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+      @extend .icon-twitter:before
+
