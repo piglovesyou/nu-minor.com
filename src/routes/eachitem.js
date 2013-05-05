@@ -7,6 +7,7 @@ var _ = require('underscore');
 
 
 var findOne = Q.denodeify(db.item.findOne.bind(db.item));
+var findUsers = Q.denodeify(db.user.find.bind(db.user));
 var update = Q.denodeify(db.item.update.bind(db.item));
 
 var whenFail = function(res) {
@@ -19,14 +20,43 @@ var whenFail = function(res) {
 
 
 // GET handlers
-exports.view = function(req, res, item) {
+exports.view = function(req, res) {
+  res.writeHead(200, {'Content-Type': 'application/json;charset=UTF8'});
 
   var itemId = req.params.itemId;
-  findOne({id: itemId})
-  .fail(whenFail(res))
-  .done(function(item) {
-    var body = item ? item.title : 'not found';
-    res.end(body);
+  var item;
+  var result;
+
+  var q = findOne({id: itemId}, {_id: 0})
+  .then(function(i) {
+    item = i;
+  });
+
+  if (req.query && req.query.expand) {
+    req.query.expand.split(',').forEach(function(e) {
+      var field;
+      switch (e) {
+        case 'like':
+        case 'bad':
+          field = 'nm_' + e;
+          break;
+        default:
+          return;
+      }
+      q = q.then(function() {
+        return findUsers({id: {$in: item[field]}});
+      })
+      .then(function(users) {
+        result = result || {};
+        result[field] = users;
+      });
+    });
+  }
+
+  q.fail(whenFail(res))
+  .done(function() {
+    // What is going on in `item' object..
+    res.end(JSON.stringify(result || item));
   });
 
 };
@@ -86,7 +116,7 @@ var swapUserId = function(itemId, userId, toPush, toPull) {
       currentBad: toPush === 'nm_bad' ? (itemRef.nm_bad.length + pushInc) : (itemRef.nm_bad.length + pullInc)
     };
   });
-  return q; 
+  return q;
 };
 
 

@@ -25,15 +25,21 @@ goog.addSingletonGetter(app.Model);
 
 
 /**
+ * @param {string} method .
  * @param {string} itemId .
  * @param {string} action .
  * @param {Function} callback .
  * @param {Object=} opt_obj .
  */
-app.Model.prototype.items = function(itemId, action, callback, opt_obj) {
+app.Model.prototype.items =
+    function(method, itemId, action, callback, opt_obj) {
   goog.asserts.assert(!goog.string.contains(action, ' '));
   var uri = new goog.Uri('/items/' + itemId + '/' + action);
-  xhr.post(uri.toString(), {}, callback, opt_obj);
+  var fn = method === 'POST' ? xhr.post :
+           method === 'GET' ? xhr.get : null;
+  if (fn) {
+    fn.call(xhr, uri.toString(), {}, callback, opt_obj);
+  }
 };
 
 

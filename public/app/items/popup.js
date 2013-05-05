@@ -31,7 +31,7 @@ goog.inherits(app.items.Popup, goog.ui.Popup);
  */
 app.items.Popup.prototype.setup_ = function() {
   this.createDomInternal_();
-  this.dh_.append(this.triggerElement_, this.getElement());
+  this.dh_.append(this.dh_.getDocument().body, this.getElement());
 
   // Setup.
   // width: 207px

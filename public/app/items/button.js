@@ -18,7 +18,7 @@ app.items.Button = function(renderer, opt_domHelper) {
 
   this.renderer_ = renderer;
 
-  this.delay_ = new goog.async.Delay(this.handleTick_, 800, this);
+  // this.delay_ = new goog.async.Delay(this.handleTick_, 800, this);
 };
 goog.inherits(app.items.Button, goog.ui.Component);
 
@@ -66,15 +66,17 @@ app.items.Button.prototype.enterDocument = function() {
   var eh = this.getHandler();
   var element = this.getElement();
 
-  this.popup_ = new app.items.Popup(element);
+  eh
+    .listenOnce(element, 'mouseover', function(e) {
+      this.popup_ = new app.items.Popup(element);
+      eh.listenOnce(this.popup_,
+          goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+        this.loadTooltipContent_();
+      });
+    })
+    .listen(element, 'mouseover', this.handleMouseover_)
+    .listen(element, 'mouseout', this.handleMouseout_);
 
-  eh.listen(element, 'mouseover', this.handleMouseover_);
-  eh.listen(element, 'mouseout', this.handleMouseout_);
-
-  eh.listenOnce(this.popup_,
-      goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
-    this.loadTooltipContent_();
-  });
 };
 
 
