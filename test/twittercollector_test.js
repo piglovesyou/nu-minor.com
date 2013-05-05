@@ -15,7 +15,9 @@ describe('TwitterCollector', function() {
     var id;
     var twitter = require('../src/feedcollector/twittercollector');
     Q.when()
-    .then(twitter)
+    .then(function() {
+      return twitter.promise;
+    })
     .then(function() {
       return twitter.get('/search.json', {
         q: '#DBZ'

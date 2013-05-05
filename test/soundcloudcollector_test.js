@@ -13,7 +13,9 @@ describe('SoundCloudCollector', function() {
     var total;
     var soundcloud = require('../src/feedcollector/soundcloudcollector');
     Q.when()
-    .then(soundcloud)
+    .then(function() {
+       return soundcloud.promise;
+    })
     .then(function() {
       return soundcloud.get('/users/piglovesyou.json');
     })

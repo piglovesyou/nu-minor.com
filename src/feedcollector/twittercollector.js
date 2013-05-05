@@ -10,7 +10,7 @@ var update = Q.denodeify(db.item.update.bind(db.item));
 var deferredToExport = Q.defer();
 
 /** @type {Object} */
-module.exports = deferredToExport.promise;
+module.exports.promise = deferredToExport.promise;
 
 // A local promise object where steps are chained in this file.
 var promiseCollectYoutube;

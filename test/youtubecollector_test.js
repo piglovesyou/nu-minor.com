@@ -12,7 +12,10 @@ describe('YoutubeCollector', function() {
   it('should have all items saved in DB.', function(done) {
     var total;
 
-    Q(require('../src/feedcollector/youtubecollector'))
+    Q.when()
+    .then(function() {
+      return require('../src/feedcollector/youtubecollector').promise;
+    })
     .fail(function(err) {
       throw new Error(err);
     })

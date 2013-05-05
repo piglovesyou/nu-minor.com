@@ -10,7 +10,7 @@ var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 var deferredToExport = Q.defer();
 
 /** @type {Object} */
-module.exports = deferredToExport.promise;
+module.exports.promise = deferredToExport.promise;
 
 // A local promise object where steps are chained in this file.
 var promiseCollectYoutube;
