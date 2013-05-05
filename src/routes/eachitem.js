@@ -44,18 +44,22 @@ exports.view = function(req, res) {
           return;
       }
       q = q.then(function() {
-        return findUsers({id: {$in: item[field]}});
-      })
-      .then(function(users) {
         result = result || {};
-        result[field] = users;
+        if (!item[field]) {
+          result[field] = [];
+          return;
+        }
+        return findUsers({id: {$in: item[field]}})
+        .then(function(users) {
+          if (!users) return;
+          result[field] = users || [];
+        });
       });
     });
   }
 
   q.fail(whenFail(res))
   .done(function() {
-    // What is going on in `item' object..
     res.end(JSON.stringify(result || item));
   });
 
