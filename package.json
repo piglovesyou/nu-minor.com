@@ -11,6 +11,9 @@
     "jade": "*",
     "oauth": "*",
     "connect-redis": "*",
-    "node-sass": "0.4.x"
+    "node-sass": "0.4.x",
+    "mocha": "*",
+    "underscore": "*",
+    "selenium-webdriver": "*"
   }
 }
