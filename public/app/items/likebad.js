@@ -98,7 +98,7 @@ app.items.LikeBad.prototype.handleClick_ = function(e) {
  */
 app.items.LikeBad.prototype.handleLikeClick_ = function(e) {
   var id = app.ui.util.getBelongingId(this, app.items.Item);
-  app.model.items('POST', id, 'like', this.handleLikeComplete_, this);
+  app.model.items('POST', id, 'like', {}, this.handleLikeComplete_, this);
 };
 
 
@@ -118,7 +118,7 @@ app.items.LikeBad.prototype.handleLikeComplete_ = function(err, json) {
  */
 app.items.LikeBad.prototype.handleBadClick_ = function(e) {
   var id = app.ui.util.getBelongingId(this, app.items.Item);
-  app.model.items('POST', id, 'bad', this.handleBadComplete_, this);
+  app.model.items('POST', id, 'bad', {}, this.handleBadComplete_, this);
 };
 
 
