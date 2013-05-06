@@ -23,14 +23,14 @@ var whenFail = function(driver) {
 
 describe('auth', function() {
   this.timeout(30 * 1000);
+  var d = buildDriver();
 
-  it('#User should log in', function(done) {
-    var d = buildDriver();
+  it('#Open page', function(done) {
     d.get('http://nu-minor.com');
 
     d.getTitle()
     .then(function(title) {
-      assert.equal(title, 'Plovr Sample xx');
+      assert.equal(title, 'Plovr Sample');
     })
     .then(function() {
       return d.quit();
@@ -40,5 +40,9 @@ describe('auth', function() {
       done();
     });
   });
+
+  it('#Login', function(done) {
+  });
+
 });
 
