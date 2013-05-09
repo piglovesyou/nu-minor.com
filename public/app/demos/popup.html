@@ -17,14 +17,8 @@
     var btnElm = goog.dom.getElement('btn');
     var popup = new app.ui.Popup(btnElm);
 
-    goog.events.listen(btnElm, 'mouseover', function(e) {
-      popup.setVisible(true);
-    });
-    goog.events.listen(btnElm, 'mouseout', function(e) {
-      popup.setVisible(false);
-    });
-
     goog.events.listenOnce(popup, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+      popup.setText('loading...');
       setTimeout(function() {
         popup.setHtml('<p class="icon-thumbs-up">yeah!<\/p>');
       }, 800);

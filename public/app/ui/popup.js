@@ -2,43 +2,58 @@
 goog.provide('app.ui.Popup');
 
 goog.require('goog.fx.css3.Transition');
-goog.require('goog.ui.Popup');
+goog.require('goog.ui.AdvancedTooltip');
 
 
 
 /**
  * @constructor
  * @inheritDoc
- * @extends {goog.ui.Popup}
+ * @extends {goog.ui.AdvancedTooltip}
  */
 app.ui.Popup = function(triggerElement) {
+  this.className = 'tooltip fade bottom in';
+  goog.base(this, triggerElement);
 
-  goog.base(this, null,
-      new goog.positioning.AnchoredPosition(triggerElement,
-        goog.positioning.Corner.BOTTOM_RIGHT));
-
-  this.triggerElement_ = triggerElement;
   this.dh_ = goog.dom.getDomHelper();
-  this.eh_ = new goog.events.EventHandler(this);
 
-  this.setup_();
+  this.setupElement_();
+  this.setupOptions_();
 };
-goog.inherits(app.ui.Popup, goog.ui.Popup);
+goog.inherits(app.ui.Popup, goog.ui.AdvancedTooltip);
 
 
 /**
  * @private
  */
-app.ui.Popup.prototype.setup_ = function() {
-  this.createDomInternal_();
-  this.dh_.append(this.dh_.getDocument().body, this.getElement());
+app.ui.Popup.prototype.setupElement_ = function() {
+  var element = this.getElement();
 
-  // Setup.
-  // width: 207px
-  this.setMargin(0, 0, 0, -(this.triggerElement_.offsetWidth + 207) / 2);
-  this.setHideOnEscape(true);
-  this.setAutoHide(true);
+  goog.style.setStyle(element, {
+    display: 'none',
+    opacity: 0
+  });
+
+  this.dh_.append(element,
+      this.dh_.createDom('div', 'tooltip-arrow'),
+      this.contentElement_ = this.dh_.createDom('div',
+        'tooltip-inner', 'loading...'));
+};
+
+
+/**
+ * @private
+ */
+app.ui.Popup.prototype.setupOptions_ = function() {
   this.setupTransition_();
+  this.setCursorTracking(true); // cool.
+  this.setHotSpotPadding(new goog.math.Box(5, 5, 5, 5));
+  this.setHideDelayMs(250);
+  this.setHideOnEscape(true);
+
+  var defaultFixedMargin = 10;
+  var popupWidth = 207;
+  this.setMargin(0, 0, 0, -(popupWidth / 2) - defaultFixedMargin);
 };
 
 
@@ -65,44 +80,8 @@ app.ui.Popup.prototype.setHtml = function(html) {
 
 
 /**
- * @private
+ * @param {string} str .
  */
-app.ui.Popup.prototype.createDomInternal_ = function() {
-  var dh = this.dh_;
-  var element = dh.createDom('div', {
-    className: 'tooltip fade bottom in',
-    style: 'display:none;opacity:0'
-  }, dh.createDom('div', 'tooltip-arrow'),
-      this.contentElement_ = dh.createDom('div',
-        'tooltip-inner', 'loading...'));
-  this.setElement(element);
+app.ui.Popup.prototype.setText = function(str) {
+  this.dh_.setTextContent(this.contentElement_, str);
 };
-
-
-//
-//
-// /** @inheritDoc */
-// app.ui.Popup.prototype.decorateInternal = function(element) {
-//   goog.base(this, 'decorateInternal', element);
-// };
-//
-//
-// /** @inheritDoc */
-// app.ui.Popup.prototype.canDecorate = function(element) {
-//   if (element) {
-//     return true;
-//   }
-//   return false;
-// };
-//
-//
-// /** @inheritDoc */
-// app.ui.Popup.prototype.enterDocument = function() {
-//   goog.base(this, 'enterDocument');
-// };
-//
-//
-// /** @inheritDoc */
-// app.ui.Popup.prototype.disposeInternal = function() {
-//   goog.base(this, 'disposeInternal');
-// };
