@@ -1,0 +1,38 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+  <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
+</head>
+<body>
+
+  <div class="content">
+    <p style="padding: 200px;">
+      <a id="btn" class="btn">click me</a>
+      <span id="message"></span>
+    </p>
+  </div>
+
+  <script>
+    var btn = goog.dom.getElement('btn');
+    var msg = goog.dom.getElement('message');
+    goog.events.listen(btn, 'click', handleClick);
+
+    var dialog = new app.ui.Dialog();
+    dialog.setTitle('title. title.')
+    dialog.setContent('content. content.')
+    goog.events.listen(dialog, goog.ui.Dialog.EventType.SELECT, function(e){
+      msg.innerHTML = '<b>' + e.key + '</b> is clicked.';
+    });
+
+    function handleClick (e) {
+      dialog.setVisible(true);
+    }
+
+    btn.click()
+  </script>
+</body>
+</html>

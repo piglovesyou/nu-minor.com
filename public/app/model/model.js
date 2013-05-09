@@ -24,6 +24,13 @@ goog.inherits(app.Model, goog.events.EventTarget);
 goog.addSingletonGetter(app.Model);
 
 
+/***/
+app.Model.prototype.dialog = function(url, callback, opt_obj) {
+  var uri = new goog.Uri(url);
+  xhr.get.call(xhr, uri.toString(), {}, callback, opt_obj);
+};
+
+
 /**
  * @param {string} method .
  * @param {string} itemId .

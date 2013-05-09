@@ -23,12 +23,21 @@ $fontResourcePath:   "../sass/resources"
 .icon-skull:before
   content: "S"
 
+
+// Mixins
 =user-drag($drag)
   -webkit-user-drag: $drag
   -moz-user-drag: $drag
   -ms-user-drag: $drag
   -o-user-drag: $drag
   user-drag: $drag
+
+=filter-blur($blur)
+  -webkit-filter: blur($blur)
+  -moz-filter: blur($blur)
+  -ms-filter: blur($blur)
+  -o-filter: blur($blur)
+  filter: blur($blur)
 
 =display-box
   display: -webkit-box
@@ -143,4 +152,39 @@ $item-margin-bottom: 20px
       @extend [class^="icon-"]
       @extend [class^="icon-"]:before
       @extend .icon-twitter:before
+
+
+// app.ui.Dialog
+.dialog-shown .content
+  +filter-blur(2px)
+  
+.app-dialog
+  width: 60%
+  margin: 0
+  @extend .modal
+  border: none
+  background: #C0392B
+  border-radius: 0
+.app-dialog-title
+  @extend .modal-header
+  border-bottom: none
+  font-size: 137%
+  color: rgba(255,255,255,1)
+.app-dialog-content
+  @extend .modal-body
+  color: rgba(255,255,255,.8)
+.app-dialog-buttons
+  @extend .modal-footer
+  border-top: none
+  background: none
+  box-shadow: none
+  button
+    @extend .btn
+.app-dialog-title-close
+  cursor: pointer
+  &:before
+    @extend .close
+    @extend [class^="icon-"]
+    @extend [class^="icon-"]:before
+    @extend .icon-remove:before
 

@@ -1,7 +1,7 @@
 
 goog.provide('app.items.Button');
 
-goog.require('app.items.Popup');
+goog.require('app.ui.Popup');
 goog.require('goog.async.Delay');
 goog.require('goog.ui.Component');
 
@@ -68,7 +68,7 @@ app.items.Button.prototype.enterDocument = function() {
 
   eh
     .listenOnce(element, 'mouseover', function(e) {
-      this.popup_ = new app.items.Popup(element);
+      this.popup_ = new app.ui.Popup(element);
       eh.listenOnce(this.popup_,
           goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
         this.loadTooltipContent_();
