@@ -32,6 +32,17 @@ app.Model.EventType = {
 };
 
 
+app.Model.prototype.users = function(uri, callback, opt_obj) {
+  xhr.get.call(xhr, uri, {}, function(err, json) {
+    if (err) {
+      goog.asserts.assert(!err);
+      return;
+    }
+    callback.call(opt_obj, err, json);
+  });
+};
+
+
 /**
  * @param {string} url .
  * @param {Function} callback .

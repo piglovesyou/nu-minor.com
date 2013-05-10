@@ -1,0 +1,42 @@
+
+{namespace app.soy.dialog}
+
+/**
+ * @param profile_image_url
+ * @param screen_name
+ * @param name
+ * @param description
+ * @param location
+ * @param url
+ */
+{template .user}
+  <div class="app-dialog-user">
+    
+    <div class="app-dialog-user-img"><img src="{$profile_image_url}" alt="" /></div>
+    <div class="app-dialog-user-screen_name">{$screen_name}</div>
+    <div class="app-dialog-user-name">@{$name}</div>
+    {if $description}
+      <div class="app-dialog-user-description">{$description}</div>
+    {/if}
+    {if $location or $url}
+      <div class="location-and-url">
+        {if $location}
+          <span class="location">
+            {$location}
+          </span>
+        {/if}
+        {if $location and $url}
+          <span>・</span>
+        {/if}
+        {if $url}
+          <span class="url">
+            {$url}
+          </span>
+        {/if}
+      </div>
+    {/if}
+
+  </div>
+{/template}
+
+

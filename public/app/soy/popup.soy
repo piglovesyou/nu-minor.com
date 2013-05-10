@@ -26,14 +26,14 @@
 
 
 /**
- * @param name
+ * @param id
  * @param profile_image_url
  * @param screen_name
  * @param type
  */
 {template .user}
   <div class="app-item-popup-user">
-    <a href="http://twitter.com/{$name}" target="_blank">
+    <a href="/users/{$id}/view">
       <img src="{$profile_image_url}" alt="{$screen_name}" />{$screen_name}
       <span class="icon-external-link"></span>
     </a> {call .likeOrBadVerbe data="all"}{/call} this post.

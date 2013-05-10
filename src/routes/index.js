@@ -15,6 +15,16 @@ var isAuthed = function(req) {
             req.session.twitter.id);
 };
 
+var sortAs = function(idArr, objArr) {
+  var r = [];
+  idArr.forEach(function(id, i) {
+    r[i] = _.find(objArr, function(obj) {
+      return obj.id === id;
+    });
+  });
+  return r;
+};
+
 /*
  * GET home page.
  */
@@ -25,23 +35,19 @@ exports.index = function(req, res) {
       userId = isAuthed_ && req.session.twitter.id;
 
   var feature = [
-    '-3JCESdFNyw',
     'j3S3Txsl2vs',
-    'WQO-aOdJLiw',
-    'tb3qxDrsA0M',
-    '89726554',
-    '89728820',
     '93t1H-EkUj4',
-    '328504676247023600'
-    // 'kcVh-tXfwZw',
-    // 'RIFSuAJhTlg',
-    // '4SBXcybIo3o'
+    '89728820',
+    '-3JCESdFNyw',
+    '89726554',
+    'tb3qxDrsA0M',
+    'WQO-aOdJLiw'
   ];
 
   find({id: {$in: feature}}, null, { })
   .then(function(items) {
 
-    items = _.shuffle(items);
+    items = sortAs(feature, items);
 
     if (userId) {
       _.each(items, function(item) {

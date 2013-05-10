@@ -2,7 +2,7 @@
 goog.provide('app.items.Button');
 
 goog.require('app.soy.popup');
-goog.require('app.ui.Popup');
+goog.require('app.items.Popup');
 goog.require('goog.async.Delay');
 goog.require('goog.ui.Component');
 
@@ -104,7 +104,7 @@ app.items.Button.prototype.preparePopupBorn_ = function() {
   var element = this.getElement();
 
   eh.listenOnce(element, 'mouseover', function(e) {
-      this.popup_ = new app.ui.Popup(element);
+      this.popup_ = new app.items.Popup(element);
       eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
         this.loadTooltipContent_();
       });
