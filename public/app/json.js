@@ -13,3 +13,12 @@ goog.provide('app.json');
  * } }
  */
 app.json.ItemActionResponse;
+
+
+/**
+ * @typedef { {
+ *   "nm_like": Array,
+ *   "nm_bad": Array
+ * } }
+ */
+app.json.ViewItemLikedUsers;

@@ -1,0 +1,49 @@
+
+{namespace app.soy.popup}
+
+/**
+ * @param users
+ * @param type
+ */
+{template .main}
+  {foreach $user in $users}
+    {call .user data="$user"}
+      {param type: $type /}
+    {/call}
+  {ifempty}
+    No one has {call .likeOrBadVerbe data="all"}{/call} this item.
+  {/foreach}
+{/template}
+
+
+/***/
+{template .content}
+  <div class="tooltip-arrow"></div>
+  <div class="tooltip-inner"></div>
+{/template}
+
+
+/**
+ * @param name
+ * @param profile_image_url
+ * @param screen_name
+ * @param type
+ */
+{template .user}
+  <div class="app-item-popup-user">
+    <a href="http://twitter/{$name}">
+      <img src="{$profile_image_url}" alt="{$screen_name}" />{$screen_name}
+      <span class="icon-external-link"></span>
+    </a> {call .likeOrBadVerbe data="all"}{/call} this post.
+  </div>
+{/template}
+
+
+/**
+ * @param type
+ */
+{template .likeOrBadVerbe}
+{if $type == 'like'}liked
+{else}hated
+{/if}
+{/template}

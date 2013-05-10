@@ -4830,13 +4830,13 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
 .affix {
   position: fixed; }
 
-.clearfix {
+.clearfix, .app-item-popup-user {
   *zoom: 1; }
-  .clearfix:before, .clearfix:after {
+  .clearfix:before, .app-item-popup-user:before, .clearfix:after, .app-item-popup-user:after {
     display: table;
     content: "";
     line-height: 0; }
-  .clearfix:after {
+  .clearfix:after, .app-item-popup-user:after {
     clear: both; }
 
 .hide-text {
@@ -8691,3 +8691,17 @@ ul.icons {
     color: white;
     opacity: 0.6;
     font-size: 400%; }
+
+.app-item-popup .tooltip-inner {
+  font-size: 85%;
+  text-align: left; }
+
+.app-item-popup-user {
+  margin-bottom: 4px; }
+  .app-item-popup-user:last-of-type {
+    margin-bottom: 0; }
+  .app-item-popup-user img {
+    width: 22px;
+    margin-right: 3px; }
+  .app-item-popup-user .icon-external-link {
+    font-size: 77%; }
