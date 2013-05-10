@@ -8816,6 +8816,9 @@ ul.icons {
   cursor: pointer; }
 
 .app-message {
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   position: fixed;
   margin: 0;
   width: 100%;
@@ -8833,6 +8836,9 @@ ul.icons {
   float: left; }
 
 .app-popup .tooltip-inner {
+  -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   padding-right: 0;
   width: 195px;
   text-align: left; }

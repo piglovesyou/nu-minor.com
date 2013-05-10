@@ -45,6 +45,8 @@ $fontResourcePath:   "../sass/resources"
   display: -ms-box
   display: box
 
+=popupBoxShadow ()
+  +box-shadow(0 2px 3px rgba(0, 0, 0, .2))
 
 // Overrides
 .btn
@@ -197,6 +199,7 @@ $item-margin-bottom: 20px
   @extend .alert
   @extend .fade
   @extend .clearfix
+  +popupBoxShadow()
   position: fixed
   margin: 0
   width: 100%
@@ -227,6 +230,7 @@ $item-margin-bottom: 20px
   @extend .bottom
   @extend .in
   .tooltip-inner
+    +popupBoxShadow()
     padding-right: 0  // <- 12px
     width: 195px      // 183 + 12
     text-align: left

@@ -6,6 +6,7 @@ goog.require('goog.fx.css3.Transition');
 goog.require('goog.ui.Popup');
 goog.require('app.soy.message');
 goog.require('app.Model');
+goog.require('goog.Timer');
 
 
 
@@ -30,12 +31,19 @@ app.ui.Message = function(opt_domHelper) {
       this.closeElement_ = dh.createDom('span', 'app-message-close'));
   this.dh_.append(this.dh_.getDocument().body, element);
   this.setElement(element);
+  this.setHideOnEscape(true);
+  this.setAutoHide(false);
   this.setupTransition_();
 
+  var timer = new goog.Timer(30 * 1000);
   eh.listen(this.closeElement_, 'click', function(e) {
     this.setVisible(false);
-  }).listen(this, goog.ui.PopupBase.EventType.HIDE, function(e) {
+  }).listenOnce(this, goog.ui.PopupBase.EventType.SHOW, function(e) {
+    timer.start();
+  }).listenOnce(this, goog.ui.PopupBase.EventType.HIDE, function(e) {
     this.dispatchEvent(app.ui.Message.EventType.DELEGATE_DISPOSE);
+  }).listen(timer, goog.Timer.TICK, function(e) {
+    this.setVisible(false);
   });
 };
 goog.inherits(app.ui.Message, goog.ui.Popup);
