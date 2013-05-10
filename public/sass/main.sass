@@ -45,6 +45,8 @@ $fontResourcePath:   "../sass/resources"
   display: -ms-box
   display: box
 
+.btn
+  +user-select(none)
 
 
 
@@ -188,3 +190,29 @@ $item-margin-bottom: 20px
     @extend [class^="icon-"]:before
     @extend .icon-remove:before
 
+.app-message
+  @extend .alert
+  @extend .fade
+  @extend .clearfix
+  position: fixed
+  margin: 0
+  width: 100%
+  top: 0
+  left: 0
+  background: #34495e
+  text-shadow: none
+  box-sizing: border-box
+  border: none
+  border-radius: 0
+  color: white
+  line-height: 1.6em
+.app-message-content
+  float: left
+
+.app-message-close
+  @extend .app-dialog-title-close
+  &:before
+    @extend .close
+    @extend [class^="icon-"]
+    @extend [class^="icon-"]:before
+    @extend .icon-remove:before
