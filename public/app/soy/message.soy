@@ -1,0 +1,12 @@
+
+{namespace app.soy.message}
+
+/**
+ * @param type
+ */
+{template .modelError}
+  {if $type == 'forbidden'}
+    こちらで<a href="/auth/auth">Twitterでログイン</a>してからゆっっくりとご利用ください。
+  {/if}
+{/template}
+

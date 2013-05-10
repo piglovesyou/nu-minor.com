@@ -12,7 +12,7 @@ goog.require('goog.ui.AdvancedTooltip');
  * @extends {goog.ui.AdvancedTooltip}
  */
 app.ui.Popup = function(triggerElement) {
-  this.className = 'tooltip fade bottom in';
+  this.className = 'app-popup';
   goog.base(this, triggerElement);
 
   this.dh_ = goog.dom.getDomHelper();

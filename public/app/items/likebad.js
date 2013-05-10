@@ -108,6 +108,7 @@ app.items.LikeBad.prototype.handleLikeClick_ = function(e) {
  * @param {app.json.ItemActionResponse} json .
  */
 app.items.LikeBad.prototype.handleLikeComplete_ = function(err, json) {
+  goog.asserts.assert(!err);
   this.updateButtons_(true, json);
 };
 
@@ -128,6 +129,7 @@ app.items.LikeBad.prototype.handleBadClick_ = function(e) {
  * @param {app.json.ItemActionResponse} json .
  */
 app.items.LikeBad.prototype.handleBadComplete_ = function(err, json) {
+  goog.asserts.assert(!err);
   this.updateButtons_(false, json);
 };
 

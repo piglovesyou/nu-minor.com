@@ -24,7 +24,19 @@ goog.inherits(app.Model, goog.events.EventTarget);
 goog.addSingletonGetter(app.Model);
 
 
-/***/
+/**
+ * @enum {string}
+ */
+app.Model.EventType = {
+  FORBIDDEN: 'forbidden'
+};
+
+
+/**
+ * @param {string} url .
+ * @param {Function} callback .
+ * @param {Object} opt_obj .
+ */
 app.Model.prototype.dialog = function(url, callback, opt_obj) {
   var uri = new goog.Uri(url);
   xhr.get.call(xhr, uri.toString(), {}, callback, opt_obj);
@@ -46,8 +58,29 @@ app.Model.prototype.items =
   var fn = method === 'POST' ? xhr.post :
            method === 'GET' ? xhr.get : null;
   if (fn) {
-    fn.call(xhr, uri.toString(), params, callback, opt_obj);
+    fn.call(xhr, uri.toString(), params, function(err, json) {
+      if (err) {
+        this.handleError_(err);
+        return;
+      }
+      callback.apply(opt_obj, arguments);
+    }, this);
   }
+};
+
+
+/**
+ * @private
+ * @param {goog.XhrIo} err .
+ */
+app.Model.prototype.handleError_ = function(err) {
+  var type;
+  switch (err.getStatus()) {
+    case 403:
+      type = app.Model.EventType.FORBIDDEN;
+      break;
+  }
+  if (type) this.dispatchEvent(type);
 };
 
 

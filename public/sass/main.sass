@@ -45,9 +45,13 @@ $fontResourcePath:   "../sass/resources"
   display: -ms-box
   display: box
 
+
+// Overrides
 .btn
   +user-select(none)
-
+.muted
+  color: inherit
+  opacity: .6
 
 
 
@@ -66,7 +70,7 @@ $item-margin-bottom: 20px
     margin-top: 0
     margin-bottom: 0
   .icon-twitter
-    font-size: 150%
+    font-size: 120%
     vertical-align: middle
     margin-right: 20px
   .pull-right
@@ -155,21 +159,6 @@ $item-margin-bottom: 20px
       @extend [class^="icon-"]:before
       @extend .icon-twitter:before
 
-.app-item-popup
-  .tooltip-inner
-    font-size: 85%
-    text-align: left
-.app-item-popup-user
-  @extend .clearfix
-  margin-bottom: 4px
-  &:last-of-type
-    margin-bottom: 0
-  img
-    width: 22px
-    margin-right: 3px
-  .icon-external-link
-    font-size: 77%
-
 // app.ui.Dialog
 .dialog-shown .content
   +filter-blur(2px)
@@ -230,3 +219,25 @@ $item-margin-bottom: 20px
     @extend [class^="icon-"]
     @extend [class^="icon-"]:before
     @extend .icon-remove:before
+
+
+.app-popup
+  @extend .tooltip
+  @extend .fade
+  @extend .bottom
+  @extend .in
+  .tooltip-inner
+    padding-right: 0  // <- 12px
+    width: 195px      // 183 + 12
+    text-align: left
+.app-item-popup-user
+  +text-overflow()
+  margin-bottom: 4px
+  &:last-of-type
+    margin-bottom: 0
+  img
+    width: 22px
+    margin-right: 3px
+  .icon-external-link
+    font-size: 77%
+

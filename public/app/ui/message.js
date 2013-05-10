@@ -4,6 +4,8 @@ goog.provide('app.ui.message');
 
 goog.require('goog.fx.css3.Transition');
 goog.require('goog.ui.Popup');
+goog.require('app.soy.message');
+goog.require('app.Model');
 
 
 
@@ -92,7 +94,11 @@ app.ui.Message.Proxy = function() {
   this.eh_ = new goog.events.EventHandler(this);
   this.eh_.listen(this,
       app.ui.Message.EventType.DELEGATE_DISPOSE,
-      this.handleDelegateDispose_);
+      this.handleDelegateDispose_)
+    
+    .listen(app.model, [app.Model.EventType.FORBIDDEN], function(e) {
+      this.show(app.soy.message.modelError(e));
+    });
 };
 goog.inherits(app.ui.Message.Proxy, goog.events.EventTarget);
 goog.addSingletonGetter(app.ui.Message.Proxy);

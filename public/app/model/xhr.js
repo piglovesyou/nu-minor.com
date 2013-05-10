@@ -76,8 +76,9 @@ app.model_.Xhr.prototype.request_ = function(method,
     xhr.send(id, uri, method, content_, u, u, function(e) {
       var xhrio = e.target; // Should be.
       goog.asserts.assert(xhrio, 'Xhrio object sould be.');
-      callback.call(opt_obj, xhrio.isSuccess() ? null : xhrio,
-          app.model_.Xhr.extractResponse_(xhrio));
+      var succeeded = xhrio.isSuccess();
+      callback.call(opt_obj, succeeded ? null : xhrio,
+          succeeded && app.model_.Xhr.extractResponse_(xhrio));
     });
   } else {
     callback.call(opt_obj, {

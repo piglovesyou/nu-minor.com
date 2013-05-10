@@ -122,10 +122,10 @@ exports.requireAuthMW = function(req, res, next) {
     next();
     return;
   }
-  res.status(401);
+  res.status(403);
   res.end(JSON.stringify({
     error: 1,
-    reason: 'require auth'
+    reason: 'Forbidden. You need authorization.'
   }));
 };
 

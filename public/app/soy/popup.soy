@@ -11,7 +11,9 @@
       {param type: $type /}
     {/call}
   {ifempty}
-    No one has {call .likeOrBadVerbe data="all"}{/call} this item.
+    <span class="muted">
+      No one has {call .likeOrBadVerbe data="all"}{/call} this item.
+    </span>
   {/foreach}
 {/template}
 
@@ -31,7 +33,7 @@
  */
 {template .user}
   <div class="app-item-popup-user">
-    <a href="http://twitter/{$name}">
+    <a href="http://twitter.com/{$name}" target="_blank">
       <img src="{$profile_image_url}" alt="{$screen_name}" />{$screen_name}
       <span class="icon-external-link"></span>
     </a> {call .likeOrBadVerbe data="all"}{/call} this post.
