@@ -1,0 +1,29 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <link rel="stylesheet" href="/stylesheets/main.css" />
+  <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
+</head>
+<body>
+
+  <!--div class="app-message">
+  </div-->
+
+  <p style="padding: 200px;">
+    <a id="btn" class="btn">show message.</a>
+  </p>
+
+  <script>
+
+    var btnElm = goog.dom.getElement('btn');
+    goog.events.listen(btnElm, 'click', function(e) {
+      app.ui.message.show('<div class="app-message-content">そうだよね、そうだよね！<a href="#">http://www.google.com</a> yeah.</div>');
+    });
+
+    btnElm.click();
+  </script>
+</body>
+</html>

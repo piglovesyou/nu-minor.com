@@ -1,6 +1,8 @@
 
 goog.provide('App');
 
+goog.require('app.ui.dialog');
+goog.require('app.ui.Message');
 goog.require('app.soy');
 goog.require('goog.dom');
 goog.require('app.Items');
