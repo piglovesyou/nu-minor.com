@@ -39,6 +39,10 @@ app.items.Button.prototype.enablePrimary = function(enable) {
  * @param {Object} arg .
  */
 app.items.Button.prototype.update = function(arg) {
+  console.log(this.popup_);
+  if (this.popup_) {
+    this.preparePopupReborn_();
+  }
   this.getElement().innerHTML = this.renderer_(arg);
 };
 
@@ -67,13 +71,42 @@ app.items.Button.prototype.canDecorate = function(element) {
 /** @inheritDoc */
 app.items.Button.prototype.enterDocument = function() {
   goog.base(this, 'enterDocument');
+  this.preparePopupBorn_();
+};
+
+
+/**
+ * @private
+ */
+app.items.Button.prototype.preparePopupReborn_ = function() {
+  goog.asserts.assert(this.popup_);
+  var dh = this.getDomHelper();
+  var eh = this.getHandler();
+
+  var reborn = function() {
+    dh.removeNode(this.popup_.getElement());
+    this.popup_.dispose();
+    this.preparePopupBorn_();
+  }
+  if (this.popup_.isVisible()) {
+    eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.HIDE, reborn);
+    this.popup_.setVisible(false);
+  } else {
+    reborn.call(this);
+  }
+};
+
+
+/**
+ * @private
+ */
+app.items.Button.prototype.preparePopupBorn_ = function() {
   var eh = this.getHandler();
   var element = this.getElement();
 
   eh.listenOnce(element, 'mouseover', function(e) {
       this.popup_ = new app.ui.Popup(element);
-      eh.listenOnce(this.popup_,
-          goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+      eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
         this.loadTooltipContent_();
       });
     });
