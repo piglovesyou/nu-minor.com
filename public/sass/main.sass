@@ -162,7 +162,7 @@ $item-margin-bottom: 20px
       @extend .icon-twitter:before
 
 // app.ui.Dialog
-.dialog-shown .content
+.dialog-shown .container
   +filter-blur(2px)
   
 .app-dialog
@@ -205,7 +205,7 @@ $item-margin-bottom: 20px
   width: 100%
   top: 0
   left: 0
-  background: #34495e
+  background: #f1c40f // #34495e
   text-shadow: none
   box-sizing: border-box
   border: none
@@ -214,6 +214,8 @@ $item-margin-bottom: 20px
   line-height: 1.6em
 .app-message-content
   float: left
+  a
+    color: #c0392b // #34495e
 
 .app-message-close
   @extend .app-dialog-title-close
@@ -222,6 +224,8 @@ $item-margin-bottom: 20px
     @extend [class^="icon-"]
     @extend [class^="icon-"]:before
     @extend .icon-remove:before
+.app-message .app-message-close:before
+  line-height: 22px
 
 
 .app-popup

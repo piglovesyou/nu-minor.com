@@ -8785,7 +8785,7 @@ ul.icons {
     opacity: 0.6;
     font-size: 400%; }
 
-.dialog-shown .content {
+.dialog-shown .container {
   -webkit-filter: blur(2px);
   -moz-filter: blur(2px);
   -ms-filter: blur(2px);
@@ -8824,7 +8824,7 @@ ul.icons {
   width: 100%;
   top: 0;
   left: 0;
-  background: #34495e;
+  background: #f1c40f;
   text-shadow: none;
   box-sizing: border-box;
   border: none;
@@ -8834,6 +8834,11 @@ ul.icons {
 
 .app-message-content {
   float: left; }
+  .app-message-content a {
+    color: #c0392b; }
+
+.app-message .app-message-close:before {
+  line-height: 22px; }
 
 .app-popup .tooltip-inner {
   -webkit-box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);

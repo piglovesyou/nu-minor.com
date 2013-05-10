@@ -30,7 +30,8 @@ var express = require('express') ,
 var routes = require('./src/routes');
 _.extend(routes, {
   auth: require('./src/routes/auth'),
-  eachitem: require('./src/routes/eachitem')
+  eachitem: require('./src/routes/eachitem'),
+  users: require('./src/routes/items')
 });
 
 var app = express();
@@ -74,6 +75,8 @@ app.get('/auth/logout', routes.auth.logout);
 app.get('/items/:itemId/view', routes.eachitem.itemExistsMW, routes.eachitem.view);
 app.post('/items/:itemId/like', routes.auth.requireAuthMW, routes.eachitem.itemExistsMW, routes.eachitem.like);
 app.post('/items/:itemId/bad', routes.auth.requireAuthMW, routes.eachitem.itemExistsMW, routes.eachitem.bad);
+
+app.get('/users/:userId/view', routes.users.userExistsMW, routes.users.view);
 
 
 

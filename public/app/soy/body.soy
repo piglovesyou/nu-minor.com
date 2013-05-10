@@ -8,7 +8,7 @@
 {template .main}
   <div class="row app-items">
 
-    {let $featureList: [9, 3, 6, 3, 3, 3, 3, 3] /}
+    {let $featureList: [9, 3, 3, 6, 3, 3, 3, 3] /}
     {foreach $span in $featureList}
       {let $item: $items[index($span)] /}
       {call .item data="$item"}{param span: $span /}{/call}

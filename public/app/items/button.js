@@ -39,7 +39,6 @@ app.items.Button.prototype.enablePrimary = function(enable) {
  * @param {Object} arg .
  */
 app.items.Button.prototype.update = function(arg) {
-  console.log(this.popup_);
   if (this.popup_) {
     this.preparePopupReborn_();
   }
@@ -87,7 +86,7 @@ app.items.Button.prototype.preparePopupReborn_ = function() {
     dh.removeNode(this.popup_.getElement());
     this.popup_.dispose();
     this.preparePopupBorn_();
-  }
+  };
   if (this.popup_.isVisible()) {
     eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.HIDE, reborn);
     this.popup_.setVisible(false);

@@ -32,7 +32,7 @@ app.ui.Message = function(opt_domHelper) {
   this.dh_.append(this.dh_.getDocument().body, element);
   this.setElement(element);
   this.setHideOnEscape(true);
-  this.setAutoHide(false);
+  // this.setAutoHide(false);
   this.setupTransition_();
 
   var timer = new goog.Timer(30 * 1000);
