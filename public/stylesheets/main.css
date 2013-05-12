@@ -8785,6 +8785,10 @@ ul.icons {
     opacity: 0.6;
     font-size: 400%; }
 
+.app-footer {
+  padding: 2em 0 4em;
+  text-align: center; }
+
 .dialog-shown .container {
   -webkit-filter: blur(4px);
   -moz-filter: blur(4px);
@@ -8825,6 +8829,10 @@ ul.icons {
   box-shadow: none; }
 
 .app-dialog-title-close, .app-message-close {
+  position: absolute;
+  top: 9px;
+  right: 15px;
+  z-index: 2;
   cursor: pointer; }
 
 .app-message {
@@ -8872,6 +8880,9 @@ ul.icons {
     margin-right: 3px; }
   .app-item-popup-user .icon-external-link {
     font-size: 77%; }
+
+.app-item-popup-user-anchor {
+  padding: 6px 0; }
 
 .app-dialog-user-img {
   margin: 0 auto 6px; }

@@ -15,6 +15,13 @@ var isAuthed = function(req) {
             req.session.twitter.id);
 };
 
+var whenFail = function(res) {
+  return function(reason) {
+    assert.fail(reason);
+    res.end(JSON.stringify(reason));
+  };
+};
+
 var sortAs = function(idArr, objArr) {
   var r = [];
   idArr.forEach(function(id, i) {
@@ -44,10 +51,11 @@ exports.index = function(req, res) {
     'WQO-aOdJLiw'
   ];
 
+  var itemsRef;
   find({id: {$in: feature}}, null, { })
   .then(function(items) {
 
-    items = sortAs(feature, items);
+    itemsRef = items = sortAs(feature, items);
 
     if (userId) {
       _.each(items, function(item) {
@@ -56,13 +64,21 @@ exports.index = function(req, res) {
       });
     }
 
+  })
+  .then(function() {
+    // return find({id: {$nin: feature}});
+  })
+  .then(function(items) {
+
     res.end(soy.render('app.soy.index', {
       isProduction: isProduction,
       isAuthed: !!(isAuthed_ && req.session.oauth.access_token),
       twitter: isAuthed_ ? req.session.twitter : null,
-      items: items
+      items: itemsRef.concat(items ? _.shuffle(items) : [])
     }));
-  });
+
+  })
+  .fail(whenFail);
 
 };
 
