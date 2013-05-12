@@ -51,12 +51,35 @@
 {/template}
 
 
+
+/**
+ * @param content
+ */
+{template .test_wrapper}
+  <div style="padding:.4em;background:lightblue">
+    {$content}
+  </div>
+{/template}
+
+/***/
+{template .test_content1}
+  {call .test_wrapper}
+    {param content}
+      <div style="background:lightgreen">ohhh</div>
+    {/param}
+  {/call}
+{/template}
+
+
 /**
  * Rendered from `soyweb' command.
  * This entry point does not contain any script tag.
  * Designer
  */
 {template .soyweb}
+
+  {call .test_content1}{/call}
+
   {call .layout_}
     {param isProduction: false /}
     {param excludeScript: true /}

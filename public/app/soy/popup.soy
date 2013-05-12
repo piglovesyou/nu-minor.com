@@ -33,7 +33,7 @@
  */
 {template .user}
   <div class="app-item-popup-user">
-    <a href="/users/{$id}/view">
+    <a class="app-item-popup-user-anchor" href="/users/{$id}/view">
       <img src="{$profile_image_url}" alt="{$screen_name}" />{$screen_name}
       <span class="icon-external-link"></span>
     </a> {call .likeOrBadVerbe data="all"}{/call} this post.

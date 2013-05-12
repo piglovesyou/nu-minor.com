@@ -16,11 +16,21 @@ app.ui.Popup = function(triggerElement) {
   goog.base(this, triggerElement);
 
   this.dh_ = goog.dom.getDomHelper();
+  this.eh_ = new goog.events.EventHandler(this);
 
-  this.setupElement_();
-  this.setupOptions_();
+  this.eh_.listenOnce(this, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+    this.setupElement_();
+  });
 };
 goog.inherits(app.ui.Popup, goog.ui.AdvancedTooltip);
+
+
+/**
+ * @return {goog.events.EventHandler} .
+ */
+app.ui.Popup.prototype.getHandler = function() {
+  return this.eh_;
+};
 
 
 /**
@@ -38,6 +48,8 @@ app.ui.Popup.prototype.setupElement_ = function() {
       this.dh_.createDom('div', 'tooltip-arrow'),
       this.contentElement_ = this.dh_.createDom('div',
         'tooltip-inner', 'loading...'));
+
+  this.setupOptions_();
 };
 
 
@@ -48,7 +60,7 @@ app.ui.Popup.prototype.setupOptions_ = function() {
   this.setupTransition_();
   this.setCursorTracking(true); // cool.
   this.setHotSpotPadding(new goog.math.Box(5, 5, 5, 5));
-  this.setHideDelayMs(250);
+  this.setHideDelayMs(0);
   this.setHideOnEscape(true);
 
   var defaultFixedMargin = 10;

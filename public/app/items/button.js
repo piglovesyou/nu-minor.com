@@ -79,20 +79,26 @@ app.items.Button.prototype.enterDocument = function() {
  */
 app.items.Button.prototype.preparePopupReborn_ = function() {
   goog.asserts.assert(this.popup_);
-  var dh = this.getDomHelper();
   var eh = this.getHandler();
 
-  var reborn = function() {
-    dh.removeNode(this.popup_.getElement());
-    this.popup_.dispose();
-    this.preparePopupBorn_();
-  };
   if (this.popup_.isVisible()) {
-    eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.HIDE, reborn);
+    eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.HIDE, this.rebirthPopup_);
     this.popup_.setVisible(false);
   } else {
-    reborn.call(this);
+    this.rebirthPopup_();
   }
+};
+
+
+/**
+ * @private
+ */
+app.items.Button.prototype.rebirthPopup_ = function() {
+  var dh = this.getDomHelper();
+
+  dh.removeNode(this.popup_.getElement());
+  this.popup_.dispose();
+  this.preparePopupBorn_();
 };
 
 
@@ -102,13 +108,11 @@ app.items.Button.prototype.preparePopupReborn_ = function() {
 app.items.Button.prototype.preparePopupBorn_ = function() {
   var eh = this.getHandler();
   var element = this.getElement();
+  this.popup_ = new app.items.Popup(element);
 
-  eh.listenOnce(element, 'mouseover', function(e) {
-      this.popup_ = new app.items.Popup(element);
-      eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
-        this.loadTooltipContent_();
-      });
-    });
+  eh.listenOnce(this.popup_, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+    this.loadTooltipContent_();
+  });
 };
 
 
