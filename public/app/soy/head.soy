@@ -7,10 +7,12 @@
  * @param twitter
  */
 {template .main}
-  {call .title data="all"}
-    {param useFollowButton: true /}
-  {/call}
-  {call .nav}{/call}
+  <div class="app-head">
+    {call .title data="all"}
+      {param useFollowButton: true /}
+    {/call}
+    {call .nav}{/call}
+  </div>
 {/template}
 
 /**
@@ -23,7 +25,7 @@
     <h1 class="span2">NuMinor</h1>
     <p class="muted span4">the super super supre band</p>
 
-    <div class="span4 pull-right">
+    <div class="span5 pull-right">
       {if $useFollowButton}
         <a href="#" class="btn icon-twitter">
           follow @numinor
@@ -38,13 +40,14 @@
           login
         </a>
       {/if}
+      <a class="app-menutoggle btn" href="javascript:void(0)">o</a>
     </div>
   </div>
 {/template}
 
 /***/
 {template .nav}
-  <div class="row row-nav">
+  <div class="app-menu row row-nav">
     <div class="span3">
       <a href="#" class="btn btn-large btn-block btn-danger">
         <span class="icon-youtube">You Tube</span>

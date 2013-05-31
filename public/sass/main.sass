@@ -65,10 +65,12 @@ $item-margin-bottom: 20px
   margin-bottom: $item-margin-bottom
   
 
-.app-title
-  line-height: 40px
+.app-head
   margin-top: 40px
   margin-bottom: 20px
+
+.app-title
+  line-height: 40px
   h1
     margin-top: 0
     margin-bottom: 0
@@ -81,6 +83,7 @@ $item-margin-bottom: 20px
 
 .app-userprofile
   display: inline-block
+  margin-right: 10px
   img
     +user-select(none)
     +user-drag(none)
@@ -88,7 +91,6 @@ $item-margin-bottom: 20px
     margin-right: 6px
 
 .row-nav
-  display: none
   +margin-bottom-normal
   [class^="icon-"], [class*=" icon-"]
     font-weight: bold
@@ -294,3 +296,15 @@ $item-margin-bottom: 20px
 .app-dialog-user
   margin: 20px 0 38px
   text-align: center
+
+.app-menu
+  +transition(height .1s ease-in-out)
+  overflow: hidden
+.app-menu-open
+  height: 45px
+.app-menu-close
+  height: 0
+.app-menutoggle
+  @extend [class^="icon-"]
+  @extend [class^="icon-"]:before
+  @extend .icon-ellipsis-horizontal:before
