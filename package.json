@@ -14,6 +14,9 @@
     "node-sass": "0.4.x",
     "mocha": "*",
     "underscore": "*",
+    "q": "*",
+    "mongoose": "*",
+    "youtube-feeds": "*",
     "selenium-webdriver": "*"
   }
 }
