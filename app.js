@@ -22,7 +22,6 @@ var express = require('express') ,
   path = require('path') ,
   RedisStore = require('connect-redis')(express),
   SECRET = require('secret-strings').NU_MINOR;
-  sass = require('node-sass'),
   _ = require('underscore');
   isProduction = process.env.NODE_ENV === 'production',
   youtube = require('youtube-feeds');
@@ -49,16 +48,16 @@ app.configure(function() {
     cookie: {maxAge: 60 * 60 * 1000}
   }));
   app.use(app.router);
-  sass.middleware({
-    src: __dirname + '/public/sass',
-    dest: __dirname + '/public/stylesheets',
-    debug: !isProduction
-  });
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function() {
   app.use(express.errorHandler());
+  require('node-sass').middleware({
+    src: __dirname + '/public/sass',
+    dest: __dirname + '/public/stylesheets',
+    debug: !isProduction
+  });
 });
 
 
