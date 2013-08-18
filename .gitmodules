@@ -7,3 +7,6 @@
 [submodule "public/sass/Font-Awesome-More"]
 	path = public/sass/Font-Awesome-More
 	url = git://github.com/gregoryloucas/Font-Awesome-More.git
+[submodule "public/sass/Font-Awesome"]
+	path = public/sass/Font-Awesome
+	url = https://github.com/FortAwesome/Font-Awesome.git

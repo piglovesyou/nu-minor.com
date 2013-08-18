@@ -2,12 +2,8 @@
 @import './sass-twitter-bootstrap/lib/bootstrap.scss'
 @import './Flat-UI/sass/flat-ui.sass'
 
-$fontAwesomePath:   "../sass/Font-Awesome-More/font"
-@import './Font-Awesome-More/sass/font-awesome.sass'
-
-$fontAwesomeSocialPath:   "../sass/Font-Awesome-More/fonts/social"
-@import './font-awesome-more-patch.sass'
-
+$FontAwesomePath:   "../sass/Font-Awesome/font"
+@import './Font-Awesome/scss/font-awesome.scss'
 
 
 $fontResourcePath:   "../sass/resources"
@@ -174,7 +170,7 @@ $item-margin-bottom: 20px
 
       @extend [class^="icon-"]
       @extend [class^="icon-"]:before
-      @extend .icon-twitter:before
+      @extend .icon-twitter-sign:before
 
 .app-footer
   padding: 2em 0 4em
