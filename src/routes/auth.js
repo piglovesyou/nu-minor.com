@@ -8,11 +8,11 @@ var db = require('../setupdb');
 
 var SECRET = require('secret-strings').NU_MINOR;
 var oa = new (require('oauth').OAuth)(
-    'https://twitter.com/oauth/request_token',
-    'https://twitter.com/oauth/access_token',
+    'https://api.twitter.com/oauth/request_token',
+    'https://api.twitter.com/oauth/access_token',
     SECRET.CONSUMER_KEY,
     SECRET.CONSUMER_SECRET,
-    '1.0',
+    '1.0A',
     'http://nu-minor.com/auth/callback',
     'HMAC-SHA1');
 
@@ -47,7 +47,7 @@ exports.auth = function(req, res) {
     req.session.oauth = {};
     req.session.oauth.token = oauth_token;
     req.session.oauth.token_secret = oauth_token_secret;
-    res.redirect('https://twitter.com/oauth/authenticate?oauth_token=' + oauth_token);
+    res.redirect('https://api.twitter.com/oauth/authenticate?oauth_token=' + oauth_token);
   });
 };
 
