@@ -2,7 +2,7 @@
 goog.provide('app.Head');
 
 goog.require('goog.ui.Component');
-goog.require('app.head.MenuToggle');
+// goog.require('app.head.MenuToggle');
 
 
 

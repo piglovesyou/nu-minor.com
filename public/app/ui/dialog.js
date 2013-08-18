@@ -8,7 +8,8 @@ goog.require('goog.ui.Dialog');
 
 /**
  * @constructor
- * @inheritDoc
+ * @param {boolean=} opt_useIframeMask .
+ * @param {goog.dom.DomHelper=} opt_domHelper .
  * @extends {goog.ui.Dialog}
  */
 app.ui.Dialog = function(opt_useIframeMask, opt_domHelper) {

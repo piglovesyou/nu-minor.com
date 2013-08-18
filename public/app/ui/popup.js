@@ -5,6 +5,10 @@ goog.require('goog.fx.css3.Transition');
 goog.require('goog.ui.AdvancedTooltip');
 
 
+goog.scope(function() {
+
+var PopupBase = goog.ui.PopupBase;
+
 
 /**
  * @constructor
@@ -18,7 +22,7 @@ app.ui.Popup = function(triggerElement) {
   this.dh_ = goog.dom.getDomHelper();
   this.eh_ = new goog.events.EventHandler(this);
 
-  this.eh_.listenOnce(this, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
+  this.eh_.listenOnce(this, PopupBase.EventType.BEFORE_SHOW, function(e) {
     this.setupElement_();
   });
 };
@@ -44,7 +48,7 @@ app.ui.Popup.prototype.setupElement_ = function() {
     opacity: 0
   });
 
-  this.dh_.append(element,
+  this.dh_.append(/** @type {!Element} */(element),
       this.dh_.createDom('div', 'tooltip-arrow'),
       this.contentElement_ = this.dh_.createDom('div',
         'tooltip-inner', 'loading...'));
@@ -97,3 +101,6 @@ app.ui.Popup.prototype.setHtml = function(html) {
 app.ui.Popup.prototype.setText = function(str) {
   this.dh_.setTextContent(this.contentElement_, str);
 };
+
+
+}); // goog.scope

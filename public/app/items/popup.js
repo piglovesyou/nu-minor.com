@@ -1,8 +1,9 @@
 
 goog.provide('app.items.Popup');
 
-goog.require('app.ui.Popup');
 goog.require('app.soy.dialog');
+goog.require('app.ui.Popup');
+goog.require('app.ui.Dialog');
 
 
 /**
@@ -27,11 +28,11 @@ goog.inherits(app.items.Popup, app.ui.Popup);
  * @param {goog.events.Event} e .
  */
 app.items.Popup.prototype.handleClicked_ = function(e) {
-  var href = this.extractHrefFromEventTarget_(e.target);
+  var href = this.extractHrefFromEventTarget_(/**@type {!Element}*/(e.target));
   if (href) {
     this.setVisible(false);
 
-    var d = new app.ui.Dialog()
+    var d = new app.ui.Dialog();
     d.setDisposeOnHide(true);
     d.setContent('loading...');
     d.setVisible(true);
@@ -41,6 +42,12 @@ app.items.Popup.prototype.handleClicked_ = function(e) {
 };
 
 
+/**
+ * @private
+ * @param {app.ui.Dialog} dialog .
+ * @param {goog.net.XhrIo} err .
+ * @param {Object} json .
+ */
 app.items.Popup.prototype.handleCompleteUser_ = function(dialog, err, json) {
   // Store this json somewhere.
   json['profile_image_url'] = json['profile_image_url'].replace('_normal', '_bigger');
@@ -54,7 +61,7 @@ app.items.Popup.prototype.handleCompleteUser_ = function(dialog, err, json) {
 /**
  * @private
  * @param {Element} et .
- * @return {Element?} .
+ * @return {?string} .
  */
 app.items.Popup.prototype.extractHrefFromEventTarget_ = function(et) {
   var e = app.dom.getAncestorFromEventTargetByClass(this.getElement(),

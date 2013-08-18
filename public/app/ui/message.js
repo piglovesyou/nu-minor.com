@@ -2,18 +2,18 @@
 goog.provide('app.ui.Message');
 goog.provide('app.ui.message');
 
+goog.require('app.Model');
+goog.require('app.soy.message');
+goog.require('goog.Timer');
 goog.require('goog.fx.css3.Transition');
 goog.require('goog.ui.Popup');
-goog.require('app.soy.message');
-goog.require('app.Model');
-goog.require('goog.Timer');
 
 
 
 /**
  * @constructor
  * @param {goog.dom.DomHelper=} opt_domHelper .
- * @extends {goog.ui.Component}
+ * @extends {goog.ui.Popup}
  */
 app.ui.Message = function(opt_domHelper) {
   goog.base(this, null, new goog.positioning.AbsolutePosition(0, 0));
@@ -29,7 +29,7 @@ app.ui.Message = function(opt_domHelper) {
       },
       this.contentElement_ = dh.createDom('div', 'app-message-content'),
       this.closeElement_ = dh.createDom('span', 'app-message-close'));
-  this.dh_.append(this.dh_.getDocument().body, element);
+  this.dh_.append(/**@type {!Element}*/(this.dh_.getDocument().body), element);
   this.setElement(element);
   this.setHideOnEscape(true);
   // this.setAutoHide(false);
@@ -95,6 +95,7 @@ app.ui.Message.prototype.disposeInternal = function() {
 
 /**
  * @constructor
+ * @extends {goog.events.EventTarget}
  */
 app.ui.Message.Proxy = function() {
   this.msg_ = null;
@@ -103,7 +104,7 @@ app.ui.Message.Proxy = function() {
   this.eh_.listen(this,
       app.ui.Message.EventType.DELEGATE_DISPOSE,
       this.handleDelegateDispose_)
-    
+
     .listen(app.model, [app.Model.EventType.FORBIDDEN], function(e) {
       this.show(app.soy.message.modelError(e));
     });

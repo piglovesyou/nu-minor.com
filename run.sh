@@ -6,6 +6,11 @@
 
 USAGE_TEXT="\n
     ---- Usage ---- \n\n\
+    $ ./run.sh setup\t# Fetch libraries.\n
+    $ ./run.sh soyweb\t# Start soyweb server for development.\n
+    $ ./run.sh sass\t# Start to watch sass for development.\n
+    $ ./run.sh serve\t# Start JavaScript server for development.\n
+    $ ./run.sh build\t# Build JavaScript and CSS for production.\n
         \n"
 
 
@@ -68,6 +73,7 @@ case $1 in
 
     build)
         java -jar ${PLOVR_JAR_PATH} build plovr.json
+        sass -t compressed public/sass/main.sass:public/stylesheets/main-min.css
         ;;
 
     *)

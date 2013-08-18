@@ -3,6 +3,7 @@ goog.provide('app.Model');
 goog.provide('app.model');
 
 goog.require('app.model_.Xhr');
+goog.require('goog.net.XhrIo');
 goog.require('goog.string');
 
 
@@ -32,8 +33,13 @@ app.Model.EventType = {
 };
 
 
-app.Model.prototype.users = function(uri, callback, opt_obj) {
-  xhr.get.call(xhr, uri, {}, function(err, json) {
+/**
+ * @param {string} url .
+ * @param {Function} callback .
+ * @param {Object=} opt_obj .
+ */
+app.Model.prototype.users = function(url, callback, opt_obj) {
+  xhr.get.call(xhr, url, {}, function(err, json) {
     if (err) {
       goog.asserts.assert(!err);
       return;
@@ -58,7 +64,7 @@ app.Model.prototype.dialog = function(url, callback, opt_obj) {
  * @param {string} method .
  * @param {string} itemId .
  * @param {string} action .
- * @param {Object} params .
+ * @param {!Object} params .
  * @param {Function} callback .
  * @param {Object=} opt_obj .
  */
@@ -82,7 +88,7 @@ app.Model.prototype.items =
 
 /**
  * @private
- * @param {goog.XhrIo} err .
+ * @param {goog.net.XhrIo} err .
  */
 app.Model.prototype.handleError_ = function(err) {
   var type;

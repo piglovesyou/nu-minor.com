@@ -7,7 +7,7 @@ goog.require('goog.ui.Component');
 
 /**
  * @constructor
- * @param {Element} menu .
+ * @param {Element} menuEl .
  * @param {goog.dom.DomHelper=} opt_domHelper .
  * @extends {goog.ui.Component}
  */

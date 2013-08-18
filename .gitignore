@@ -7,3 +7,4 @@ node_modules
 /public/stylesheets/main-min.css
 /tmp.js
 /var/*
+npm-debug.log
