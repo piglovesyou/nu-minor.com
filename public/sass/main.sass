@@ -66,8 +66,21 @@ $item-margin-bottom: 20px
   
 
 .app-head
-  margin-top: 40px
-  margin-bottom: 20px
+  width: 940px // TODO: Care this
+  padding-top: 40px
+  background: white
+  position: fixed
+  z-index: 1
+  &:after
+    $height: 4px
+    position: absolute
+    display: block
+    width: 100%
+    height: $height
+    bottom: -$height
+    content: ""
+    +gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0))
+    background-color: transparent
 
 .app-title
   line-height: 40px
@@ -298,6 +311,7 @@ $item-margin-bottom: 20px
   text-align: center
 
 .app-menu
+  margin-top: 110px
   +transition(height .1s ease-in-out)
   overflow: hidden
 .app-menu-open

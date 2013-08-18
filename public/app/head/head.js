@@ -28,11 +28,11 @@ app.Head.prototype.createDom = function() {
 app.Head.prototype.decorateInternal = function(element) {
   goog.base(this, 'decorateInternal', element);
 
-  this.menuToggle =
-      new app.head.MenuToggle(this.getElementByClass('app-menu'));
-  this.menuToggle.decorateInternal(this.getElementByClass('app-menutoggle'));
-  console.log('-------');
-  this.addChild(this.menuToggle);
+  // this.menuToggle =
+  //     new app.head.MenuToggle(this.getElementByClass('app-menu'));
+  // this.menuToggle.decorateInternal(this.getElementByClass('app-menutoggle'));
+  // console.log('-------');
+  // this.addChild(this.menuToggle);
 };
 
 

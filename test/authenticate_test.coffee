@@ -1,3 +1,10 @@
+
+###
+  Before run auth test,
+   1. Launch app server by 80 port.
+   2. Let "nu-minor.com" be seen.
+###
+  
 assert = require("assert")
 webdriver = require("selenium-webdriver")
 buildDriver = ->
