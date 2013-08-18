@@ -77,7 +77,7 @@ exports.callback = function(req, res, next) {
     }
     var userId = req.session.twitter.user_id;
     return getWithOAuth(
-      'http://api.twitter.com/1/users/show.json?id=' + userId,
+      'https://api.twitter.com/1.1/users/show.json?id=' + userId,
       req.session.oauth.access_token,
       req.session.oauth.access_token_secret)
     .then(function(results) {
