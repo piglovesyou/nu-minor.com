@@ -1,8 +1,8 @@
 
 goog.provide('app.items.Button');
 
-goog.require('app.soy.popup');
 goog.require('app.items.Popup');
+goog.require('app.soy.popup');
 goog.require('goog.async.Delay');
 goog.require('goog.ui.Component');
 
@@ -132,9 +132,17 @@ app.items.Button.prototype.loadTooltipContent_ = function() {
   app.model.items('GET', id, 'view', {
     'expand': this.type_
   }, function(err, json) {
+
+    // XXX: hack for ADVANCED_COMPILATION
+    var users = goog.array.map(json['nm_' + this.type_], function(val) {
+      return {
+        user: val
+      };
+    });
+
     this.popup_.setHtml(err ? 'Fail.' : app.soy.popup.main({
       type: this.type_,
-      users: json['nm_' + this.type_]
+      users: users
     }));
   }, this);
 };

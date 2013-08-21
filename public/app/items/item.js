@@ -2,12 +2,11 @@
 goog.provide('app.items.Item');
 
 goog.require('app.dom');
-goog.require('app.json');
+goog.require('app.items.LikeBad');
 goog.require('app.model');
 goog.require('app.soy.body');
 goog.require('goog.dom.dataset');
 goog.require('goog.ui.Component');
-goog.require('app.items.LikeBad');
 
 
 
@@ -32,7 +31,7 @@ app.items.Item = function(opt_domHelper) {
    * @type {app.items.LikeBad}
    */
   this.likeBad_ = new app.items.LikeBad(dh);
-  this.addChild(this.likeBad_)
+  this.addChild(this.likeBad_);
 };
 goog.inherits(app.items.Item, goog.ui.Component);
 

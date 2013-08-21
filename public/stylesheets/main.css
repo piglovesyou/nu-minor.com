@@ -8971,7 +8971,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   line-height: 40px; }
   .app-title h1 {
     margin-top: 0;
-    margin-bottom: 0; }
+    margin-bottom: 0;
+    margin-right: 0.6em; }
   .app-title .icon-twitter {
     font-size: 120%;
     vertical-align: middle;
@@ -9170,12 +9171,16 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   border: none;
   border-radius: 0;
   color: white;
-  line-height: 1.6em; }
+  line-height: 1.6em;
+  z-index: 100; }
 
 .app-message-content {
   float: left; }
   .app-message-content a {
     color: #c0392b; }
+
+.app-message-close:before {
+  right: 0 !important; }
 
 .app-message .app-message-close:before {
   line-height: 22px; }

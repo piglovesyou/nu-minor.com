@@ -2,8 +2,8 @@
 goog.provide('app.items.Popup');
 
 goog.require('app.soy.dialog');
-goog.require('app.ui.Popup');
 goog.require('app.ui.Dialog');
+goog.require('app.ui.Popup');
 
 
 /**
@@ -17,7 +17,8 @@ app.items.Popup = function(triggerElement) {
   this.eh_ = new goog.events.EventHandler(this);
   var eh = this.eh_;
   eh.listenOnce(this, goog.ui.PopupBase.EventType.BEFORE_SHOW, function(e) {
-    eh.listen(this.getElement(), goog.events.EventType.CLICK, this.handleClicked_);
+    eh.listen(this.getElement(),
+              goog.events.EventType.CLICK, this.handleClicked_);
   });
 };
 goog.inherits(app.items.Popup, app.ui.Popup);

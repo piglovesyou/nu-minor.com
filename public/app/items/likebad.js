@@ -1,12 +1,12 @@
 
 goog.provide('app.items.LikeBad');
 
-goog.require('goog.ui.Component');
-goog.require('app.model');
-goog.require('app.ui.util');
-goog.require('app.soy');
-goog.require('app.items.LikeButton');
 goog.require('app.items.BadButton');
+goog.require('app.items.LikeButton');
+goog.require('app.model');
+goog.require('app.soy');
+goog.require('app.ui.util');
+goog.require('goog.ui.Component');
 
 
 
@@ -105,7 +105,7 @@ app.items.LikeBad.prototype.handleLikeClick_ = function(e) {
 /**
  * @private
  * @param {boolean} err .
- * @param {app.json.ItemActionResponse} json .
+ * @param {Object} json .
  */
 app.items.LikeBad.prototype.handleLikeComplete_ = function(err, json) {
   goog.asserts.assert(!err);
@@ -126,7 +126,7 @@ app.items.LikeBad.prototype.handleBadClick_ = function(e) {
 /**
  * @private
  * @param {boolean} err .
- * @param {app.json.ItemActionResponse} json .
+ * @param {Object} json .
  */
 app.items.LikeBad.prototype.handleBadComplete_ = function(err, json) {
   goog.asserts.assert(!err);
@@ -138,25 +138,25 @@ app.items.LikeBad.prototype.handleBadComplete_ = function(err, json) {
 /**
  * @private
  * @param {boolean} isLike .
- * @param {app.json.ItemActionResponse} json .
+ * @param {Object} json .
  */
 app.items.LikeBad.prototype.updateButtons_ = function(isLike, json) {
-  goog.asserts.assertNumber(json.currentLike);
-  goog.asserts.assertNumber(json.currentBad);
+  goog.asserts.assertNumber(json['currentLike']);
+  goog.asserts.assertNumber(json['currentBad']);
   var dh = this.getDomHelper();
 
   var arg = {
-    nm_like: {length: json.currentLike},
-    nm_bad: {length: json.currentBad},
-    userLiked: isLike ? json.wasPushed : !json.wasOppositePulled,
-    userMarkedBad: !isLike ? json.wasPushed : !json.wasOppositePulled
+    nm_like: {length: json['currentLike']},
+    nm_bad: {length: json['currentBad']},
+    userLiked: isLike ? json['wasPushed'] : !json['wasOppositePulled'],
+    userMarkedBad: !isLike ? json['wasPushed'] : !json['wasOppositePulled']
   };
 
   var button = isLike ? this.likeButton_ : this.badButton_;
   button.update(arg);
-  button.enablePrimary(json.wasPushed);
+  button.enablePrimary(json['wasPushed']);
 
-  if (json.wasOppositePulled) {
+  if (json['wasOppositePulled']) {
     var opposite = !isLike ? this.likeButton_ : this.badButton_;
     opposite.update(arg);
     opposite.enablePrimary(false);

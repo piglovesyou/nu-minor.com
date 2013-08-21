@@ -1,6 +1,8 @@
 {
   "id": "plovr-sample",
 
+  // "debug": true,
+
   "paths": [
 	  "./public/app",
 	  "./public/javascripts"

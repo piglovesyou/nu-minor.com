@@ -26,15 +26,14 @@
 
 
 /**
- * @param id
- * @param profile_image_url
- * @param screen_name
+ * XXX: hack for ADVANCED_COMPILATION
+ * @param user
  * @param type
  */
 {template .user}
   <div class="app-item-popup-user">
-    <a class="app-item-popup-user-anchor" href="/users/{$id}/view">
-      <img src="{$profile_image_url}" alt="{$screen_name}" />{$screen_name}
+    <a class="app-item-popup-user-anchor" href="/users/{$user['id']}/view">
+      <img src="{$user['profile_image_url']}" alt="{$user['screen_name']}" />{$user['screen_name']}
       <span class="icon-external-link"></span>
     </a> {call .likeOrBadVerbe data="all"}{/call} this post.
   </div>
