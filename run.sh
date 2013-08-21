@@ -73,7 +73,7 @@ case $1 in
 
     build)
         java -jar ${PLOVR_JAR_PATH} build plovr.json
-        # sass -t compressed public/sass/main.sass:public/stylesheets/main-min.css
+        sass -t compressed public/sass/main.sass:public/stylesheets/main-min.css
         ;;
 
     *)
