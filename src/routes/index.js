@@ -22,6 +22,7 @@ var whenFail = function(res) {
   };
 };
 
+// objArr.length can be bigger
 var sortAs = function(idArr, objArr) {
   var r = [];
   idArr.forEach(function(id, i) {
@@ -42,22 +43,30 @@ exports.index = function(req, res) {
       userId = isAuthed_ && req.session.twitter.id;
 
   var feature = [
-    'j3S3Txsl2vs',
-    '93t1H-EkUj4',
-    '89728820',
-    '-3JCESdFNyw',
-    '89726554',
-    'tb3qxDrsA0M',
-    'WQO-aOdJLiw'
+    'La-bD1IhMto',
+    
+    '106166477',
+    '103989632',
+
+    'JphADRVX_W0',
+
+    '102117201',
+    '100169194',
+    'd7fTQMUZ6yc',
+    'phffZ2snf0A',
+    'S0U4rIi07qY',
+    'Ao399AaSV_E',
+
+    'pl2DQWEFbp8'
   ];
 
   var itemsRef;
   // TODO: Find features
-  // find({id: {$in: feature}}, null, { })
-  find()
+  find({id: {$in: feature}}, null, { })
+  // find()
   .then(function(items) {
-    
-    itemsRef = items; // = sortAs(feature, items);
+
+    itemsRef = items = sortAs(feature, items);
 
     if (userId) {
       _.each(items, function(item) {

@@ -5,6 +5,7 @@ node_modules
 /closure
 /public/javascripts/main-min.js
 /public/stylesheets/main-min.css
+/public/stylesheets/main.css
 /tmp.js
 /var/*
 npm-debug.log

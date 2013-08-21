@@ -315,15 +315,14 @@ $item-margin-bottom: 20px
   margin-top: 110px
   +transition(height .1s ease-in-out)
   overflow: hidden
-  [class^="nav-"],
-  [class*=" nav-"]
-    &:hover:after
-      @extend [class^="icon-"]
-      @extend [class^="icon-"]:before
-      @extend .icon-external-link:before
       
   // [class^="icon-"],
   // [class*=" icon-"]
+a[target="_blank"].btn
+  &:hover:after
+    @extend [class^="icon-"]
+    @extend [class^="icon-"]:before
+    @extend .icon-external-link:before
     
 .app-menu-open
   height: 45px
@@ -339,9 +338,6 @@ $item-margin-bottom: 20px
   &:hover
     background-color: lighten(#F39C12, 16%)
 .nav-schedule
-  @extend .muted
   background-color: #2980B9
   &:hover
-    @extend .muted
-    background-color: #2980B9
-    // background-color: lighten(#2980B9, 16%)
+    background-color: lighten(#2980B9, 16%)
