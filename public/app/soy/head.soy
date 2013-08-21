@@ -7,7 +7,7 @@
  * @param twitter
  */
 {template .main}
-  <div class="app-head">
+  <div class="app-head app-head-float">
     {call .title data="all"}
       {param useFollowButton: true /}
     {/call}
@@ -22,23 +22,26 @@
  */
 {template .title}
   <div class="row app-title">
-    <div class="span6">
+    <div class="span5">
       <h1 class="pull-left">NU minor</h1>
       <p class="muted">The super super super band</p>
     </div>
 
-    <div class="span5 pull-right">
+    {let $rightSpan}
+      {if not $useFollowButton and not $isAuthed}1{else}5{/if}
+    {/let}
+    <div class="span{$rightSpan} pull-right">
       {if $useFollowButton}
-        <a href="http://twitter.com/NU_minor" class="btn icon-twitter">
+        <a target="_blank" href="http://twitter.com/NU_minor" class="btn icon-twitter">
           follow @NU_minor
         </a>
       {/if}
       {if $isAuthed}
-        <a href="/auth/logout" class="app-userprofile">
+        <a href="/auth/logout" class="app-userprofile" title="ログアウトします">
           <img src="{$twitter.profile_image_url}" alt="{$twitter.screen_name}" />{$twitter.screen_name}
         </a>
       {else}
-        <a href="/auth/auth">
+        <a href="/auth/auth" title="Twitter にログインすると、評価を付けることができます">
           login
         </a>
       {/if}
@@ -50,21 +53,27 @@
 /***/
 {template .nav}
   <div class="app-menu row row-nav">
-    <div class="span3">
-      <a href="#" class="btn btn-large btn-block btn-danger">
-        <span class="icon-youtube">You Tube</span>
+    <div class="span4">
+      <a target="_blank" href="http://www.youtube.com/user/NUminormusic" class="nav-youtube btn btn-large btn-block">
+        <span class="icon-youtube">You Tube</span>&nbsp;
       </a>
     </div>
-    <div class="span3">
-      <a href="#" class="btn btn-large btn-block">
-        <span class="icon-thumbs-up">Default Button</span>
+    <div class="span4">
+      <a target="_blank" href="http://soundcloud.com/nu-minor" class="nav-soundcloud btn btn-large btn-block">
+        <span class="icon-thumbs-up">SoundCloud</span>&nbsp;
       </a>
     </div>
-    <div class="span3">
-      <a href="#" class="btn btn-large btn-block btn-primary">Primary Button</a>
+    <div class="span4">
+      <a // href="http://connpass.com/"
+        class="nav-schedule btn btn-large btn-block">
+        <span class="icon-thumbs-up">Schedule</span>&nbsp;
+      </a>
     </div>
-    <div class="span3">
-      <a href="#" class="btn btn-large btn-block btn-info">Info Button</a>
-    </div>
+    // <div class="span3">
+    //   <a href="#" class="btn btn-large btn-block btn-primary">Primary Button</a>
+    // </div>
+    // <div class="span3">
+    //   <a href="#" class="btn btn-large btn-block btn-info">Info Button</a>
+    // </div>
   </div>
 {/template}

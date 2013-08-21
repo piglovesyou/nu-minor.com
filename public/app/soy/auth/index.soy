@@ -51,10 +51,10 @@
       {call .authlayout}
         {param body}
           <div class="span6" style="text-align: center;">
-            <h2>You completely logged out.</h2>
+            <h2>完全にログアウトしました。</h2>
           </div>
           <a href="/" class="span4 offset1 btn btn-large">
-            Back to top page
+            トップページに戻る
           </a>
         {/param}
       {/call}
@@ -67,11 +67,13 @@
  */
 {template .authlayout}
   <div class="container" style="width:480px">
-    {call app.soy.head.title}
-      {param isAuthed: false /}
-      {param useFollowButton: false /}
-      {param twitter: [] /}
-    {/call}
+    <div class="app-head">
+      {call app.soy.head.title}
+        {param isAuthed: false /}
+        {param useFollowButton: false /}
+        {param twitter: [] /}
+      {/call}
+    </div>
     <div class="row">
       {$body|noescape}
     </div>

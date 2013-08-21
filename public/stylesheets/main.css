@@ -483,11 +483,12 @@ em {
 cite {
   font-style: normal; }
 
-.muted {
+.muted, .nav-schedule, .nav-schedule:hover {
   color: #999999; }
 
-a.muted:hover,
-a.muted:focus {
+a.muted:hover, a.nav-schedule:hover,
+a.muted:focus,
+a.nav-schedule:focus {
   color: gray; }
 
 .text-warning {
@@ -1763,7 +1764,8 @@ table th[class*="span"],
 .table-hover tbody tr.info:hover > td {
   background-color: #c4e3f3; }
 
-[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before,
+[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before, .app-menu [class^="nav-"]:hover:after,
+.app-menu [class*=" nav-"]:hover:after,
 [class*=" icon-"] {
   display: inline-block;
   width: 14px;
@@ -1782,41 +1784,59 @@ table th[class*="span"],
 .app-item-twitter .nav-pills > .active > a > .app-item-twitter-inner:after,
 .nav-pills > .active > a > .app-dialog-title-close:before,
 .nav-pills > .active > a > .app-message-close:before,
+.app-menu .nav-pills > .active > a > [class^="nav-"]:hover:after,
+.app-menu .nav-pills > .active > a > [class*=" nav-"]:hover:after,
 .nav-pills > .active > a > [class*=" icon-"],
 .nav-list > .active > a > [class^="icon-"],
 .app-item-twitter .nav-list > .active > a > .app-item-twitter-inner:after,
 .nav-list > .active > a > .app-dialog-title-close:before,
 .nav-list > .active > a > .app-message-close:before,
+.app-menu .nav-list > .active > a > [class^="nav-"]:hover:after,
+.app-menu .nav-list > .active > a > [class*=" nav-"]:hover:after,
 .nav-list > .active > a > [class*=" icon-"],
 .navbar-inverse .nav > .active > a > [class^="icon-"],
 .navbar-inverse .app-item-twitter .nav > .active > a > .app-item-twitter-inner:after,
 .app-item-twitter .navbar-inverse .nav > .active > a > .app-item-twitter-inner:after,
 .navbar-inverse .nav > .active > a > .app-dialog-title-close:before,
 .navbar-inverse .nav > .active > a > .app-message-close:before,
+.navbar-inverse .app-menu .nav > .active > a > [class^="nav-"]:hover:after,
+.app-menu .navbar-inverse .nav > .active > a > [class^="nav-"]:hover:after,
+.navbar-inverse .app-menu .nav > .active > a > [class*=" nav-"]:hover:after,
+.app-menu .navbar-inverse .nav > .active > a > [class*=" nav-"]:hover:after,
 .navbar-inverse .nav > .active > a > [class*=" icon-"],
 .dropdown-menu > li > a:hover > [class^="icon-"],
 .app-item-twitter .dropdown-menu > li > a:hover > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:hover > .app-dialog-title-close:before,
 .dropdown-menu > li > a:hover > .app-message-close:before,
+.app-menu .dropdown-menu > li > a:hover > [class^="nav-"]:hover:after,
+.app-menu .dropdown-menu > li > a:hover > [class*=" nav-"]:hover:after,
 .dropdown-menu > li > a:focus > [class^="icon-"],
 .app-item-twitter .dropdown-menu > li > a:focus > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:focus > .app-dialog-title-close:before,
 .dropdown-menu > li > a:focus > .app-message-close:before,
+.app-menu .dropdown-menu > li > a:focus > [class^="nav-"]:hover:after,
+.app-menu .dropdown-menu > li > a:focus > [class*=" nav-"]:hover:after,
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > li > a:focus > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .app-item-twitter .dropdown-menu > .active > a > .app-item-twitter-inner:after,
 .dropdown-menu > .active > a > .app-dialog-title-close:before,
 .dropdown-menu > .active > a > .app-message-close:before,
+.app-menu .dropdown-menu > .active > a > [class^="nav-"]:hover:after,
+.app-menu .dropdown-menu > .active > a > [class*=" nav-"]:hover:after,
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .app-item-twitter .dropdown-submenu:hover > a > .app-item-twitter-inner:after,
 .dropdown-submenu:hover > a > .app-dialog-title-close:before,
 .dropdown-submenu:hover > a > .app-message-close:before,
+.app-menu .dropdown-submenu:hover > a > [class^="nav-"]:hover:after,
+.app-menu .dropdown-submenu:hover > a > [class*=" nav-"]:hover:after,
 .dropdown-submenu:focus > a > [class^="icon-"],
 .app-item-twitter .dropdown-submenu:focus > a > .app-item-twitter-inner:after,
 .dropdown-submenu:focus > a > .app-dialog-title-close:before,
 .dropdown-submenu:focus > a > .app-message-close:before,
+.app-menu .dropdown-submenu:focus > a > [class^="nav-"]:hover:after,
+.app-menu .dropdown-submenu:focus > a > [class*=" nav-"]:hover:after,
 .dropdown-submenu:hover > a > [class*=" icon-"],
 .dropdown-submenu:focus > a > [class*=" icon-"] {
   background-image: url("../img/glyphicons-halflings-white.png"); }
@@ -2587,7 +2607,9 @@ button.close, button.app-dialog-title-close:before, button.app-message-close:bef
   -moz-border-radius: 6px;
   border-radius: 6px; }
 
-.btn-large [class^="icon-"], .btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-large .app-item-twitter-inner:after, .btn-large .app-dialog-title-close:before, .btn-large .app-message-close:before,
+.btn-large [class^="icon-"], .btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-large .app-item-twitter-inner:after, .btn-large .app-dialog-title-close:before, .btn-large .app-message-close:before, .btn-large .app-menu [class^="nav-"]:hover:after, .app-menu .btn-large [class^="nav-"]:hover:after,
+.btn-large .app-menu [class*=" nav-"]:hover:after,
+.app-menu .btn-large [class*=" nav-"]:hover:after,
 .btn-large [class*=" icon-"] {
   margin-top: 4px; }
 
@@ -2598,11 +2620,15 @@ button.close, button.app-dialog-title-close:before, button.app-message-close:bef
   -moz-border-radius: 3px;
   border-radius: 3px; }
 
-.btn-small [class^="icon-"], .btn-small .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-small .app-item-twitter-inner:after, .btn-small .app-dialog-title-close:before, .btn-small .app-message-close:before,
+.btn-small [class^="icon-"], .btn-small .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-small .app-item-twitter-inner:after, .btn-small .app-dialog-title-close:before, .btn-small .app-message-close:before, .btn-small .app-menu [class^="nav-"]:hover:after, .app-menu .btn-small [class^="nav-"]:hover:after,
+.btn-small .app-menu [class*=" nav-"]:hover:after,
+.app-menu .btn-small [class*=" nav-"]:hover:after,
 .btn-small [class*=" icon-"] {
   margin-top: 0; }
 
-.btn-mini [class^="icon-"], .btn-mini .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-mini .app-item-twitter-inner:after, .btn-mini .app-dialog-title-close:before, .btn-mini .app-message-close:before,
+.btn-mini [class^="icon-"], .btn-mini .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn-mini .app-item-twitter-inner:after, .btn-mini .app-dialog-title-close:before, .btn-mini .app-message-close:before, .btn-mini .app-menu [class^="nav-"]:hover:after, .app-menu .btn-mini [class^="nav-"]:hover:after,
+.btn-mini .app-menu [class*=" nav-"]:hover:after,
+.app-menu .btn-mini [class*=" nav-"]:hover:after,
 .btn-mini [class*=" icon-"] {
   margin-top: -1px; }
 
@@ -3149,7 +3175,9 @@ input[type="submit"].btn {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
   background-color: #0088cc; }
 
-.nav-list [class^="icon-"], .nav-list .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-list .app-item-twitter-inner:after, .nav-list .app-dialog-title-close:before, .nav-list .app-message-close:before,
+.nav-list [class^="icon-"], .nav-list .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-list .app-item-twitter-inner:after, .nav-list .app-dialog-title-close:before, .nav-list .app-message-close:before, .nav-list .app-menu [class^="nav-"]:hover:after, .app-menu .nav-list [class^="nav-"]:hover:after,
+.nav-list .app-menu [class*=" nav-"]:hover:after,
+.app-menu .nav-list [class*=" nav-"]:hover:after,
 .nav-list [class*=" icon-"] {
   margin-right: 2px; }
 
@@ -7478,7 +7506,8 @@ body.vjs-full-window {
 
 /* FONT AWESOME CORE
  * -------------------------- */
-[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before,
+[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before, .app-menu [class^="nav-"]:hover:after,
+.app-menu [class*=" nav-"]:hover:after,
 [class*=" icon-"] {
   font-family: FontAwesome;
   font-weight: normal;
@@ -7487,7 +7516,8 @@ body.vjs-full-window {
   -webkit-font-smoothing: antialiased;
   *margin-right: .3em; }
 
-[class^="icon-"]:before, .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before,
+[class^="icon-"]:before, .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before, .app-menu [class^="nav-"]:hover:after,
+.app-menu [class*=" nav-"]:hover:after,
 [class*=" icon-"]:before {
   text-decoration: inherit;
   display: inline-block;
@@ -7499,18 +7529,22 @@ body.vjs-full-window {
   font-size: 1.33333em; }
 
 /* makes sure icons active on rollover in links */
-a [class^="icon-"], a .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter a .app-item-twitter-inner:after, a .app-dialog-title-close:before, a .app-message-close:before,
+a [class^="icon-"], a .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter a .app-item-twitter-inner:after, a .app-dialog-title-close:before, a .app-message-close:before, a .app-menu [class^="nav-"]:hover:after, .app-menu a [class^="nav-"]:hover:after,
+a .app-menu [class*=" nav-"]:hover:after,
+.app-menu a [class*=" nav-"]:hover:after,
 a [class*=" icon-"] {
   display: inline; }
 
 /* increased font size for icon-large */
-[class^="icon-"].icon-fixed-width, .app-item-twitter .icon-fixed-width.app-item-twitter-inner:after, .icon-fixed-width.app-dialog-title-close:before, .icon-fixed-width.app-message-close:before,
+[class^="icon-"].icon-fixed-width, .app-item-twitter .icon-fixed-width.app-item-twitter-inner:after, .icon-fixed-width.app-dialog-title-close:before, .icon-fixed-width.app-message-close:before, .app-menu .icon-fixed-width[class^="nav-"]:hover:after,
+.app-menu .icon-fixed-width[class*=" nav-"]:hover:after,
 [class*=" icon-"].icon-fixed-width {
   display: inline-block;
   width: 1.14286em;
   text-align: right;
   padding-right: 0.28571em; }
-  [class^="icon-"].icon-fixed-width.icon-large, .app-item-twitter .icon-fixed-width.icon-large.app-item-twitter-inner:after, .icon-fixed-width.icon-large.app-dialog-title-close:before, .icon-fixed-width.icon-large.app-message-close:before,
+  [class^="icon-"].icon-fixed-width.icon-large, .app-item-twitter .icon-fixed-width.icon-large.app-item-twitter-inner:after, .icon-fixed-width.icon-large.app-dialog-title-close:before, .icon-fixed-width.icon-large.app-message-close:before, .app-menu .icon-fixed-width.icon-large[class^="nav-"]:hover:after,
+  .app-menu .icon-fixed-width.icon-large[class*=" nav-"]:hover:after,
   [class*=" icon-"].icon-fixed-width.icon-large {
     width: 1.42857em; }
 
@@ -7526,7 +7560,8 @@ a [class*=" icon-"] {
     text-align: center;
     line-height: inherit; }
 
-[class^="icon-"].hide, .app-item-twitter .hide.app-item-twitter-inner:after, .hide.app-dialog-title-close:before, .hide.app-message-close:before,
+[class^="icon-"].hide, .app-item-twitter .hide.app-item-twitter-inner:after, .hide.app-dialog-title-close:before, .hide.app-message-close:before, .app-menu .hide[class^="nav-"]:hover:after,
+.app-menu .hide[class*=" nav-"]:hover:after,
 [class*=" icon-"].hide {
   display: none; }
 
@@ -7584,17 +7619,20 @@ a [class*=" icon-"] {
 .pull-left {
   float: left; }
 
-[class^="icon-"].pull-left, .app-item-twitter .pull-left.app-item-twitter-inner:after, .pull-left.app-dialog-title-close:before, .pull-left.app-message-close:before,
+[class^="icon-"].pull-left, .app-item-twitter .pull-left.app-item-twitter-inner:after, .pull-left.app-dialog-title-close:before, .pull-left.app-message-close:before, .app-menu .pull-left[class^="nav-"]:hover:after,
+.app-menu .pull-left[class*=" nav-"]:hover:after,
 [class*=" icon-"].pull-left {
   margin-right: .3em; }
-[class^="icon-"].pull-right, .app-item-twitter .pull-right.app-item-twitter-inner:after, .pull-right.app-dialog-title-close:before, .pull-right.app-message-close:before,
+[class^="icon-"].pull-right, .app-item-twitter .pull-right.app-item-twitter-inner:after, .pull-right.app-dialog-title-close:before, .pull-right.app-message-close:before, .app-menu .pull-right[class^="nav-"]:hover:after,
+.app-menu .pull-right[class*=" nav-"]:hover:after,
 [class*=" icon-"].pull-right {
   margin-left: .3em; }
 
 /* BOOTSTRAP SPECIFIC CLASSES
  * -------------------------- */
 /* Bootstrap 2.0 sprites.less reset */
-[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before,
+[class^="icon-"], .app-item-twitter .app-item-twitter-inner:after, .app-dialog-title-close:before, .app-message-close:before, .app-menu [class^="nav-"]:hover:after,
+.app-menu [class*=" nav-"]:hover:after,
 [class*=" icon-"] {
   display: inline;
   width: auto;
@@ -7612,93 +7650,169 @@ a [class*=" icon-"] {
 .app-item-twitter .nav-pills > .active > a > .app-item-twitter-inner:after,
 .nav-pills > .active > a > .app-dialog-title-close:before,
 .nav-pills > .active > a > .app-message-close:before,
+.app-menu .nav-pills > .active > a > [class^="nav-"]:hover:after,
+.app-menu .nav-pills > .active > a > [class*=" nav-"]:hover:after,
 .nav-pills > .active > a > [class*=" icon-"],
 .nav-list > .active > a > [class^="icon-"],
 .app-item-twitter .nav-list > .active > a > .app-item-twitter-inner:after,
 .nav-list > .active > a > .app-dialog-title-close:before,
 .nav-list > .active > a > .app-message-close:before,
+.app-menu .nav-list > .active > a > [class^="nav-"]:hover:after,
+.app-menu .nav-list > .active > a > [class*=" nav-"]:hover:after,
 .nav-list > .active > a > [class*=" icon-"],
 .navbar-inverse .nav > .active > a > [class^="icon-"],
 .navbar-inverse .app-item-twitter .nav > .active > a > .app-item-twitter-inner:after,
 .app-item-twitter .navbar-inverse .nav > .active > a > .app-item-twitter-inner:after,
 .navbar-inverse .nav > .active > a > .app-dialog-title-close:before,
 .navbar-inverse .nav > .active > a > .app-message-close:before,
+.navbar-inverse .app-menu .nav > .active > a > [class^="nav-"]:hover:after,
+.app-menu .navbar-inverse .nav > .active > a > [class^="nav-"]:hover:after,
+.navbar-inverse .app-menu .nav > .active > a > [class*=" nav-"]:hover:after,
+.app-menu .navbar-inverse .nav > .active > a > [class*=" nav-"]:hover:after,
 .navbar-inverse .nav > .active > a > [class*=" icon-"],
 .dropdown-menu > li > a:hover > [class^="icon-"],
 .app-item-twitter .dropdown-menu > li > a:hover > .app-item-twitter-inner:after,
 .dropdown-menu > li > a:hover > .app-dialog-title-close:before,
 .dropdown-menu > li > a:hover > .app-message-close:before,
+.app-menu .dropdown-menu > li > a:hover > [class^="nav-"]:hover:after,
+.app-menu .dropdown-menu > li > a:hover > [class*=" nav-"]:hover:after,
 .dropdown-menu > li > a:hover > [class*=" icon-"],
 .dropdown-menu > .active > a > [class^="icon-"],
 .app-item-twitter .dropdown-menu > .active > a > .app-item-twitter-inner:after,
 .dropdown-menu > .active > a > .app-dialog-title-close:before,
 .dropdown-menu > .active > a > .app-message-close:before,
+.app-menu .dropdown-menu > .active > a > [class^="nav-"]:hover:after,
+.app-menu .dropdown-menu > .active > a > [class*=" nav-"]:hover:after,
 .dropdown-menu > .active > a > [class*=" icon-"],
 .dropdown-submenu:hover > a > [class^="icon-"],
 .app-item-twitter .dropdown-submenu:hover > a > .app-item-twitter-inner:after,
 .dropdown-submenu:hover > a > .app-dialog-title-close:before,
 .dropdown-submenu:hover > a > .app-message-close:before,
+.app-menu .dropdown-submenu:hover > a > [class^="nav-"]:hover:after,
+.app-menu .dropdown-submenu:hover > a > [class*=" nav-"]:hover:after,
 .dropdown-submenu:hover > a > [class*=" icon-"] {
   background-image: none; }
 
 /* keeps Bootstrap styles with and without icons the same */
-.btn [class^="icon-"].icon-large, .app-dialog-buttons button [class^="icon-"].icon-large, .btn .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-large.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-large.app-item-twitter-inner:after, .btn .icon-large.app-dialog-title-close:before, .app-dialog-buttons button .icon-large.app-dialog-title-close:before, .btn .icon-large.app-message-close:before, .app-dialog-buttons button .icon-large.app-message-close:before,
+.btn [class^="icon-"].icon-large, .app-dialog-buttons button [class^="icon-"].icon-large, .btn .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-large.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-large.app-item-twitter-inner:after, .btn .icon-large.app-dialog-title-close:before, .app-dialog-buttons button .icon-large.app-dialog-title-close:before, .btn .icon-large.app-message-close:before, .app-dialog-buttons button .icon-large.app-message-close:before, .btn .app-menu .icon-large[class^="nav-"]:hover:after, .app-menu .btn .icon-large[class^="nav-"]:hover:after, .app-dialog-buttons button .app-menu .icon-large[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button .icon-large[class^="nav-"]:hover:after,
+.btn .app-menu .icon-large[class*=" nav-"]:hover:after,
+.app-menu .btn .icon-large[class*=" nav-"]:hover:after,
+.app-dialog-buttons button .app-menu .icon-large[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button .icon-large[class*=" nav-"]:hover:after,
 .btn [class*=" icon-"].icon-large,
-.app-dialog-buttons button [class*=" icon-"].icon-large, .nav [class^="icon-"].icon-large, .nav .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav .icon-large.app-item-twitter-inner:after, .nav .icon-large.app-dialog-title-close:before, .nav .icon-large.app-message-close:before,
+.app-dialog-buttons button [class*=" icon-"].icon-large, .nav [class^="icon-"].icon-large, .nav .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav .icon-large.app-item-twitter-inner:after, .nav .icon-large.app-dialog-title-close:before, .nav .icon-large.app-message-close:before, .nav .app-menu .icon-large[class^="nav-"]:hover:after, .app-menu .nav .icon-large[class^="nav-"]:hover:after,
+.nav .app-menu .icon-large[class*=" nav-"]:hover:after,
+.app-menu .nav .icon-large[class*=" nav-"]:hover:after,
 .nav [class*=" icon-"].icon-large {
   line-height: .9em; }
-.btn [class^="icon-"].icon-spin, .app-dialog-buttons button [class^="icon-"].icon-spin, .btn .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-spin.app-item-twitter-inner:after, .btn .icon-spin.app-dialog-title-close:before, .app-dialog-buttons button .icon-spin.app-dialog-title-close:before, .btn .icon-spin.app-message-close:before, .app-dialog-buttons button .icon-spin.app-message-close:before,
+.btn [class^="icon-"].icon-spin, .app-dialog-buttons button [class^="icon-"].icon-spin, .btn .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-spin.app-item-twitter-inner:after, .btn .icon-spin.app-dialog-title-close:before, .app-dialog-buttons button .icon-spin.app-dialog-title-close:before, .btn .icon-spin.app-message-close:before, .app-dialog-buttons button .icon-spin.app-message-close:before, .btn .app-menu .icon-spin[class^="nav-"]:hover:after, .app-menu .btn .icon-spin[class^="nav-"]:hover:after, .app-dialog-buttons button .app-menu .icon-spin[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button .icon-spin[class^="nav-"]:hover:after,
+.btn .app-menu .icon-spin[class*=" nav-"]:hover:after,
+.app-menu .btn .icon-spin[class*=" nav-"]:hover:after,
+.app-dialog-buttons button .app-menu .icon-spin[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button .icon-spin[class*=" nav-"]:hover:after,
 .btn [class*=" icon-"].icon-spin,
-.app-dialog-buttons button [class*=" icon-"].icon-spin, .nav [class^="icon-"].icon-spin, .nav .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .nav .icon-spin.app-item-twitter-inner:after, .nav .icon-spin.app-dialog-title-close:before, .nav .icon-spin.app-message-close:before,
+.app-dialog-buttons button [class*=" icon-"].icon-spin, .nav [class^="icon-"].icon-spin, .nav .app-item-twitter .icon-spin.app-item-twitter-inner:after, .app-item-twitter .nav .icon-spin.app-item-twitter-inner:after, .nav .icon-spin.app-dialog-title-close:before, .nav .icon-spin.app-message-close:before, .nav .app-menu .icon-spin[class^="nav-"]:hover:after, .app-menu .nav .icon-spin[class^="nav-"]:hover:after,
+.nav .app-menu .icon-spin[class*=" nav-"]:hover:after,
+.app-menu .nav .icon-spin[class*=" nav-"]:hover:after,
 .nav [class*=" icon-"].icon-spin {
   display: inline-block; }
 
-.nav-tabs [class^="icon-"], .nav-tabs .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-tabs .app-item-twitter-inner:after, .nav-tabs .app-dialog-title-close:before, .nav-tabs .app-message-close:before, .nav-tabs [class^="icon-"].icon-large, .nav-tabs .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-tabs .icon-large.app-item-twitter-inner:after, .nav-tabs .icon-large.app-dialog-title-close:before, .nav-tabs .icon-large.app-message-close:before,
+.nav-tabs [class^="icon-"], .nav-tabs .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-tabs .app-item-twitter-inner:after, .nav-tabs .app-dialog-title-close:before, .nav-tabs .app-message-close:before, .nav-tabs .app-menu [class^="nav-"]:hover:after, .app-menu .nav-tabs [class^="nav-"]:hover:after,
+.nav-tabs .app-menu [class*=" nav-"]:hover:after,
+.app-menu .nav-tabs [class*=" nav-"]:hover:after, .nav-tabs [class^="icon-"].icon-large, .nav-tabs .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-tabs .icon-large.app-item-twitter-inner:after, .nav-tabs .icon-large.app-dialog-title-close:before, .nav-tabs .icon-large.app-message-close:before, .nav-tabs .app-menu .icon-large[class^="nav-"]:hover:after, .app-menu .nav-tabs .icon-large[class^="nav-"]:hover:after,
+.nav-tabs .app-menu .icon-large[class*=" nav-"]:hover:after,
+.app-menu .nav-tabs .icon-large[class*=" nav-"]:hover:after,
 .nav-tabs [class*=" icon-"],
-.nav-tabs [class*=" icon-"].icon-large, .nav-pills [class^="icon-"], .nav-pills .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-pills .app-item-twitter-inner:after, .nav-pills .app-dialog-title-close:before, .nav-pills .app-message-close:before, .nav-pills [class^="icon-"].icon-large, .nav-pills .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-pills .icon-large.app-item-twitter-inner:after, .nav-pills .icon-large.app-dialog-title-close:before, .nav-pills .icon-large.app-message-close:before,
+.nav-tabs [class*=" icon-"].icon-large, .nav-pills [class^="icon-"], .nav-pills .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-pills .app-item-twitter-inner:after, .nav-pills .app-dialog-title-close:before, .nav-pills .app-message-close:before, .nav-pills .app-menu [class^="nav-"]:hover:after, .app-menu .nav-pills [class^="nav-"]:hover:after,
+.nav-pills .app-menu [class*=" nav-"]:hover:after,
+.app-menu .nav-pills [class*=" nav-"]:hover:after, .nav-pills [class^="icon-"].icon-large, .nav-pills .app-item-twitter .icon-large.app-item-twitter-inner:after, .app-item-twitter .nav-pills .icon-large.app-item-twitter-inner:after, .nav-pills .icon-large.app-dialog-title-close:before, .nav-pills .icon-large.app-message-close:before, .nav-pills .app-menu .icon-large[class^="nav-"]:hover:after, .app-menu .nav-pills .icon-large[class^="nav-"]:hover:after,
+.nav-pills .app-menu .icon-large[class*=" nav-"]:hover:after,
+.app-menu .nav-pills .icon-large[class*=" nav-"]:hover:after,
 .nav-pills [class*=" icon-"],
 .nav-pills [class*=" icon-"].icon-large {
   line-height: .9em; }
 
-.btn [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button [class^="icon-"].pull-left.icon-2x, .btn .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .pull-left.icon-2x.app-item-twitter-inner:after, .btn .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button .pull-left.icon-2x.app-dialog-title-close:before, .btn .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button .pull-left.icon-2x.app-message-close:before, .btn [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button [class^="icon-"].pull-right.icon-2x, .btn .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .pull-right.icon-2x.app-item-twitter-inner:after, .btn .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button .pull-right.icon-2x.app-dialog-title-close:before, .btn .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button .pull-right.icon-2x.app-message-close:before,
+.btn [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button [class^="icon-"].pull-left.icon-2x, .btn .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .pull-left.icon-2x.app-item-twitter-inner:after, .btn .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button .pull-left.icon-2x.app-dialog-title-close:before, .btn .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button .pull-left.icon-2x.app-message-close:before, .btn .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .btn .pull-left.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button .pull-left.icon-2x[class^="nav-"]:hover:after,
+.btn .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .btn .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-dialog-buttons button .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button .pull-left.icon-2x[class*=" nav-"]:hover:after, .btn [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button [class^="icon-"].pull-right.icon-2x, .btn .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .pull-right.icon-2x.app-item-twitter-inner:after, .btn .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button .pull-right.icon-2x.app-dialog-title-close:before, .btn .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button .pull-right.icon-2x.app-message-close:before, .btn .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .btn .pull-right.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button .pull-right.icon-2x[class^="nav-"]:hover:after,
+.btn .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .btn .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-dialog-buttons button .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button .pull-right.icon-2x[class*=" nav-"]:hover:after,
 .btn [class*=" icon-"].pull-left.icon-2x,
 .app-dialog-buttons button [class*=" icon-"].pull-left.icon-2x,
 .btn [class*=" icon-"].pull-right.icon-2x,
 .app-dialog-buttons button [class*=" icon-"].pull-right.icon-2x {
   margin-top: .18em; }
-.btn [class^="icon-"].icon-spin.icon-large, .app-dialog-buttons button [class^="icon-"].icon-spin.icon-large, .btn .app-item-twitter .icon-spin.icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.icon-large.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-spin.icon-large.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-spin.icon-large.app-item-twitter-inner:after, .btn .icon-spin.icon-large.app-dialog-title-close:before, .app-dialog-buttons button .icon-spin.icon-large.app-dialog-title-close:before, .btn .icon-spin.icon-large.app-message-close:before, .app-dialog-buttons button .icon-spin.icon-large.app-message-close:before,
+.btn [class^="icon-"].icon-spin.icon-large, .app-dialog-buttons button [class^="icon-"].icon-spin.icon-large, .btn .app-item-twitter .icon-spin.icon-large.app-item-twitter-inner:after, .app-item-twitter .btn .icon-spin.icon-large.app-item-twitter-inner:after, .app-dialog-buttons button .app-item-twitter .icon-spin.icon-large.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button .icon-spin.icon-large.app-item-twitter-inner:after, .btn .icon-spin.icon-large.app-dialog-title-close:before, .app-dialog-buttons button .icon-spin.icon-large.app-dialog-title-close:before, .btn .icon-spin.icon-large.app-message-close:before, .app-dialog-buttons button .icon-spin.icon-large.app-message-close:before, .btn .app-menu .icon-spin.icon-large[class^="nav-"]:hover:after, .app-menu .btn .icon-spin.icon-large[class^="nav-"]:hover:after, .app-dialog-buttons button .app-menu .icon-spin.icon-large[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button .icon-spin.icon-large[class^="nav-"]:hover:after,
+.btn .app-menu .icon-spin.icon-large[class*=" nav-"]:hover:after,
+.app-menu .btn .icon-spin.icon-large[class*=" nav-"]:hover:after,
+.app-dialog-buttons button .app-menu .icon-spin.icon-large[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button .icon-spin.icon-large[class*=" nav-"]:hover:after,
 .btn [class*=" icon-"].icon-spin.icon-large,
 .app-dialog-buttons button [class*=" icon-"].icon-spin.icon-large {
   line-height: .8em; }
 
-.btn.btn-small [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-small [class^="icon-"].pull-left.icon-2x, .btn.btn-small .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-small .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-small .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-small .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-message-close:before, .btn.btn-small [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-small [class^="icon-"].pull-right.icon-2x, .btn.btn-small .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-small .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-small .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-small .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-message-close:before,
+.btn.btn-small [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-small [class^="icon-"].pull-left.icon-2x, .btn.btn-small .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-small .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-small .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-small .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-small .pull-left.icon-2x.app-message-close:before, .btn.btn-small .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-small .pull-left.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-small .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-small .pull-left.icon-2x[class^="nav-"]:hover:after,
+.btn.btn-small .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .btn.btn-small .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-dialog-buttons button.btn-small .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button.btn-small .pull-left.icon-2x[class*=" nav-"]:hover:after, .btn.btn-small [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-small [class^="icon-"].pull-right.icon-2x, .btn.btn-small .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-small .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-small .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-small .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-small .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-small .pull-right.icon-2x.app-message-close:before, .btn.btn-small .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-small .pull-right.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-small .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-small .pull-right.icon-2x[class^="nav-"]:hover:after,
+.btn.btn-small .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .btn.btn-small .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-dialog-buttons button.btn-small .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button.btn-small .pull-right.icon-2x[class*=" nav-"]:hover:after,
 .btn.btn-small [class*=" icon-"].pull-left.icon-2x,
 .app-dialog-buttons button.btn-small [class*=" icon-"].pull-left.icon-2x,
 .btn.btn-small [class*=" icon-"].pull-right.icon-2x,
 .app-dialog-buttons button.btn-small [class*=" icon-"].pull-right.icon-2x {
   margin-top: .25em; }
 
-.btn.btn-large [class^="icon-"], .app-dialog-buttons button.btn-large [class^="icon-"], .btn.btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .app-item-twitter-inner:after, .btn.btn-large .app-dialog-title-close:before, .app-dialog-buttons button.btn-large .app-dialog-title-close:before, .btn.btn-large .app-message-close:before, .app-dialog-buttons button.btn-large .app-message-close:before,
+.btn.btn-large [class^="icon-"], .app-dialog-buttons button.btn-large [class^="icon-"], .btn.btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .app-item-twitter-inner:after, .btn.btn-large .app-dialog-title-close:before, .app-dialog-buttons button.btn-large .app-dialog-title-close:before, .btn.btn-large .app-message-close:before, .app-dialog-buttons button.btn-large .app-message-close:before, .btn.btn-large .app-menu [class^="nav-"]:hover:after, .app-menu .btn.btn-large [class^="nav-"]:hover:after, .app-dialog-buttons button.btn-large .app-menu [class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-large [class^="nav-"]:hover:after,
+.btn.btn-large .app-menu [class*=" nav-"]:hover:after,
+.app-menu .btn.btn-large [class*=" nav-"]:hover:after,
+.app-dialog-buttons button.btn-large .app-menu [class*=" nav-"]:hover:after,
+.app-menu .app-dialog-buttons button.btn-large [class*=" nav-"]:hover:after,
 .btn.btn-large [class*=" icon-"],
 .app-dialog-buttons button.btn-large [class*=" icon-"] {
   margin-top: 0; }
-  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-message-close:before, .btn.btn-large [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-message-close:before,
+  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-message-close:before, .btn.btn-large .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-large .pull-left.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-large .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-large .pull-left.icon-2x[class^="nav-"]:hover:after,
+  .btn.btn-large .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .btn.btn-large .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-dialog-buttons button.btn-large .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .app-dialog-buttons button.btn-large .pull-left.icon-2x[class*=" nav-"]:hover:after, .btn.btn-large [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-message-close:before, .btn.btn-large .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-large .pull-right.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-large .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-large .pull-right.icon-2x[class^="nav-"]:hover:after,
+  .btn.btn-large .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .btn.btn-large .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-dialog-buttons button.btn-large .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .app-dialog-buttons button.btn-large .pull-right.icon-2x[class*=" nav-"]:hover:after,
   .btn.btn-large [class*=" icon-"].pull-left.icon-2x,
   .app-dialog-buttons button.btn-large [class*=" icon-"].pull-left.icon-2x,
   .btn.btn-large [class*=" icon-"].pull-right.icon-2x,
   .app-dialog-buttons button.btn-large [class*=" icon-"].pull-right.icon-2x {
     margin-top: .05em; }
-  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-message-close:before,
+  .btn.btn-large [class^="icon-"].pull-left.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-left.icon-2x, .btn.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-left.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-left.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-left.icon-2x.app-message-close:before, .btn.btn-large .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-large .pull-left.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-large .app-menu .pull-left.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-large .pull-left.icon-2x[class^="nav-"]:hover:after,
+  .btn.btn-large .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .btn.btn-large .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-dialog-buttons button.btn-large .app-menu .pull-left.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .app-dialog-buttons button.btn-large .pull-left.icon-2x[class*=" nav-"]:hover:after,
   .btn.btn-large [class*=" icon-"].pull-left.icon-2x,
   .app-dialog-buttons button.btn-large [class*=" icon-"].pull-left.icon-2x {
     margin-right: .2em; }
-  .btn.btn-large [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-message-close:before,
+  .btn.btn-large [class^="icon-"].pull-right.icon-2x, .app-dialog-buttons button.btn-large [class^="icon-"].pull-right.icon-2x, .btn.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .btn.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .app-dialog-buttons button.btn-large .app-item-twitter .pull-right.icon-2x.app-item-twitter-inner:after, .app-item-twitter .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-item-twitter-inner:after, .btn.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-dialog-title-close:before, .btn.btn-large .pull-right.icon-2x.app-message-close:before, .app-dialog-buttons button.btn-large .pull-right.icon-2x.app-message-close:before, .btn.btn-large .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .btn.btn-large .pull-right.icon-2x[class^="nav-"]:hover:after, .app-dialog-buttons button.btn-large .app-menu .pull-right.icon-2x[class^="nav-"]:hover:after, .app-menu .app-dialog-buttons button.btn-large .pull-right.icon-2x[class^="nav-"]:hover:after,
+  .btn.btn-large .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .btn.btn-large .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-dialog-buttons button.btn-large .app-menu .pull-right.icon-2x[class*=" nav-"]:hover:after,
+  .app-menu .app-dialog-buttons button.btn-large .pull-right.icon-2x[class*=" nav-"]:hover:after,
   .btn.btn-large [class*=" icon-"].pull-right.icon-2x,
   .app-dialog-buttons button.btn-large [class*=" icon-"].pull-right.icon-2x {
     margin-left: .2em; }
 
 /* Fixes alignment in nav lists */
-.nav-list [class^="icon-"], .nav-list .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-list .app-item-twitter-inner:after, .nav-list .app-dialog-title-close:before, .nav-list .app-message-close:before,
+.nav-list [class^="icon-"], .nav-list .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .nav-list .app-item-twitter-inner:after, .nav-list .app-dialog-title-close:before, .nav-list .app-message-close:before, .nav-list .app-menu [class^="nav-"]:hover:after, .app-menu .nav-list [class^="nav-"]:hover:after,
+.nav-list .app-menu [class*=" nav-"]:hover:after,
+.app-menu .nav-list [class*=" nav-"]:hover:after,
 .nav-list [class*=" icon-"] {
   line-height: inherit; }
 
@@ -7712,7 +7826,9 @@ a [class*=" icon-"] {
   height: 2em;
   line-height: 2em;
   vertical-align: -35%; }
-  .icon-stack [class^="icon-"], .icon-stack .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .icon-stack .app-item-twitter-inner:after, .icon-stack .app-dialog-title-close:before, .icon-stack .app-message-close:before,
+  .icon-stack [class^="icon-"], .icon-stack .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .icon-stack .app-item-twitter-inner:after, .icon-stack .app-dialog-title-close:before, .icon-stack .app-message-close:before, .icon-stack .app-menu [class^="nav-"]:hover:after, .app-menu .icon-stack [class^="nav-"]:hover:after,
+  .icon-stack .app-menu [class*=" nav-"]:hover:after,
+  .app-menu .icon-stack [class*=" nav-"]:hover:after,
   .icon-stack [class*=" icon-"] {
     display: block;
     text-align: center;
@@ -8227,7 +8343,8 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 .icon-pushpin:before {
   content: "\f08d"; }
 
-.icon-external-link:before {
+.icon-external-link:before, .app-menu [class^="nav-"]:hover:after,
+.app-menu [class*=" nav-"]:hover:after {
   content: "\f08e"; }
 
 .icon-signin:before {
@@ -8940,16 +9057,12 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
   -o-user-select: none;
   user-select: none; }
 
-.muted {
+.muted, .nav-schedule, .nav-schedule:hover {
   color: inherit;
   opacity: 0.6; }
 
 .app-head {
-  width: 940px;
-  padding-top: 40px;
-  background: white;
-  position: fixed;
-  z-index: 1; }
+  padding-top: 40px; }
   .app-head:after {
     position: absolute;
     display: block;
@@ -8966,6 +9079,12 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
     background-repeat: repeat-x;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#00FFFFFF', GradientType=0);
     background-color: transparent; }
+
+.app-head-float {
+  width: 940px;
+  background: white;
+  position: fixed;
+  z-index: 1; }
 
 .app-title {
   line-height: 40px; }
@@ -8999,8 +9118,6 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 
 .row-nav {
   margin-bottom: 20px; }
-  .row-nav [class^="icon-"], .row-nav .app-item-twitter .app-item-twitter-inner:after, .app-item-twitter .row-nav .app-item-twitter-inner:after, .row-nav .app-dialog-title-close:before, .row-nav .app-message-close:before, .row-nav [class*=" icon-"] {
-    font-weight: bold; }
 
 .app-items .app-item-youtube.span1 iframe {
   width: 60px;
@@ -9107,7 +9224,7 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
     font-size: 400%; }
 
 .app-footer {
-  padding: 2em 0 4em;
+  padding: 3em 0 2em;
   text-align: center; }
 
 .dialog-shown .container {
@@ -9254,3 +9371,18 @@ a .icon-rotate-90:before, a .icon-rotate-180:before, a .icon-rotate-270:before, 
 
 .app-menu-close {
   height: 0; }
+
+.nav-youtube {
+  background-color: #c0392b; }
+  .nav-youtube:hover {
+    background-color: #dc6d61; }
+
+.nav-soundcloud {
+  background-color: #f39c12; }
+  .nav-soundcloud:hover {
+    background-color: #f7bc60; }
+
+.nav-schedule {
+  background-color: #2980b9; }
+  .nav-schedule:hover {
+    background-color: #2980b9; }

@@ -58,7 +58,7 @@ var insertItems = function(items) {
 
 promiseCollectYoutube = Q.when()
 .then(function() {
-  return get('/users/piglovesyou/tracks.json');
+  return get('/users/nu-minor/tracks.json');
 })
 .then(function(res) {
   return res.json;

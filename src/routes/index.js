@@ -52,10 +52,12 @@ exports.index = function(req, res) {
   ];
 
   var itemsRef;
-  find({id: {$in: feature}}, null, { })
+  // TODO: Find features
+  // find({id: {$in: feature}}, null, { })
+  find()
   .then(function(items) {
-
-    itemsRef = items = sortAs(feature, items);
+    
+    itemsRef = items; // = sortAs(feature, items);
 
     if (userId) {
       _.each(items, function(item) {

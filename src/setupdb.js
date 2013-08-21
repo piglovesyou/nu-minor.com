@@ -1,6 +1,6 @@
 
 var mongoose = require('mongoose');
-var conn = mongoose.connect('mongodb://localhost/numinor');
+var conn = mongoose.connect('mongodb://localhost/nu-minor');
 var _ = require('underscore');
 
 

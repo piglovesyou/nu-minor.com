@@ -11,7 +11,7 @@ describe "SoundCloudCollector", ->
     Q.when().then(->
       soundcloud.promise
     ).then(->
-      soundcloud.get "/users/piglovesyou.json"
+      soundcloud.get "/users/nu-minor.json"
     ).then((res) ->
       total = res.json.track_count
     ).then(->

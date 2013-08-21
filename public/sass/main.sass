@@ -62,11 +62,7 @@ $item-margin-bottom: 20px
   
 
 .app-head
-  width: 940px // TODO: Care this
   padding-top: 40px
-  background: white
-  position: fixed
-  z-index: 1
   &:after
     $height: 4px
     position: absolute
@@ -77,6 +73,11 @@ $item-margin-bottom: 20px
     content: ""
     +gradient-vertical(rgba(255,255,255,1), rgba(255,255,255,0))
     background-color: transparent
+.app-head-float
+  width: 940px // TODO: Care this
+  background: white
+  position: fixed
+  z-index: 1
 
 .app-title
   line-height: 40px
@@ -102,8 +103,9 @@ $item-margin-bottom: 20px
 
 .row-nav
   +margin-bottom-normal
-  [class^="icon-"], [class*=" icon-"]
-    font-weight: bold
+  // [class^="icon-"],
+  // [class*=" icon-"]
+  //   font-weight: bold
 
 .app-items
   // Youtube
@@ -174,7 +176,7 @@ $item-margin-bottom: 20px
       @extend .icon-twitter-sign:before
 
 .app-footer
-  padding: 2em 0 4em
+  padding: 3em 0 2em
   text-align: center
 
 
@@ -313,11 +315,33 @@ $item-margin-bottom: 20px
   margin-top: 110px
   +transition(height .1s ease-in-out)
   overflow: hidden
+  [class^="nav-"],
+  [class*=" nav-"]
+    &:hover:after
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+      @extend .icon-external-link:before
+      
+  // [class^="icon-"],
+  // [class*=" icon-"]
+    
 .app-menu-open
   height: 45px
 .app-menu-close
   height: 0
-// .app-menutoggle
-//   @extend [class^="icon-"]
-//   @extend [class^="icon-"]:before
-//   @extend .icon-ellipsis-horizontal:before
+
+.nav-youtube
+  background-color: #C0392B
+  &:hover
+    background-color: lighten(#C0392B, 16%)
+.nav-soundcloud
+  background-color: #F39C12
+  &:hover
+    background-color: lighten(#F39C12, 16%)
+.nav-schedule
+  @extend .muted
+  background-color: #2980B9
+  &:hover
+    @extend .muted
+    background-color: #2980B9
+    // background-color: lighten(#2980B9, 16%)

@@ -13,7 +13,7 @@ describe "YoutubeCollector", ->
       throw new Error(err)
     ).then(->
       videos
-        author: "cyriak"
+        author: "NUminormusic"
         "max-results": 1
 
     ).then((data) ->

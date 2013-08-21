@@ -21,7 +21,7 @@ var promiseCollectYoutube;
 var PER_PAGE = 20;
 var createOpt = function(pageIndex, perPage) {
   return {
-    'author': 'cyriak',
+    'author': 'NUminormusic',
     'max-results': perPage,
     'start-index': pageIndex * PER_PAGE + 1
   };
