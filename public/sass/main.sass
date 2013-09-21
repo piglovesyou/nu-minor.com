@@ -1,56 +1,10 @@
 
-@import './sass-twitter-bootstrap/lib/bootstrap.scss'
-@import './Flat-UI/sass/flat-ui.sass'
+@import './bootstrap-wrapper'
 
-$FontAwesomePath:   "../sass/Font-Awesome/font"
-@import './Font-Awesome/scss/font-awesome.scss'
+@import './font'
 
+@import './_primitive-mixins'
 
-$fontResourcePath:   "../sass/resources"
-@font-face
-  font-family: 'Fantasy-Clipart-2'
-  src: url('#{$fontResourcePath}/fantasy_clipart_2-webfont.eot?v=3.0.1')
-  src: url('#{$fontResourcePath}/fantasy_clipart_2-webfont.eot?#iefix&v=3.0.1') format("embedded-opentype"), url('#{$fontResourcePath}/fantasy_clipart_2-webfont.woff?v=3.0.1') format("woff"), url('#{$fontResourcePath}/fantasy_clipart_2-webfont.ttf?v=3.0.1') format("truetype")
-  font-weight: normal
-  font-style: normal
-
-.icon-skull
-  font-family: 'Fantasy-Clipart-2'
-.icon-skull:before
-  content: "S"
-
-
-
-// Mixins
-=user-drag($drag)
-  -webkit-user-drag: $drag
-  -moz-user-drag: $drag
-  -ms-user-drag: $drag
-  -o-user-drag: $drag
-  user-drag: $drag
-
-=filter-blur($blur)
-  -webkit-filter: blur($blur)
-  -moz-filter: blur($blur)
-  -ms-filter: blur($blur)
-  -o-filter: blur($blur)
-  filter: blur($blur)
-
-=display-box
-  display: -webkit-box
-  display: -moz-box
-  display: -ms-box
-  display: box
-
-=popupBoxShadow ()
-  +box-shadow(0 2px 3px rgba(0, 0, 0, .2))
-
-// Overrides
-.btn
-  +user-select(none)
-.muted
-  color: inherit
-  opacity: .6
 
 
 
@@ -60,7 +14,6 @@ $item-margin-bottom: 20px
 =margin-bottom-normal
   margin-bottom: $item-margin-bottom
   
-
 .app-head
   padding-top: 40px
   &:after
@@ -85,10 +38,10 @@ $item-margin-bottom: 20px
     margin-top: 0
     margin-bottom: 0
     margin-right: .6em
-  .icon-twitter
+  .follow-numinor
+    margin-right: 20px
     font-size: 120%
     vertical-align: middle
-    margin-right: 20px
   .pull-right
     text-align: right
 
@@ -123,11 +76,6 @@ $item-margin-bottom: 20px
   background: #d7dce0
   .btn-group
     float: right
-
-  // override flat-ui
-  .btn-group > .btn:first-child,
-  .btn-group > .btn:last-child
-    border-radius: 0
 
   input[type="text"]
     width: 110px
@@ -315,29 +263,21 @@ $item-margin-bottom: 20px
   margin-top: 110px
   +transition(height .1s ease-in-out)
   overflow: hidden
-      
-  // [class^="icon-"],
-  // [class*=" icon-"]
-a[target="_blank"].btn
-  &:hover:after
-    @extend [class^="icon-"]
-    @extend [class^="icon-"]:before
-    @extend .icon-external-link:before
     
 .app-menu-open
   height: 45px
 .app-menu-close
   height: 0
 
-.nav-youtube
-  background-color: #C0392B
-  &:hover
-    background-color: lighten(#C0392B, 16%)
-.nav-soundcloud
-  background-color: #F39C12
-  &:hover
-    background-color: lighten(#F39C12, 16%)
-.nav-schedule
-  background-color: #2980B9
-  &:hover
-    background-color: lighten(#2980B9, 16%)
+// .nav-youtube
+//   background-color: #C0392B
+//   &:hover
+//     background-color: lighten(#C0392B, 16%)
+// .nav-soundcloud
+//   background-color: #F39C12
+//   &:hover
+//     background-color: lighten(#F39C12, 16%)
+// .nav-schedule
+//   background-color: #2980B9
+//   &:hover
+//     background-color: lighten(#2980B9, 16%)

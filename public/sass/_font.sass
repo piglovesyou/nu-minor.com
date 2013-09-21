@@ -1,0 +1,19 @@
+
+$FontAwesomePath:   "../sass/Font-Awesome/font"
+@import './Font-Awesome/scss/font-awesome.scss'
+
+
+
+$fontResourcePath:   "../sass/resources"
+@font-face
+  font-family: 'Fantasy-Clipart-2'
+  src: url('#{$fontResourcePath}/fantasy_clipart_2-webfont.eot?v=3.0.1')
+  src: url('#{$fontResourcePath}/fantasy_clipart_2-webfont.eot?#iefix&v=3.0.1') format("embedded-opentype"), url('#{$fontResourcePath}/fantasy_clipart_2-webfont.woff?v=3.0.1') format("woff"), url('#{$fontResourcePath}/fantasy_clipart_2-webfont.ttf?v=3.0.1') format("truetype")
+  font-weight: normal
+  font-style: normal
+
+.icon-skull
+  font-family: 'Fantasy-Clipart-2'
+.icon-skull:before
+  content: "S"
+
