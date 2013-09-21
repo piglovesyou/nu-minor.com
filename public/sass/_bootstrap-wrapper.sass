@@ -1,12 +1,31 @@
 
+// Typography
+$baseFontFamily: "Raleway", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ" "ProN W3", Meiryo, "メイリオ", sans-serif
+$baseFontSize: 18px
+$headingsFontWeight: $g_fontWeight
+
+// Scaffolding
+$bodyBackground: #2a7792
+$textColor: #ebcec7
+
+// Links
+$linkColor: #afcfb6
+$linkColorHover: $linkColor
+
+// Component sizing
 $baseBorderRadius:      0px
 $borderRadiusLarge:     0px
 $borderRadiusSmall:     0px
 
+
+
 @import './sass-twitter-bootstrap/lib/bootstrap.scss'
+
+
 
 // Overrides
 .btn
+  color: $textColor
   +user-select(none)
 .muted
   color: inherit

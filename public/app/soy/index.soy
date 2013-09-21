@@ -13,14 +13,39 @@
     {param isProduction: $isProduction /}
     {param excludeScript: false /}
     {param body}
-      <div class="container">
+      <div class="app-head-container">
         {call app.soy.head.main data="all"}{/call}
+      </div>
+      <div class="container app-body-container">
+        // {call .nav}{/call}
         {call app.soy.body.main data="all"}{/call}
         {call app.soy.foot.main data="all"}{/call}
       </div>
       <script> main()</script>
     {/param}
   {/call}
+{/template}
+
+
+/***/
+{template .nav}
+  <div class="app-menu row row-nav">
+    <div class="span6">
+      <a target="_blank" href="http://www.youtube.com/user/NUminormusic" class="nav-youtube btn btn-large btn-block">
+        <span class="">You Tube</span>&nbsp;
+      </a>
+    </div>
+    <div class="span6">
+      <a target="_blank" href="http://soundcloud.com/nu-minor" class="nav-soundcloud btn btn-large btn-block">
+        <span class="">SoundCloud</span>&nbsp;
+      </a>
+    </div>
+    // <div class="span4">
+    //   <a target="_blank" href="http://connpass.com/" class="nav-schedule btn btn-large btn-block">
+    //     <span class="">Schedule</span>&nbsp;
+    //   </a>
+    // </div>
+  </div>
 {/template}
 
 

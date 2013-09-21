@@ -7,12 +7,13 @@
  * @param twitter
  */
 {template .main}
-  <div class="app-head app-head-float">
-    {call .title data="all"}
-      {param useFollowButton: true /}
-    {/call}
+  <div class="container">
+    <div class="app-head">
+      {call .title data="all"}
+        {param useFollowButton: true /}
+      {/call}
+    </div>
   </div>
-  {call .nav}{/call}
 {/template}
 
 /**
@@ -22,9 +23,9 @@
  */
 {template .title}
   <div class="row app-title">
-    <div class="span5">
+    <div class="span7">
       <h1 class="pull-left">NU minor</h1>
-      <p class="muted">The super super super band</p>
+      <p class="muted">The super super band</p>
     </div>
 
     {let $rightSpan}
@@ -32,7 +33,7 @@
     {/let}
     <div class="span{$rightSpan} pull-right">
       {if $useFollowButton}
-        <a class="follow-numinor btn" target="_blank" href="http://twitter.com/NU_minor">
+        <a class="follow-numinor" target="_blank" href="http://twitter.com/NU_minor">
           <span class="iconbefore">
             follow @NU_minor&nbsp;
           </span>
@@ -52,23 +53,4 @@
   </div>
 {/template}
 
-/***/
-{template .nav}
-  <div class="app-menu row row-nav">
-    <div class="span6">
-      <a target="_blank" href="http://www.youtube.com/user/NUminormusic" class="nav-youtube btn btn-large btn-block">
-        <span class="">You Tube</span>&nbsp;
-      </a>
-    </div>
-    <div class="span6">
-      <a target="_blank" href="http://soundcloud.com/nu-minor" class="nav-soundcloud btn btn-large btn-block">
-        <span class="">SoundCloud</span>&nbsp;
-      </a>
-    </div>
-    // <div class="span4">
-    //   <a target="_blank" href="http://connpass.com/" class="nav-schedule btn btn-large btn-block">
-    //     <span class="">Schedule</span>&nbsp;
-    //   </a>
-    // </div>
-  </div>
-{/template}
+

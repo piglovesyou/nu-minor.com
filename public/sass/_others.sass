@@ -1,0 +1,280 @@
+
+$itme-min-height: 120px
+$item-margin-bottom: 20px
+
+
+
+=margin-bottom-normal
+  margin-bottom: $item-margin-bottom
+
+.app-head-container
+  width: 100%
+  background: $bodyBackground
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1
+
+.app-head
+  padding-top: 70px
+
+.app-title
+  line-height: 40px
+  h1
+    margin-top: 0
+    margin-bottom: 0
+    margin-right: .3em
+  .follow-numinor
+    margin-right: 20px
+    // font-size: 120%
+    vertical-align: middle
+    > .iconbefore:before
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+      @extend .icon-twitter:before
+  .pull-right
+    text-align: right
+
+.app-userprofile
+  display: inline-block
+  margin-right: 10px
+  img
+    +user-select(none)
+    +user-drag(none)
+    width: 28px
+    margin-right: 6px
+
+
+
+
+.app-body-container
+  padding-top: 150px
+  
+.row-nav
+  +margin-bottom-normal
+  // [class^="icon-"],
+  // [class*=" icon-"]
+  //   font-weight: bold
+
+.app-items
+  // Youtube
+  @for $i from 1 through $gridColumns
+    .app-item-youtube.span#{$i} iframe
+      $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
+      width: $w
+      height: ($w / 1.777) // Youtube aspect
+      vertical-align: bottom
+
+.app-item
+  +margin-bottom-normal
+.app-item-bar
+  display: block
+  background: #d7dce0
+  .btn-group
+    float: right
+
+  input[type="text"]
+    width: 110px
+    vertical-align: middle
+    padding-top: 2px
+    padding-bottom: 2px
+
+  // Like and Bad icons
+  .app-item-like,
+  .app-item-bad
+    +user-select(none)
+    vertical-align: middle
+    .iconbefore:before
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+  .app-item-like
+    .iconbefore.userMarked:before
+      @extend .icon-heart:before
+    .iconbefore.userNotMarked:before
+      @extend .icon-heart-empty:before
+  .app-item-bad
+    .iconbefore.userMarked:before
+      @extend .icon-thumbs-down:before
+    .iconbefore.userNotMarked:before
+      @extend .icon-thumbs-down-alt:before
+
+.app-item-twitter
+
+  .from_user
+    margin-right: 4px
+  .from_user_name
+    font-size: 80%
+    opacity: .8
+    s
+      text-decoration: none
+
+  .app-item-twitter-inner
+    position: relative
+    > img
+      border-radius: 2px
+      margin: 4px
+    > .text
+      margin: 0 4px
+      font-size: 200%
+      opacity: .8
+    > .username
+      margin: 0 4px
+      padding: .2em 0
+    &:after
+      position: absolute
+      display: block
+      bottom: 0
+      right: 5px
+      color: white
+      opacity: .6
+      font-size: 400%
+
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+      @extend .icon-twitter-sign:before
+
+.app-footer
+  padding: 3em 0 4em
+  text-align: center
+
+
+
+// app.ui.Dialog
+.dialog-shown .container
+  +filter-blur(4px)
+  
+.app-dialog
+  width: 60%
+  max-width: 560px
+  min-height: 50%
+  margin: 0
+  @extend .modal
+  +transition(top .1s ease-out)
+  border: none
+  background: #C0392B
+  border-radius: 0
+.app-dialog-bg
+  position: absolute
+  top: 0
+  left: 0
+.app-dialog-title
+  @extend .modal-header
+  border-bottom: none
+  font-size: 137%
+  color: rgba(255,255,255,1)
+.app-dialog-content
+  @extend .modal-body
+  color: rgba(255,255,255,.8)
+.app-dialog-buttons
+  @extend .modal-footer
+  border-top: none
+  background: none
+  box-shadow: none
+  button
+    @extend .btn
+.app-dialog-title-close
+  position: absolute
+  top: 9px
+  right: 15px
+  z-index: 2
+  cursor: pointer
+  &:before
+    @extend .close
+    @extend [class^="icon-"]
+    @extend [class^="icon-"]:before
+    @extend .icon-remove:before
+
+.app-message
+  @extend .alert
+  @extend .fade
+  @extend .clearfix
+  +popupBoxShadow()
+  position: fixed
+  margin: 0
+  width: 100%
+  top: 0
+  left: 0
+  background: #f1c40f // #34495e
+  text-shadow: none
+  box-sizing: border-box
+  border: none
+  border-radius: 0
+  color: white
+  line-height: 1.6em
+  z-index: 100
+.app-message-content
+  float: left
+  a
+    color: #c0392b // #34495e
+
+.app-message-close
+  @extend .app-dialog-title-close
+  &:before
+    @extend .close
+    @extend [class^="icon-"]
+    @extend [class^="icon-"]:before
+    @extend .icon-remove:before
+    right: 0 !important
+.app-message .app-message-close:before
+  line-height: 22px
+
+
+.app-popup
+  @extend .tooltip
+  @extend .fade
+  @extend .bottom
+  @extend .in
+  .tooltip-inner
+    +popupBoxShadow()
+    padding-right: 0  // <- 12px
+    width: 195px      // 183 + 12
+    text-align: left
+.app-item-popup-user
+  +text-overflow()
+  margin-bottom: 4px
+  &:last-of-type
+    margin-bottom: 0
+  img
+    width: 22px
+    margin-right: 3px
+  .icon-external-link
+    font-size: 77%
+.app-item-popup-user-anchor
+  padding: 6px 0
+
+.app-dialog-user-img
+  margin: 0 auto 6px
+  > img
+    border: 4px solid #fff
+    background-color: #fff
+.app-dialog-user-screen_name
+  margin-bottom: 2px
+  font-size: 24px
+  color: white
+  line-height: 1
+.app-dialog-user-name
+  color: white
+  font-size: 18px
+  margin-bottom: 1px
+  line-height: 24px
+.app-dialog-user-description
+  font-size: 14px
+  line-height: 18px
+  margin-bottom: 4px
+.location-and-url
+  font-size: 14px
+  line-height: 18px
+
+.app-dialog-user
+  margin: 20px 0 38px
+  text-align: center
+
+.app-menu
+  +transition(height .1s ease-in-out)
+  overflow: hidden
+    
+.app-menu-open
+  height: 45px
+.app-menu-close
+  height: 0
+

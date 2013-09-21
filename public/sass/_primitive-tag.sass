@@ -1,9 +1,23 @@
 
+html,
+body
+  height: 100%
+  
+body
+  font-weight: $g_fontWeight
+  +bg-two-stripe(#2a7792, #07465e, 70%)
+  background-attachment: fixed
+
+  // color: #ebcec7
+  // background: $background-color-light
+
 h1
   font-weight: inherit
 
-a[target="_blank"].btn
-  &:hover:after
+a[target="_blank"]
+  &:after
     @extend [class^="icon-"]
     @extend [class^="icon-"]:before
     @extend .icon-external-link:before
+    font-size: 85%
+    margin-left: -.2em

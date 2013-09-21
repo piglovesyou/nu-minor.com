@@ -1,4 +1,14 @@
 
+=bg-two-stripe($color1, $color2, $colorStop)
+  background-color: $color1
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color1), color-stop($colorStop, $color1), color-stop($colorStop, $color2), to($color2))
+  background-image: -webkit-linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
+  background-image: -moz-linear-gradient(top, $color1, $color1 $colorStop, $color2 $colorStop, $color2)
+  background-image: -o-linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
+  background-image: linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
+  background-repeat: no-repeat
+  // filter: progid:DXImageTransform.Microsoft.gradient(color1str='#{ie-hex-str($color1)}', endColorstr='#{ie-hex-str($color2)}', GradientType=0) // IE9 and down, gets no color-stop at all for proper fallback
+
 =user-drag($drag)
   -webkit-user-drag: $drag
   -moz-user-drag: $drag
