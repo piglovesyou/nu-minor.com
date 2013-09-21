@@ -1,10 +1,11 @@
 
 @import './bootstrap-wrapper'
 
-@import './font'
-
 @import './_primitive-mixins'
 
+@import './font'
+
+@import './_primitive-tag'
 
 
 
@@ -42,6 +43,10 @@ $item-margin-bottom: 20px
     margin-right: 20px
     font-size: 120%
     vertical-align: middle
+    > .iconbefore:before
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+      @extend .icon-twitter:before
   .pull-right
     text-align: right
 
@@ -83,10 +88,24 @@ $item-margin-bottom: 20px
     padding-top: 2px
     padding-bottom: 2px
 
+  // Like and Bad icons
   .app-item-like,
   .app-item-bad
     +user-select(none)
     vertical-align: middle
+    .iconbefore:before
+      @extend [class^="icon-"]
+      @extend [class^="icon-"]:before
+  .app-item-like
+    .iconbefore.userMarked:before
+      @extend .icon-heart:before
+    .iconbefore.userNotMarked:before
+      @extend .icon-heart-empty:before
+  .app-item-bad
+    .iconbefore.userMarked:before
+      @extend .icon-thumbs-down:before
+    .iconbefore.userNotMarked:before
+      @extend .icon-thumbs-down-alt:before
 
 .app-item-twitter
 
@@ -269,15 +288,3 @@ $item-margin-bottom: 20px
 .app-menu-close
   height: 0
 
-// .nav-youtube
-//   background-color: #C0392B
-//   &:hover
-//     background-color: lighten(#C0392B, 16%)
-// .nav-soundcloud
-//   background-color: #F39C12
-//   &:hover
-//     background-color: lighten(#F39C12, 16%)
-// .nav-schedule
-//   background-color: #2980B9
-//   &:hover
-//     background-color: lighten(#2980B9, 16%)

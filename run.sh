@@ -72,7 +72,9 @@ case $1 in
         ;;
 
     build)
+        # JavaScript
         java -jar ${PLOVR_JAR_PATH} build plovr.json
+        # CSS
         sass -t compressed public/sass/main.sass:public/stylesheets/main-min.css
         ;;
 
