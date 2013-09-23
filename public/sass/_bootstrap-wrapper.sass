@@ -1,4 +1,11 @@
 
+// Grays
+// $black: 
+$grayDarker: #262120
+$grayDark: #4d4340
+$gray: #726460
+
+
 // Typography
 $baseFontFamily: "Raleway", "Hiragino Kaku Gothic ProN", "ヒラギノ角ゴ" "ProN W3", Meiryo, "メイリオ", sans-serif
 $baseFontSize: 18px
@@ -17,16 +24,48 @@ $baseBorderRadius:      0px
 $borderRadiusLarge:     0px
 $borderRadiusSmall:     0px
 
+// Buttons
+$btnBackground: #3ba5cc
+$btnBackgroundHighlight: $btnBackground
+$btnPrimaryBackground: #4acefe
+$btnPrimaryBackgroundHighlight: $btnPrimaryBackground
+
 
 
 @import './sass-twitter-bootstrap/lib/bootstrap.scss'
 
 
-
 // Overrides
 .btn
-  color: $textColor
+  padding: .4em .8em
+  color: darken($textColor, 5%)
+  border: none
+  text-shadow: none
   +user-select(none)
+  &:hover,
+  &:focus
+    color: lighten($textColor, 13%)
+    background: $btnPrimaryBackground
+.btn-primary
+  color: lighten($textColor, 10%)
+
+// .btn-primary
+//   background: $btnPrimaryBackground
+// .btn-primary
+//   background: $btnPrimaryBackground
+// .btn-warning 
+//   background: $btnWarningBackground
+// .btn-danger 
+//   background: $btnDangerBackground
+// .btn-success 
+//   background: $btnSuccessBackground
+// .btn-info 
+//   background: $btnInfoBackground
+// .btn-inverse 
+//   background: $btnInversebackground
+
+
+
 .muted
   color: inherit
   opacity: .6

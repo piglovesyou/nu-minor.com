@@ -69,7 +69,7 @@ $item-margin-bottom: 20px
   +margin-bottom-normal
 .app-item-bar
   display: block
-  background: #d7dce0
+  // background: #d7dce0
   .btn-group
     float: right
 
@@ -84,6 +84,9 @@ $item-margin-bottom: 20px
   .app-item-bad
     +user-select(none)
     vertical-align: middle
+    padding-left: 0
+    padding-right: 0
+    width: 3.6em
     .iconbefore:before
       @extend [class^="icon-"]
       @extend [class^="icon-"]:before
@@ -277,4 +280,50 @@ $item-margin-bottom: 20px
   height: 45px
 .app-menu-close
   height: 0
+
+
+$g_youtube_light: #ff4b6f
+$g_youtube_middle: #cb3c58
+$g_youtube_dark: #781f2f
+
+$g_soundcloud_light: #e1c407
+$g_soundcloud_middle: #c2ab19
+$g_soundcloud_dark: #6b611f
+
+$g_connpass_light: #5cc416
+$g_connpass_middle: #5aab13
+$g_connpass_dark: #3d611c
+
+
+.app-item-bar
+  background-color: #07465e
+
+// .app-item-youtube
+//   background-color: $g_youtube_dark
+//   .app-item-bar
+//     .btn
+//       background: $g_youtube_middle
+//     .btn-primary
+//       background: $g_youtube_light
+      
+.app-item-soundcloud
+  > iframe
+    margin-bottom: -4px
+    background-color: #e5e5e5
+  // background-color: $g_soundcloud_dark
+  // .app-item-bar
+  //   .btn
+  //     background: $g_soundcloud_middle
+  //   .btn-primary
+  //     background: $g_soundcloud_light
+
+// .app-item-connpass
+//   background-color: $g_connpass_dark
+//   .app-item-bar
+//     .btn
+//       background: $g_connpass_middle
+//     .btn-primary
+//       background: $g_connpass_light
+
+
 
