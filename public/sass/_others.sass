@@ -326,4 +326,23 @@ $g_connpass_dark: #3d611c
 //       background: $g_connpass_light
 
 
+.app-item-static_element-link
+  $height: 207px
+  height: $height
+  line-height: $height
+  font-size: 145%
+  text-align: center
+  color: $textColor
+  &:hover
+    color: $textColor
+  &:after
+    margin-left: .2em !important
+    font-size: 75% !important
 
+.app-item-static_element-link-youtube
+  +bg-three-stripe(#fc466d, 90%, #c93857, 93%, #771d2e)
+.app-item-static_element-link-soundcloud
+  &,
+  &:hover
+    color: $gray
+  +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)

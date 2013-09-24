@@ -1,11 +1,21 @@
 
-=bg-two-stripe($color1, $color2, $colorStop)
+=bg-two-stripe($color1, $pos, $color2)
   background-color: $color1
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color1), color-stop($colorStop, $color1), color-stop($colorStop, $color2), to($color2))
-  background-image: -webkit-linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
-  background-image: -moz-linear-gradient(top, $color1, $color1 $colorStop, $color2 $colorStop, $color2)
-  background-image: -o-linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
-  background-image: linear-gradient($color1, $color1 $colorStop, $color2 $colorStop, $color2)
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color1), color-stop($pos, $color1), color-stop($pos, $color2), to($color2))
+  background-image: -webkit-linear-gradient($color1, $color1 $pos, $color2 $pos, $color2)
+  background-image: -moz-linear-gradient(top, $color1, $color1 $pos, $color2 $pos, $color2)
+  background-image: -o-linear-gradient($color1, $color1 $pos, $color2 $pos, $color2)
+  background-image: linear-gradient($color1, $color1 $pos, $color2 $pos, $color2)
+  background-repeat: no-repeat
+  // filter: progid:DXImageTransform.Microsoft.gradient(color1str='#{ie-hex-str($color1)}', endColorstr='#{ie-hex-str($color2)}', GradientType=0) // IE9 and down, gets no color-stop at all for proper fallback
+
+=bg-three-stripe($color1, $pos1, $color2, $pos2, $color3)
+  background-color: $color1
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($color1), color-stop($pos1, $color1), color-stop($pos1, $color2), color-stop($pos2, $color2), color-stop($pos2, $color3), to($color3))
+  background-image: -webkit-linear-gradient($color1, $color1 $pos1, $color2 $pos1, $color2 $pos2, $color3 $pos2, $color3)
+  background-image: -moz-linear-gradient(top, $color1, $color1 $pos1, $color2 $pos1, $color2 $pos2, $color3 $pos2, $color3)
+  background-image: -o-linear-gradient($color1, $color1 $pos1, $color2 $pos1, $color2 $pos2, $color3 $pos2, $color3)
+  background-image: linear-gradient($color1, $color1 $pos1, $color2 $pos1, $color2 $pos2, $color3 $pos2, $color3)
   background-repeat: no-repeat
   // filter: progid:DXImageTransform.Microsoft.gradient(color1str='#{ie-hex-str($color1)}', endColorstr='#{ie-hex-str($color2)}', GradientType=0) // IE9 and down, gets no color-stop at all for proper fallback
 

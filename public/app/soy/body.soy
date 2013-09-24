@@ -37,8 +37,29 @@
     {call .soundcloud data="all"}{/call}
   {elseif $nm_type == 'twitter'}
     {call .twitter data="all"}{/call}
+  {elseif $nm_type == '@static_element@'}
+    {call .static_element data="all"}{/call}
   {/if}
 {/template}
+
+/**
+ * @param span ''
+ * @param role ''
+ * @param media ''
+ * @param label ''
+ * @param href ''
+ */
+{template .static_element}
+  <a href="{$href}" target="_blank" class="app-item app-item-static_element app-item-static_element-{$role} app-item-static_element-{$role}-{$media} span{$span}{if $span == 6} pull-right{/if}">
+    {$label}
+  </a>
+{/template}
+
+
+
+
+
+
 
 /**
  * @param id ''

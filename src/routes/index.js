@@ -44,8 +44,8 @@ exports.index = function(req, res) {
 
   var feature = [
     'La-bD1IhMto',
-    
-    '106166477',
+
+    // @static_element@
     '103989632',
 
     'JphADRVX_W0',
@@ -57,6 +57,7 @@ exports.index = function(req, res) {
     'S0U4rIi07qY',
     'Ao399AaSV_E',
 
+    '106166477',
     'pl2DQWEFbp8'
   ];
 
@@ -66,7 +67,22 @@ exports.index = function(req, res) {
   // find()
   .then(function(items) {
 
+
     itemsRef = items = sortAs(feature, items);
+    items.splice(2, 0, {
+      nm_type: '@static_element@',
+      role: 'link',
+      media: 'youtube',
+      label: 'YouTube',
+      href: 'http://www.youtube.com/user/NUminormusic'
+    });
+    items.splice(5, 0, {
+      nm_type: '@static_element@',
+      role: 'link',
+      media: 'soundcloud',
+      label: 'SoundCloud',
+      href: 'https://soundcloud.com/nu-minor'
+    });
 
     if (userId) {
       _.each(items, function(item) {
