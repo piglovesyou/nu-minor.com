@@ -2,6 +2,7 @@
 goog.provide('app.Items');
 
 goog.require('goog.ui.Component');
+goog.require('goog.dom.dataset');
 goog.require('app.items.Item');
 
 
@@ -30,7 +31,8 @@ app.Items.prototype.decorateInternal = function(element) {
   var dh = this.getDomHelper();
   var itemElms = this.getElementsByClass('app-item');
   goog.array.forEach(itemElms, function(itemEl) {
-    if (!itemEl.dataset || !itemEl.dataset.itemid) return;
+    if (!goog.dom.dataset.get(itemEl, 'itemid')) return;
+
     var item = new app.items.Item(dh);
     item.canDecorate(itemEl) && item.decorateInternal(itemEl);
     this.addChild(item);
