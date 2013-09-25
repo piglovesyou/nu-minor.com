@@ -341,8 +341,12 @@ $g_connpass_dark: #3d611c
 
 .app-item-static_element-link-youtube
   +bg-three-stripe(#fc466d, 90%, #c93857, 93%, #771d2e)
+  &:hover
+    +bg-three-stripe(lighten(#fc466d, 5%), 90%, #c93857, 93%, #771d2e)
 .app-item-static_element-link-soundcloud
   &,
   &:hover
     color: $gray
   +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)
+  &:hover
+    +bg-three-stripe(lighten(#e1c408, 10%), 90%, #c2ab18, 93%, #6b611f)
