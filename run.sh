@@ -71,6 +71,27 @@ case $1 in
         java -jar ${PLOVR_JAR_PATH} serve plovr.json
         ;;
 
+    all)
+        mongod &
+        ./run.sh soyweb &
+        ./run.sh sass &
+        ./run.sh serve &
+        ;;
+
+    killall)
+        ps | awk '$NF=="mongod"{print $1}' | xargs kill -9
+        ps | grep sass | grep -v grep | awk '{print $1}' | xargs kill -9
+        ps | grep plovr | grep -v grep | awk '{print $1}' | xargs kill -9
+        ;;
+
+    hosts_on)
+        sudo sed -i -e 's/^# \(127.*nu-minor.com\)/\1/' /etc/hosts
+        ;;
+
+    hosts_off)
+        sudo sed -i -e 's/^\(127.*nu-minor.com\)/# \1/' /etc/hosts
+        ;;
+
     build)
         # JavaScript
         java -jar ${PLOVR_JAR_PATH} build plovr.json
