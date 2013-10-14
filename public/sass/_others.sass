@@ -3,9 +3,15 @@ $itme-min-height: 120px
 $item-margin-bottom: 20px
 
 
+// @media (min-width: 980px) and (max-width: 1199px)
+// @media (min-width: 1200px)
+
 
 =margin-bottom-normal
   margin-bottom: $item-margin-bottom
+
+.app-head
+  padding-top: 70px
 
 .app-head-container
   width: 100%
@@ -15,8 +21,8 @@ $item-margin-bottom: 20px
   left: 0
   z-index: 1
 
-.app-head
-  padding-top: 70px
+// .app-head
+//   padding-top: 70px
 
 .app-title
   line-height: 40px
@@ -56,14 +62,30 @@ $item-margin-bottom: 20px
   // [class*=" icon-"]
   //   font-weight: bold
 
-.app-items
-  // Youtube
-  @for $i from 1 through $gridColumns
-    .app-item-youtube.span#{$i} iframe
-      $w: ($gridColumnWidth * $i) + ($gridGutterWidth * ($i - 1))
-      width: $w
-      height: ($w / 1.777) // Youtube aspect
-      vertical-align: bottom
+=youtube-size-care($columnWidth, $gutterWidth)
+  .app-items
+    // Youtube needs specified size.
+    @for $i from 1 through $gridColumns
+      .app-item-youtube.span#{$i} iframe
+        $w: ($columnWidth * $i) + ($gutterWidth * ($i - 1))
+        width: $w
+        height: ($w / 1.777) // Youtube aspect
+        vertical-align: bottom
+
+@media (max-width: 479px)
+  .app-item-youtube iframe
+    width: 100%
+    height: 158px // 280 / 1.777
+@media (min-width: 480px) and (max-width: 767px)
+  .app-item-youtube iframe
+    width: 100%
+    height: 247px // 247 / 1.777
+@media (min-width: 768px) and (max-width: 979px)
+  +youtube-size-care($gridColumnWidth768, $gridGutterWidth768)
+@media (min-width: 980px) and (max-width: 1199px)
+  +youtube-size-care($gridColumnWidth, $gridGutterWidth)
+@media (min-width: 1200px)
+  +youtube-size-care($gridColumnWidth1200, $gridGutterWidth1200)
 
 .app-item
   +margin-bottom-normal
@@ -350,3 +372,21 @@ $g_connpass_dark: #3d611c
   +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)
   &:hover
     +bg-three-stripe(lighten(#e1c408, 10%), 90%, #c2ab18, 93%, #6b611f)
+
+
+
+@media (max-width: 479px)
+  .app-title h1
+    float: none
+@media (max-width: 767px) 
+  .app-head-container
+    position: static
+  .app-head
+    padding-top: 40px
+  .app-body-container
+    padding-top: 30px
+@media (min-width: 768px) and (max-width: 979px)
+  .app-head
+    padding-top: 50px
+  .app-body-container
+    padding-top: 130px

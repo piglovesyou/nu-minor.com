@@ -19,4 +19,8 @@ App = function() {
   var items = new app.Items();
   items.decorate(itemsWrapEl);
 
+  // var monitor = app.dom.ViewportSizeMonitor.getInstance();
+  // goog.events.listen(monitor, app.dom.ViewportSizeMonitor.EventType.DELAYED_RESIZE, function(e) {
+  //   
+  // });
 };
