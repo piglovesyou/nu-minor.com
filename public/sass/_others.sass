@@ -70,8 +70,9 @@ $item-margin-bottom: 20px
         $w: ($columnWidth * $i) + ($gutterWidth * ($i - 1))
         width: $w
         height: ($w / 1.777) // Youtube aspect
-        vertical-align: bottom
 
+.app-item-youtube iframe
+  vertical-align: bottom
 @media (max-width: 479px)
   .app-item-youtube iframe
     width: 100%
