@@ -8,26 +8,23 @@ find = Q.denodeify(db.item.find.bind(db.item))
 count = Q.denodeify(db.item.count.bind(db.item))
 describe "TwitterCollector", ->
   it "should have some data in DB.", (done) ->
-    id = undefined
+    actualCount = 0
     twitter = require("../src/feedcollector/twittercollector")
     Q.when().then(->
       twitter.promise
     ).then(->
-      twitter.get "/search.json",
-        q: "#DBZ"
+      twitter.get "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=NU_minor"
+    # ).then((json) ->
+    #   id = json.results[0].id
 
-    ).then((res) ->
-      id = res.json.results[0].id
-    ).then(->
+    ).then((items)->
+      actualCount = items.length
       find
         nm_type: "twitter"
-        id: "" + id
 
-    ).then((item) ->
-      assert _.isArray(item)
-      assert item[0]
-      assert.equal item[0].id, id
+    ).then((dbItems) ->
+      assert _.isArray(dbItems)
+      assert.equal dbItems.length, actualCount
       done()
     ).done()
-
 
