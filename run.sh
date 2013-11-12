@@ -72,10 +72,12 @@ case $1 in
         ;;
 
     all)
+        redis-server redis.conf
         mongod &
         ./run.sh soyweb &
         ./run.sh sass &
         ./run.sh serve &
+        java -jar libs/selenium-server/selenium-server-standalone-2.32.0.jar &
         ;;
 
     killall)
