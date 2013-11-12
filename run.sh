@@ -79,9 +79,9 @@ case $1 in
         ;;
 
     killall)
-        ps | awk '$NF=="mongod"{print $1}' | xargs kill -9
-        ps | grep sass | grep -v grep | awk '{print $1}' | xargs kill -9
-        ps | grep plovr | grep -v grep | awk '{print $1}' | xargs kill -9
+        pidof mongo | xargs kill -9
+        pidof ruby | xargs kill -9
+        pidof java | xargs kill -9
         ;;
 
     hosts_on)
