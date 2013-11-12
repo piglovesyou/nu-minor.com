@@ -1,10 +1,13 @@
 
+
+
 var soy = require('../soynode.js');
 var Q = require('q');
 var db = require('../setupdb');
 var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
 
+goog.require('goog.array');
 
 var find = Q.denodeify(db.item.find.bind(db.item));
 
@@ -22,17 +25,6 @@ var whenFail = function(res) {
   };
 };
 
-// objArr.length can be bigger
-var sortAs = function(idArr, objArr) {
-  var r = [];
-  idArr.forEach(function(id, i) {
-    r[i] = _.find(objArr, function(obj) {
-      return obj.id === id;
-    });
-  });
-  return r;
-};
-
 /*
  * GET home page.
  */
@@ -46,29 +38,29 @@ exports.index = function(req, res) {
     'La-bD1IhMto',
 
     // @static_element@
-    '103989632',
+    '103989632'
 
-    'JphADRVX_W0',
+    // 'JphADRVX_W0',
 
-    '102117201',
-    '100169194',
-    'd7fTQMUZ6yc',
-    'phffZ2snf0A',
-    'S0U4rIi07qY',
-    'Ao399AaSV_E',
+    // '102117201',
+    // '100169194',
+    // 'd7fTQMUZ6yc',
+    // 'phffZ2snf0A',
+    // 'S0U4rIi07qY',
+    // 'Ao399AaSV_E',
 
-    '106166477',
-    'pl2DQWEFbp8'
+    // '106166477',
+    // 'pl2DQWEFbp8'
   ];
 
   var itemsRef;
-  // TODO: Find features
-  find({id: {$in: feature}}, null, { })
-  // find()
+  // find({id: {$in: feature}}, null, { })
+  find()
   .then(function(items) {
 
+    items = sortByIdAs(items, feature);
 
-    itemsRef = items = sortAs(feature, items);
+    itemsRef = items;
     items.splice(2, 0, {
       nm_type: '@static_element@',
       role: 'link',
@@ -76,6 +68,7 @@ exports.index = function(req, res) {
       label: 'YouTube',
       href: 'http://www.youtube.com/user/NUminormusic'
     });
+
     items.splice(5, 0, {
       nm_type: '@static_element@',
       role: 'link',
@@ -109,3 +102,78 @@ exports.index = function(req, res) {
 
 };
 
+
+
+goog.require('goog.array');
+var assert = require('assert');
+
+
+
+nearlyEqual(sortByIdAs([
+  { id: '03' },
+  { id: '04' },
+  { id: '01' },
+  { id: '02' },
+  { id: '05' }
+],
+['03', '02']).map(getId),
+[
+  '03',
+  '02',
+  '04',
+  '01',
+  '05'
+]);
+
+nearlyEqual(sortByIdAs([
+  { id: '98374' },
+  { id: '89' },
+  { id: '834987121' },
+  { id: '0' },
+  { id: '834987122' }
+],
+[null, '834987121', null, '0']).map(getId),
+[
+  '98374' ,
+  '834987121' ,
+  '89' ,
+  '0' ,
+  '834987122'
+]);
+
+
+
+
+function sortByIdAs(objArr, idArr) {
+  var result = new Array(objArr.length);
+
+  idArr.forEach(function(id, index) {
+    var found = goog.array.findIndex(objArr, function(obj) {
+      if (!obj) return;
+      return obj.id == id;
+    });
+    if (found < 0) return;
+    result[index] = objArr[found];
+    objArr[found] = null;
+  });
+
+  var next = 0;
+  objArr.forEach(function(obj) {
+    if (!obj) return;
+    while (result[next]) ++next;
+    result[next] = obj;
+  });
+
+  return result;
+}
+
+function getId(obj) {
+  return obj.id;
+}
+
+function nearlyEqual(arr1, arr2, msg) {
+  if (arr1.length != arr2.length) throw new Error(msg);
+  for (var i = 0; i < arr1.length; i++) {
+    if (arr1[i] != arr2[i]) throw new Error(msg);
+  }
+}
