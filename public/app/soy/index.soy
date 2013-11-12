@@ -14,6 +14,9 @@
     {param excludeScript: false /}
     {param body}
       <div class="app-head-container">
+
+        {if not $isProduction}not production. {/if}
+
         {call app.soy.head.main data="all"}{/call}
       </div>
       <div class="container app-body-container">
