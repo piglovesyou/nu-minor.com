@@ -6,6 +6,7 @@
     "start": "node app"
   },
   "dependencies": {
+    "closure": "*",
     "express": "3.1.0",
     "soynode": "*",
     "jade": "*",

@@ -1,21 +1,12 @@
 
-
-
-
-
-
-
-
-
-
-
-
-// login
-
-
 /**
- * Module dependencies.
+ * @type {Object}
  */
+global.goog = require('closure').Closure({
+  CLOSURE_BASE_PATH: 'libs/closure-library/closure/goog/'
+});
+
+
 
 var express = require('express') ,
   http = require('http') ,
