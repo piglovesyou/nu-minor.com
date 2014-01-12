@@ -1,11 +1,12 @@
 
-var Q = require('q');
+var Q = require('../moduleproxy/q');
 var db = require('../setupdb');
 var querystring = require('querystring');
 var http = require('../denodeify/http');
 var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 
 var update = Q.denodeify(db.item.update.bind(db.item));
+var outError = require('../promise/promise').outError;
 
 
 
@@ -22,16 +23,12 @@ function promise() {
     return res.json;
   })
   .then(insertItems)
-  .fail(whenFail);
+  .fail(outError);
 }
 
 function get(path) {
   return http.get(createUrl(path));
-};
-
-function whenFail(reason) {
-  throw new Error(reason);
-};
+}
 
 function insertItems(items) {
   return Q.allSettled(items.map(function(item, i) {
@@ -41,18 +38,18 @@ function insertItems(items) {
   .then(function() {
     return items.length;
   })
-  .fail(whenFail);
-};
+  .fail(outError);
+}
 
 function insertItem(item) {
   return update({ id: item.id },
     item, { upsert: true });
-};
+}
 
 function createUrl(path, param) {
   if (!param) param = {};
   param.client_id = CLIENT_ID;
   return 'http://api.soundcloud.com' +
       path + '?' + querystring.stringify(param);
-};
+}
 

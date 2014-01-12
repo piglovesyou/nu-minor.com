@@ -1,12 +1,12 @@
 
+var Q = require('../moduleproxy/q');
 var db = require('../setupdb');
 var youtube = require('youtube-feeds');
-var Q = require('q');
-Q.longStackSupport = true;
 var _ = require('underscore');
 
 var dbUpdate = Q.denodeify(db.item.update.bind(db.item));
 var fetchYoutube = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
+var outError = require('../promise/promise').outError;
 
 // Youtube returns crazy response
 var PER_PAGE = 20;
@@ -14,20 +14,16 @@ var PER_PAGE = 20;
 
 
 /** @type {Object} */
-module.exports.promise = Q.when()
-.then(fetchRemote.bind(null, 0, PER_PAGE))
-.then(fetchRestOfAll)
-.then(insertItems)
-.fail(whenFail);
-
-
+module.exports.promise = function() {
+  return Q.when()
+  .then(fetchRemote.bind(null, 0, PER_PAGE))
+  .then(fetchRestOfAll)
+  .then(insertItems)
+  .fail(outError);
+}
 
 function fetchRemote(pageIndex, perPage) {
   return fetchYoutube(createOpt(pageIndex, perPage));
-}
-
-function whenFail(reason) {
-  throw new Error(reason);
 }
 
 function fetchRestOfAll(data) {
@@ -60,7 +56,7 @@ function insertItems(items) {
     item.nm_type = 'youtube';
     return insertItem(item);
   }))
-  .fail(whenFail);
+  .fail(outError);
 }
 
 function createOpt(pageIndex, perPage) {

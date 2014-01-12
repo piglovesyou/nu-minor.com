@@ -8,9 +8,8 @@ describe "SoundCloudCollector", ->
   it "should have all items saved in DB.", (done) ->
     total = undefined
     soundcloud = require("../src/collector/soundcloud")
-    Q.when().then(->
-      soundcloud.promise
-    ).then(->
+    soundcloud.promise()
+    .then(->
       soundcloud.get "/users/nu-minor.json"
     ).then((res) ->
       total = res.json.track_count
