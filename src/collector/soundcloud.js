@@ -35,9 +35,6 @@ function insertItems(items) {
     item.nm_type = 'soundcloud';
     return insertItem(item);
   }))
-  .then(function() {
-    return items.length;
-  })
   .fail(outError);
 }
 

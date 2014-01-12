@@ -44,7 +44,7 @@ function fetchRestOfAll(data) {
       return arr.concat(data.items);
     }, firstItems);
   })
-  .fail(whenFail);
+  .fail(outError);
 }
 
 function insertItem(item) {
@@ -54,6 +54,7 @@ function insertItem(item) {
 function insertItems(items) {
   return Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'youtube';
+    item.created_at = item.updated || item.uploaded;
     return insertItem(item);
   }))
   .fail(outError);
