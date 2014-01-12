@@ -7,7 +7,7 @@ count = Q.denodeify(db.item.count.bind(db.item))
 describe "SoundCloudCollector", ->
   it "should have all items saved in DB.", (done) ->
     total = undefined
-    soundcloud = require("../src/collector/soundcloudcollector")
+    soundcloud = require("../src/collector/soundcloud")
     Q.when().then(->
       soundcloud.promise
     ).then(->
