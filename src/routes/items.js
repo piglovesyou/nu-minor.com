@@ -1,5 +1,6 @@
 
-var Q = require('q');
+var Q = require('../moduleproxy/q');
+var outError = require('../promise/promise');
 var db = require('../setupdb');
 var assert = require('assert');
 var _ = require('underscore');
@@ -34,7 +35,7 @@ exports.userExistsMW = function(req, res, next) {
   var userId = req.params.userId;
   findUser({id: userId})
   .fail(whenFail(res))
-  .done(function(user) {
+  .then(function(user) {
     !!user ? next(null, user) : res.end('not found');
   });
 

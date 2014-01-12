@@ -20,7 +20,7 @@ module.exports.promise = function() {
   .then(fetchRestOfAll)
   .then(insertItems)
   .fail(outError);
-}
+};
 
 function fetchRemote(pageIndex, perPage) {
   return fetchYoutube(createOpt(pageIndex, perPage));

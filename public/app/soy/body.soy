@@ -22,15 +22,10 @@
 {/template}
 
 /**
- * @param id ''
  * @param nm_type ''
- * @param span ''
- * @param userLiked n
- * @param userMarkedBad n
- * @param nm_like []
- * @param nm_bad []
  */
 {template .item}
+  // Sould I "delegate" template ?
   {if $nm_type == 'youtube'}
     {call .youtube data="all"}{/call}
   {elseif $nm_type == 'soundcloud'}
@@ -64,31 +59,25 @@
 /**
  * @param id ''
  * @param span ''
- * @param userLiked n
- * @param userMarkedBad n
- * @param nm_like []
- * @param nm_bad []
  *
- * @param from_user
- * @param from_user_name
- * @param profile_image_url
+ * @param user
  * @param text
  */
 {template .twitter}
   <div data-itemid="{$id}" class="app-item app-item-twitter span{$span}{if $span == 6} pull-right{/if}">
 
     <div class="app-item-twitter-inner clearfix" style="background:#3498db; color: white;">
-      <img style="float: left;" src="{$profile_image_url}" alt="" />
+      <img style="float: left;" src="{$user['profile_image_url']}" alt="" />
       <p class="text">{$text}</p>
 
       <div class="username">
-        <strong class="from_user">{$from_user}</strong>
-        <span class="from_user_name"><s>@</s>{$from_user_name}</span>
+        <strong class="from_user">{$user['name']}</strong>
+        <span class="from_user_name"><s>@</s>{$user['screen_name']}</span>
       </div>
 
     </div>
 
-    {call .appItemBar data="all"}{/call}
+    // {call .appItemBar data="all"}{/call}
 
   </div>
 {/template}
@@ -96,17 +85,13 @@
 /**
  * @param id ''
  * @param span ''
- * @param userLiked n
- * @param userMarkedBad n
- * @param nm_like []
- * @param nm_bad []
  */
 {template .soundcloud}
   <div data-itemid="{$id}" class="app-item app-item-soundcloud span{$span}{if $span == 6} pull-right{/if}">
 
-    // <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>
 
-    {call .appItemBar data="all"}{/call}
+    // {call .appItemBar data="all"}{/call}
 
   </div>
 {/template}
@@ -114,18 +99,14 @@
 /**
  * @param id ''
  * @param span ''
- * @param userLiked n
- * @param userMarkedBad n
- * @param nm_like []
- * @param nm_bad []
  */
 {template .youtube}
   <div data-itemid="{$id}" class="app-item app-item-youtube span{$span}{if $span == 6} pull-right{/if}">
 
     // <div style="height :2em; background: #666;"></div>
-    // <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
+    <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
 
-    {call .appItemBar data="all"}{/call}
+    // {call .appItemBar data="all"}{/call}
 
   </div>
 {/template}

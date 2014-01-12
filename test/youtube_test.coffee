@@ -17,7 +17,6 @@ describe "YoutubeCollector", ->
       videos
         author: "NUminormusic"
         "max-results": 1
-
     ).then((data) ->
       total = data.totalItems
       count nm_type: "youtube"

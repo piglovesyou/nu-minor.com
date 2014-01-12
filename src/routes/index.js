@@ -54,8 +54,9 @@ exports.index = function(req, res) {
   ];
 
   var itemsRef;
-  // find({id: {$in: feature}}, null, { })
   find()
+  // find({id: {$in: feature}}, null, { })
+  // find(null, null, {$sort: {create_at: -1}})
   .then(function(items) {
 
     items = sortByIdAs(items, feature);

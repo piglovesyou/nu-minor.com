@@ -1,9 +1,9 @@
 
-// youtube
+// soundcloud
 
 module.exports = {
   kind: String,
-  id: Number,
+  id: String,
   created_at: String,
   user_id: Number,
   duration: Number,
