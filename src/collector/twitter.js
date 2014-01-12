@@ -32,7 +32,6 @@ function get(url) {
 }
 
 function insertItem(item) {
-  console.log(item.id);
   return dbUpdate({ id: item.id }, item, { upsert: true });
 }
 

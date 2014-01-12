@@ -18,6 +18,8 @@ schemaMap.item = _.extend(
     require('./schema/twitter'),
     require('./schema/base'));
 
+console.log(schemaMap.id);
+
 
 
 // Initialize models

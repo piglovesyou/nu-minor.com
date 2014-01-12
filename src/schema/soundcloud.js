@@ -3,8 +3,8 @@
 
 module.exports = {
   kind: String,
-  id: String,
-  created_at: String,
+  // id: String,
+  // created_at: String,
   user_id: Number,
   duration: Number,
   commentable: String,

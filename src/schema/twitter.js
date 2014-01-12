@@ -6,7 +6,7 @@ module.exports = {
   'coordinates': String,
   'truncated': Boolean,
   'favorited': Boolean,
-  'created_at': String,
+  // 'created_at': String,
   'id_str': String,
   'entities': {
     'urls': [
@@ -24,7 +24,7 @@ module.exports = {
   'text': String,
   'contributors': String,
   'in_reply_to_status_id_str': String,
-  'id': Number,
+  // 'id': Number,
   'retweet_count': Number,
   'geo': String,
   'retweeted': Boolean,

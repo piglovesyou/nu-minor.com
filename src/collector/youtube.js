@@ -51,6 +51,7 @@ function insertItem(item) {
   return dbUpdate({ id: item.id }, item, { upsert: true });
 }
 
+var a = 1;
 function insertItems(items) {
   return Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'youtube';

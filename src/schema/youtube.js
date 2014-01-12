@@ -2,7 +2,7 @@
 // youtube
 
 module.exports = {
-  id: String,
+  // id: String,
   title: String,
   uploaded: String,
   updated: String,
