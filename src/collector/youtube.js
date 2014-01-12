@@ -2,46 +2,35 @@
 var db = require('../setupdb');
 var youtube = require('youtube-feeds');
 var Q = require('q');
+Q.longStackSupport = true;
 var _ = require('underscore');
 
-var update = Q.denodeify(db.item.update.bind(db.item));
-var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
-
-var deferredToExport = Q.defer();
-
-/** @type {Object} */
-module.exports.promise = deferredToExport.promise;
-
-// A local promise object where steps are chained in this file.
-var promiseCollectYoutube;
-
-
+var dbUpdate = Q.denodeify(db.item.update.bind(db.item));
+var fetchYoutube = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 
 // Youtube returns crazy response
 var PER_PAGE = 20;
-var createOpt = function(pageIndex, perPage) {
-  return {
-    'author': 'NUminormusic',
-    'max-results': perPage,
-    'start-index': pageIndex * PER_PAGE + 1
-  };
-};
 
-var fetchRemote = function(pageIndex, perPage) {
-  return videos(createOpt(pageIndex, perPage));
-};
 
-var whenFail = function(reason) {
+
+/** @type {Object} */
+module.exports.promise = Q.when()
+.then(fetchRemote.bind(null, 0, PER_PAGE))
+.then(fetchRestOfAll)
+.then(insertItems)
+.fail(whenFail);
+
+
+
+function fetchRemote(pageIndex, perPage) {
+  return fetchYoutube(createOpt(pageIndex, perPage));
+}
+
+function whenFail(reason) {
   throw new Error(reason);
-};
+}
 
-var whenAllDone = function(length) {
-  deferredToExport.resolve(length);
-};
-
-var fetchRestOfAll = function(data) {
-  var d = Q.defer();
-
+function fetchRestOfAll(data) {
   var firstItems = data.items;
   var remotes = [];
   var rest = data.totalItems - data.itemsPerPage;
@@ -53,43 +42,32 @@ var fetchRestOfAll = function(data) {
     rest -= perPage;
   }
 
-  Q.allSettled(remotes)
+  return Q.allSettled(remotes)
   .spread(function() {
     return _.reduce(arguments, function(arr, data) {
       return arr.concat(data.items);
     }, firstItems);
   })
-  .fail(whenFail)
-  .done(function(items) {
-    d.resolve(items);
-  });
+  .fail(whenFail);
+}
 
-  return d.promise;
-};
+function insertItem(item) {
+  return dbUpdate({ id: item.id }, item, { upsert: true });
+}
 
-var insertItem = function(item) {
-  return update({ id: item.id },
-    item, { upsert: true });
-};
-
-var insertItems = function(items) {
-  var d = Q.defer();
-  Q.allSettled(items.map(function(item, i) {
+function insertItems(items) {
+  return Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'youtube';
     return insertItem(item);
   }))
-  .fail(whenFail)
-  .done(function() {
-    d.resolve(items.length);
-  });
-  return d.promise;
-};
+  .fail(whenFail);
+}
 
+function createOpt(pageIndex, perPage) {
+  return {
+    'author': 'NUminormusic',
+    'max-results': perPage,
+    'start-index': pageIndex * PER_PAGE + 1
+  };
+}
 
-
-promiseCollectYoutube = Q.when()
-.then(fetchRemote.bind(null, 0, PER_PAGE))
-.then(fetchRestOfAll)
-.then(insertItems)
-.fail(whenFail)
-.done(whenAllDone);

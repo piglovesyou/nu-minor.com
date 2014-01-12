@@ -6,6 +6,9 @@ db = require("../src/setupdb")
 http = require("../src/denodeify/http")
 find = Q.denodeify(db.item.find.bind(db.item))
 count = Q.denodeify(db.item.count.bind(db.item))
+
+
+
 describe "TwitterCollector", ->
   it "should have some data in DB.", (done) ->
     actualCount = 0

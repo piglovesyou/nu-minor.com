@@ -2,28 +2,7 @@
 var Q = require('q');
 var db = require('../setupdb');
 var querystring = require('querystring');
-
-// TODO: Make a module
-var SECRET = require('secret-strings').NU_MINOR;
-var oa = new (require('oauth').OAuth)(
-    'https://api.twitter.com/oauth/request_token',
-    'https://api.twitter.com/oauth/access_token',
-    SECRET.CONSUMER_KEY,
-    SECRET.CONSUMER_SECRET,
-    '1.0A',
-    null,
-    'HMAC-SHA1');
-var oauth_get = function(url) {
-  var d = Q.defer();
-  oa.get(url,
-    SECRET.ACCESS_TOKEN,
-    SECRET.ACCESS_TOKEN_SECRET,
-    function(e, data, res) {
-      if (e) d.reject(JSON.stringify(e));
-      else d.resolve(JSON.parse(data));
-    });
-  return d.promise;
-};
+var twitter = require('../auth/twitter');
 
 var http = require('../denodeify/http');
 // var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
@@ -39,31 +18,30 @@ module.exports.promise = deferredToExport.promise;
 var promiseCollectYoutube;
 
 
-var createUrl = function(path, param) {
+function createUrl(path, param) {
   if (!param) param = {};
   return 'https://api.twitter.com' +
       path + '?' + querystring.stringify(param);
 };
 
-var get = function(url) {
-  return oauth_get(url);
-  // return http.get(createUrl(path, param));
+function get(url) {
+  return twitter.get(url);
 };
 module.exports.get = get;
 
-var whenFail = function(reason) {
+function whenFail(reason) {
   throw new Error(reason);
 };
 
-var whenAllDone = function(length) {
+function whenAllDone(length) {
   deferredToExport.resolve(length);
 };
 
-var insertItem = function(item) {
+function insertItem(item) {
   return update({ id: item.id }, item, { upsert: true });
 };
 
-var insertItems = function(items) {
+function insertItems(items) {
   var d = Q.defer();
   Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'twitter';
