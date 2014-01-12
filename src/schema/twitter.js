@@ -2,7 +2,6 @@
 // twitter
 
 module.exports = {
-  created_at: String,
   from_user: String,
   from_user_id: Number,
   from_user_id_str: String,

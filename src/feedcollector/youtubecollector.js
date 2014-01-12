@@ -53,7 +53,7 @@ var fetchRestOfAll = function(data) {
     rest -= perPage;
   }
 
-  Q.allResolved(remotes)
+  Q.allSettled(remotes)
   .spread(function() {
     return _.reduce(arguments, function(arr, data) {
       return arr.concat(data.items);
@@ -74,7 +74,7 @@ var insertItem = function(item) {
 
 var insertItems = function(items) {
   var d = Q.defer();
-  Q.allResolved(items.map(function(item, i) {
+  Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'youtube';
     return insertItem(item);
   }))

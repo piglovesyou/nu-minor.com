@@ -44,7 +44,7 @@ var insertItem = function(item) {
 var insertItems = function(items) {
 
   var d = Q.defer();
-  Q.allResolved(items.map(function(item, i) {
+  Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'soundcloud';
     return insertItem(item);
   }))

@@ -14,8 +14,6 @@ describe "TwitterCollector", ->
       twitter.promise
     ).then(->
       twitter.get "https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=NU_minor"
-    # ).then((json) ->
-    #   id = json.results[0].id
 
     ).then((items)->
       actualCount = items.length

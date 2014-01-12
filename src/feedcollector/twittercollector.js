@@ -60,13 +60,12 @@ var whenAllDone = function(length) {
 };
 
 var insertItem = function(item) {
-  return update({ id: item.id },
-    item, { upsert: true });
+  return update({ id: item.id }, item, { upsert: true });
 };
 
 var insertItems = function(items) {
   var d = Q.defer();
-  Q.allResolved(items.map(function(item, i) {
+  Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'twitter';
     return insertItem(item);
   }))
