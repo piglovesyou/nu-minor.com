@@ -7,22 +7,18 @@ var twitter = require('../auth/twitter');
 var http = require('../denodeify/http');
 // var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 
-var update = Q.denodeify(db.item.update.bind(db.item));
+var dbUpdate = Q.denodeify(db.item.update.bind(db.item));
 
-var deferredToExport = Q.defer();
+
 
 /** @type {Object} */
-module.exports.promise = deferredToExport.promise;
+module.exports.promise =
+Q.when('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=NU_minor')
+.then(get)
+.then(insertItems)
+.fail(whenFail);
 
-// A local promise object where steps are chained in this file.
-var promiseCollectYoutube;
 
-
-function createUrl(path, param) {
-  if (!param) param = {};
-  return 'https://api.twitter.com' +
-      path + '?' + querystring.stringify(param);
-};
 
 function get(url) {
   return twitter.get(url);
@@ -33,33 +29,21 @@ function whenFail(reason) {
   throw new Error(reason);
 };
 
-function whenAllDone(length) {
-  deferredToExport.resolve(length);
-};
-
 function insertItem(item) {
-  return update({ id: item.id }, item, { upsert: true });
+  return dbUpdate({ id: item.id }, item, { upsert: true });
 };
 
 function insertItems(items) {
-  var d = Q.defer();
-  Q.allSettled(items.map(function(item, i) {
+  return Q.allSettled(items.map(function(item, i) {
     item.nm_type = 'twitter';
     return insertItem(item);
   }))
-  .fail(whenFail)
-  .done(function() {
-    d.resolve(items.length);
-  });
-  return d.promise;
+  .fail(whenFail);
 };
 
-
-promiseCollectYoutube = Q.when()
-.then(function() {
-  return get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=NU_minor');
-})
-.then(insertItems)
-.fail(whenFail)
-.done(whenAllDone);
+function createUrl(path, param) {
+  if (!param) param = {};
+  return 'https://api.twitter.com' +
+      path + '?' + querystring.stringify(param);
+};
 
