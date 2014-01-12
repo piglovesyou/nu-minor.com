@@ -9,7 +9,7 @@ count = Q.denodeify(db.item.count.bind(db.item))
 describe "TwitterCollector", ->
   it "should have some data in DB.", (done) ->
     actualCount = 0
-    twitter = require("../src/feedcollector/twittercollector")
+    twitter = require("../src/collector/twittercollector")
     Q.when().then(->
       twitter.promise
     ).then(->

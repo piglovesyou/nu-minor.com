@@ -8,7 +8,7 @@ describe "YoutubeCollector", ->
   it "should have all items saved in DB.", (done) ->
     total = undefined
     Q.when().then(->
-      require("../src/feedcollector/youtubecollector").promise
+      require("../src/collector/youtubecollector").promise
     ).fail((err) ->
       throw new Error(err)
     ).then(->
