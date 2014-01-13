@@ -128,36 +128,47 @@ $item-margin-bottom: 20px
 
   .from_user
     margin-right: 4px
+    font-size: .85em
   .from_user_name
-    font-size: 80%
+    font-size: .85em
     opacity: .8
     s
       text-decoration: none
 
   .app-item-twitter-inner
-    position: relative
-    > img
-      border-radius: 2px
-      margin: 4px
-    > .text
-      margin: 0 4px
-      font-size: 200%
-      opacity: .8
-    > .username
-      margin: 0 4px
-      padding: .2em 0
-    &:after
-      position: absolute
-      display: block
-      bottom: 0
-      right: 5px
-      color: white
-      opacity: .6
-      font-size: 400%
+    .profile-image
+      float: left
+      width: 24px
+      margin: 0 8px 8px 0
+  
+  .app-item-twitter-inner
+    font-size: .85em
+    .text
+      margin: 0 0 4px
+  // .app-item-twitter-inner
+  //   position: relative
+  //   > img
+  //     border-radius: 2px
+  //     margin: 4px
+  //   > .text
+  //     margin: 0 4px
+  //     font-size: 200%
+  //     opacity: .8
+  //   > .username
+  //     margin: 0 4px
+  //     padding: .2em 0
+  //   &:after
+  //     position: absolute
+  //     display: block
+  //     bottom: 0
+  //     right: 5px
+  //     color: white
+  //     opacity: .6
+  //     font-size: 400%
 
-      @extend [class^="icon-"]
-      @extend [class^="icon-"]:before
-      @extend .icon-twitter-sign:before
+  //     @extend [class^="icon-"]
+  //     @extend [class^="icon-"]:before
+  //     @extend .icon-twitter-sign:before
 
 .app-footer
   padding: 3em 0 4em
@@ -363,16 +374,20 @@ $g_connpass_dark: #3d611c
     font-size: 75% !important
 
 .app-item-static_element-link-youtube
-  +bg-three-stripe(#fc466d, 90%, #c93857, 93%, #771d2e)
+  background: #fc466d
+  // +bg-three-stripe(#fc466d, 90%, #c93857, 93%, #771d2e)
   &:hover
-    +bg-three-stripe(lighten(#fc466d, 5%), 90%, #c93857, 93%, #771d2e)
+    background: lighten(#fc466d, 5%)
+    // +bg-three-stripe(lighten(#fc466d, 5%), 90%, #c93857, 93%, #771d2e)
 .app-item-static_element-link-soundcloud
   &,
   &:hover
     color: $gray
-  +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)
+    background: #e1c408
+  // +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)
   &:hover
-    +bg-three-stripe(lighten(#e1c408, 10%), 90%, #c2ab18, 93%, #6b611f)
+    background: lighten(#e1c408, 10%)
+    // +bg-three-stripe(lighten(#e1c408, 10%), 90%, #c2ab18, 93%, #6b611f)
 
 
 

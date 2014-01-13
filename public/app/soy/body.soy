@@ -66,8 +66,8 @@
 {template .twitter}
   <div data-itemid="{$id}" class="app-item app-item-twitter span{$span}{if $span == 6} pull-right{/if}">
 
-    <div class="app-item-twitter-inner clearfix" style="background:#3498db; color: white;">
-      <img style="float: left;" src="{$user['profile_image_url']}" alt="" />
+    <div class="app-item-twitter-inner clearfix">
+      <img class="profile-image" src="{$user['profile_image_url']}" alt="" />
       <p class="text">{$text}</p>
 
       <div class="username">
