@@ -4,7 +4,7 @@
 
 /**
  * @param isAuthed
- * @param twitter
+ * param twitter
  */
 {template .main}
   <div class="container">
@@ -19,7 +19,7 @@
 /**
  * @param isAuthed
  * @param useFollowButton
- * @param twitter
+ * param twitter
  */
 {template .title}
   <div class="row app-title">
@@ -39,15 +39,15 @@
           </span>
         </a>
       {/if}
-      {if $isAuthed}
-        <a href="/auth/logout" class="app-userprofile" title="ログアウトします">
-          <img src="{$twitter.profile_image_url}" alt="{$twitter.screen_name}" />{$twitter.screen_name}
-        </a>
-      {else}
-        <a href="/auth/auth" title="Twitter にログインすると、評価を付けることができます">
-          login
-        </a>
-      {/if}
+      // {if $isAuthed}
+      //   <a href="/auth/logout" class="app-userprofile" title="ログアウトします">
+      //     <img src="{$twitter.profile_image_url}" alt="{$twitter.screen_name}" />{$twitter.screen_name}
+      //   </a>
+      // {else}
+      //   <a href="/auth/auth" title="Twitter にログインすると、評価を付けることができます">
+      //     login
+      //   </a>
+      // {/if}
       // <a class="app-menutoggle btn" href="javascript:void(0)">o</a>
     </div>
   </div>

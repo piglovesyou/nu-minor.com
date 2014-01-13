@@ -3,26 +3,9 @@ $itme-min-height: 120px
 $item-margin-bottom: 20px
 
 
-// @media (min-width: 980px) and (max-width: 1199px)
-// @media (min-width: 1200px)
-
 
 =margin-bottom-normal
   margin-bottom: $item-margin-bottom
-
-.app-head
-  padding-top: 70px
-
-.app-head-container
-  width: 100%
-  background: $bodyBackground
-  position: fixed
-  top: 0
-  left: 0
-  z-index: 1
-
-// .app-head
-//   padding-top: 70px
 
 .app-title
   line-height: 40px
@@ -32,7 +15,6 @@ $item-margin-bottom: 20px
     margin-right: .3em
   .follow-numinor
     margin-right: 20px
-    // font-size: 120%
     vertical-align: middle
     > .iconbefore:before
       @extend [class^="icon-"]
@@ -51,10 +33,6 @@ $item-margin-bottom: 20px
     margin-right: 6px
 
 
-
-
-.app-body-container
-  padding-top: 150px
   
 .row-nav
   +margin-bottom-normal
@@ -92,7 +70,6 @@ $item-margin-bottom: 20px
   +margin-bottom-normal
 .app-item-bar
   display: block
-  // background: #d7dce0
   .btn-group
     float: right
 
@@ -102,7 +79,6 @@ $item-margin-bottom: 20px
     padding-top: 2px
     padding-bottom: 2px
 
-  // Like and Bad icons
   .app-item-like,
   .app-item-bad
     +user-select(none)
@@ -375,34 +351,33 @@ $g_connpass_dark: #3d611c
 
 .app-item-static_element-link-youtube
   background: #fc466d
-  // +bg-three-stripe(#fc466d, 90%, #c93857, 93%, #771d2e)
   &:hover
     background: lighten(#fc466d, 5%)
-    // +bg-three-stripe(lighten(#fc466d, 5%), 90%, #c93857, 93%, #771d2e)
 .app-item-static_element-link-soundcloud
   &,
   &:hover
     color: $gray
     background: #e1c408
-  // +bg-three-stripe(#e1c408, 90%, #c2ab18, 93%, #6b611f)
   &:hover
     background: lighten(#e1c408, 10%)
-    // +bg-three-stripe(lighten(#e1c408, 10%), 90%, #c2ab18, 93%, #6b611f)
 
 
 
+
+.app-head
+  padding-top: 70px
+  padding-bottom: 50px
 @media (max-width: 479px)
   .app-title h1
     float: none
 @media (max-width: 767px) 
-  .app-head-container
-    position: static
   .app-head
     padding-top: 40px
-  .app-body-container
-    padding-top: 30px
+    padding-bottom: 30px
 @media (min-width: 768px) and (max-width: 979px)
   .app-head
     padding-top: 50px
-  .app-body-container
-    padding-top: 130px
+    padding-bottom: 40px
+// @media (min-width: 980px) and (max-width: 1199px)
+// @media (min-width: 1200px)
+
