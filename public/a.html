@@ -1,0 +1,45 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+  <script src="/javascripts/masonry.pkgd.min.js"></script>
+  <style type="text/css">
+    body {margin: 0;}
+    .wrap {
+      width: 80%;
+      margin: 100px auto;
+    }
+    .item {
+      width: 180px;
+      height: 180px;
+      margin: 10px;
+      background: lightblue;
+      text-align: center;
+      line-height: 180px;
+    }
+    .item2 {
+      width: 380px;
+    }
+  </style>
+</head>
+<body>
+	<div class="wrap">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item item2">3</div>
+    <div class="item">4</div>
+    <div class="item">5</div>
+    <div class="item item2">6</div>
+    <div class="item">7</div>
+    <div class="item item2">8</div>
+    <div class="item">9</div>
+  </div>
+  <script>
+    new Masonry(document.querySelector('.wrap'), {
+      itemSelector: '.item'
+    });
+  </script>
+</body>
+</html>

@@ -70,7 +70,7 @@
     {else}
       <link rel="stylesheet" href="/stylesheets/main.css" />
       {if not $excludeScript}
-        <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
+        // <script src="http://localhost:9810/compile?id=plovr-sample&mode=whitespace&pretty-print=true"></script>
       {/if}
     {/if}
   </head>
@@ -79,6 +79,8 @@
     {if $isProduction}
       {call .google_analytics /}
     {/if}
+    <script src="/javascripts/masonry.pkgd.min.js"></script>
+    <script src="/javascripts/m.js"></script>
   </body>
   </html>
 {/template}
