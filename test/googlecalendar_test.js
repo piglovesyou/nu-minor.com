@@ -1,25 +1,26 @@
 var Q = require('q');
 var _ = require('underscore');
-var youtube = require('youtube-feeds');
 var assert = require('assert');
 var db = require('../src/db');
 var http = require('../src/denodeify/http');
-var count = Q.denodeify(db.item.count.bind(db.item));
 var querystring = require('querystring');
-var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
+var count = Q.denodeify(db.item.count.bind(db.item));
+var API_KEY = require('secret-strings').NU_MINOR.API_KEY;
 
-describe('SoundCloudCollector', function() {
+describe('GoogleCalendarCollector', function() {
   return it('should have all items saved in DB.', function(done) {
-    var soundcloud, total;
-    total = void 0;
-    soundcloud = require('../src/collector/soundcloud');
-    return soundcloud.promise().then(function() {
-      return http.get(
-        'http://api.soundcloud.com' +
-        '/users/nu-minor/tracks.json?' +
-        querystring.stringify({client_id: CLIENT_ID}));
+    var total = void 0;
+    var googlecalendar = require('../src/collector/googlecalendar');
+    return googlecalendar.promise().then(function() {
+      return http.sGet(
+        'https://www.googleapis.com/calendar/v3/calendars/' +
+        'b225852svf6num52g7agnsh568@group.calendar.google.com' +
+        '/events?' + querystring.stringify({
+          alwaysIncludeEmail: false,
+          key: API_KEY
+        }));
     }).then(function(res) {
-      var items = res.json;
+      var items = res.json.items;
       assert(_.isArray(items));
       return items;
     }).then(function(items) {

@@ -27,7 +27,6 @@ function get_(fn, opt) {
     });
     res.on('end', function() {
       res.body = body;
-      // TODO: Parse it outside.
       res.json = JSON.parse(body);
       d.resolve(res);
     });
