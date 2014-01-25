@@ -1,72 +1,34 @@
 
+var querystring = require('querystring');
+var util = require('util');
+var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
+var Base = require('./base').Base;
+
 var Q = require('../moduleproxy/q');
-var db = require('../db');
 var youtube = require('youtube-feeds');
-var _ = require('underscore');
-
-var dbUpdate = Q.denodeify(db.item.update.bind(db.item));
-var fetchYoutube = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
-var outError = require('../promise/promise').outError;
-
-// Youtube returns crazy response
-var PER_PAGE = 20;
+var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
 
 
 
-/** @type {Object} */
-module.exports.promise = function() {
-  return Q.when()
-  .then(fetchRemote.bind(null, 0, PER_PAGE))
-  .then(fetchRestOfAll)
-  .then(insertItems)
-  .fail(outError);
+util.inherits(YouTube, Base);
+module.exports = new YouTube();
+
+
+
+function YouTube() {
+  this.nmType = 'youtube';
+  this.createdAtProperty = 'uploaded';
+}
+
+YouTube.prototype.request = function() {
+  return videos({
+    'author': 'NUminormusic',
+    'max-results': 20,
+    'start-index': 1 // It starts from 1..
+  });
 };
 
-function fetchRemote(pageIndex, perPage) {
-  return fetchYoutube(createOpt(pageIndex, perPage));
-}
-
-function fetchRestOfAll(data) {
-  var firstItems = data.items;
-  var remotes = [];
-  var rest = data.totalItems - data.itemsPerPage;
-  var i = 1;
-
-  while (rest > 0) {
-    var perPage = Math.min(rest, PER_PAGE); // fuck youtube api
-    remotes.push(fetchRemote(i++, perPage));
-    rest -= perPage;
-  }
-
-  return Q.allSettled(remotes)
-  .spread(function() {
-    return _.reduce(arguments, function(arr, data) {
-      return arr.concat(data.items);
-    }, firstItems);
-  })
-  .fail(outError);
-}
-
-function insertItem(item) {
-  return dbUpdate({ id: item.id }, item, { upsert: true });
-}
-
-var a = 1;
-function insertItems(items) {
-  return Q.allSettled(items.map(function(item, i) {
-    item.nm_type = 'youtube';
-    item.created_at = item.updated || item.uploaded;
-    return insertItem(item);
-  }))
-  .fail(outError);
-}
-
-// TODO: I don't want "max-results" thing any more
-function createOpt(pageIndex, perPage) {
-  return {
-    'author': 'NUminormusic',
-    'max-results': perPage,
-    'start-index': pageIndex * PER_PAGE + 1
-  };
-}
+YouTube.prototype.getItemsFromJson = function(data) {
+  return data.items;
+};
 
