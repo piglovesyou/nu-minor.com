@@ -3,7 +3,7 @@
 var soy = require('../soynode.js');
 var isProduction = process.env.NODE_ENV === 'production';
 var Q = require('q');
-var db = require('../setupdb');
+var db = require('../db');
 
 
 var SECRET = require('secret-strings').NU_MINOR;

@@ -1,6 +1,6 @@
 
 var Q = require('../moduleproxy/q');
-var db = require('../setupdb');
+var db = require('../db');
 var youtube = require('youtube-feeds');
 var _ = require('underscore');
 

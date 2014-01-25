@@ -2,7 +2,7 @@ var Q = require('q');
 var _ = require('underscore');
 var youtube = require('youtube-feeds');
 var assert = require('assert');
-var db = require('../src/setupdb');
+var db = require('../src/db');
 var http = require('../src/denodeify/http');
 var count = Q.denodeify(db.item.count.bind(db.item));
 

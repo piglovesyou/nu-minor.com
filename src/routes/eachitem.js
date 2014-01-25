@@ -1,6 +1,6 @@
 
 var Q = require('q');
-var db = require('../setupdb');
+var db = require('../db');
 var assert = require('assert');
 var _ = require('underscore');
 

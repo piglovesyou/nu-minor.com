@@ -1,6 +1,6 @@
 
 var Q = require('../moduleproxy/q');
-var db = require('../setupdb');
+var db = require('../db');
 var querystring = require('querystring');
 var twitter = require('../auth/twitter');
 

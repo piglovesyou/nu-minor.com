@@ -1,6 +1,6 @@
 
 var Q = require('../moduleproxy/q');
-var db = require('../setupdb');
+var db = require('../db');
 var querystring = require('querystring');
 var http = require('../denodeify/http');
 var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;

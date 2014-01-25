@@ -3,7 +3,7 @@
 
 var soy = require('../soynode.js');
 var Q = require('q');
-var db = require('../setupdb');
+var db = require('../db');
 var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
 
