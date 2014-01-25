@@ -18,6 +18,7 @@
     "q": "*",
     "mongoose": "*",
     "youtube-feeds": "*",
-    "selenium-webdriver": "*"
+    "selenium-webdriver": "*",
+    "moment": "*"
   }
 }

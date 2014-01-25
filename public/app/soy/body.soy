@@ -32,6 +32,8 @@
     {call .soundcloud data="all"}{/call}
   {elseif $nm_type == 'twitter'}
     {call .twitter data="all"}{/call}
+  {elseif $nm_type == 'googlecalendar'}
+    {call .googlecalendar data="all"}{/call}
   {elseif $nm_type == '@static_element@'}
     {call .static_element data="all"}{/call}
   {/if}
@@ -57,21 +59,42 @@
 
 
 /**
+ * @param summary
+ * @param span
+ * @param displayDate
+ * @param description
+ * @param location
+ */
+{template .googlecalendar}
+  
+  <a href="https://www.google.com/calendar/embed?src=b225852svf6num52g7agnsh568%40group.calendar.google.com&ctz=Asia/Tokyo" target="_blank" class="app-item app-item-static_element app-item-static_element-link app-item-static_element-link-googlecalendar span{$span}{if $span == 6} pull-right{/if}">
+    <h3>{$displayDate}</h3>
+    <h2>{$summary}</h2>
+    {$description} {$location}
+    
+  </a>
+
+{/template}
+
+/**
  * @param id ''
  * @param span ''
  *
  * @param user
- * @param text
+ * @param displayText
+ * @param displayDate
+ * @param displayDateDescription
  */
 {template .twitter}
   <div data-itemid="{$id}" class="app-item app-item-twitter span{$span}{if $span == 6} pull-right{/if}">
 
     <div class="app-item-twitter-inner clearfix">
       <img class="profile-image" src="{$user['profile_image_url']}" alt="" />
-      <p class="text">{$text}</p>
+      <p class="text">{$displayText|noAutoescape}</p>
 
       <div class="username">
         <strong class="from_user">{$user['name']}</strong>
+        <span class="updated_at" title="{$displayDateDescription}">{$displayDate}</span>
         <span class="from_user_name"><s>@</s>{$user['screen_name']}</span>
       </div>
 

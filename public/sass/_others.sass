@@ -110,6 +110,9 @@ $item-margin-bottom: 20px
     opacity: .8
     s
       text-decoration: none
+  .updated_at
+    font-size: .85em
+    float: right
 
   .app-item-twitter-inner
     .profile-image
@@ -337,22 +340,24 @@ $g_connpass_dark: #3d611c
 
 
 .app-item-static_element-link
-  $height: 200px
-  height: $height
-  line-height: $height
+  padding: 3.5em 0
   font-size: 145%
   text-align: center
   color: $textColor
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+  line-height: 1.2
   &:hover
-    color: $textColor
+    // color: $textColor
   &:after
     margin-left: .2em !important
     font-size: 75% !important
 
 .app-item-static_element-link-youtube
-  background: #fc466d
+  background: #eb567d
+  // color: #DFE5E9
   &:hover
-    background: lighten(#fc466d, 5%)
+    background: lighten(#eb567d, 5%)
 .app-item-static_element-link-soundcloud
   &,
   &:hover
@@ -360,6 +365,18 @@ $g_connpass_dark: #3d611c
     background: #e1c408
   &:hover
     background: lighten(#e1c408, 10%)
+.app-item-static_element-link-googlecalendar
+  background: #5497e1
+  padding: 2em 2.5em
+  color: #DFE5E9
+  text-align: inherit
+  &:hover
+    background: lighten(#5497e1, 5%)
+  h3
+    margin-top: 0
+    font-size: .85em
+  // .location
+  //   text-align: right
 
 
 

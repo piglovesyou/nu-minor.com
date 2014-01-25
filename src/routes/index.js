@@ -6,8 +6,11 @@ var Q = require('q');
 var db = require('../db');
 var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
-
+var strftime = require('strftime');
+var moment = require('moment');
+moment.lang('ja');
 goog.require('goog.array');
+goog.require('goog.string.linkify');
 
 var find = Q.denodeify(db.item.find.bind(db.item));
 
@@ -59,6 +62,19 @@ exports.index = function(req, res) {
 
     items = sortByIdAs(items, feature);
 
+    items.forEach(function(item) {
+      switch (item.nm_type) {
+        case 'googlecalendar':
+          item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
+          break;
+        case 'twitter':
+          // item.displayDate = moment(item.created_at, 'DD').fromNow();
+          item.displayDate = moment(item.created_at).fromNow();
+          item.displayDateDescription = moment(item.created_at).format('LLLL');
+          item.displayText = goog.string.linkify.linkifyPlainText(item.text);
+      }
+    });
+
     itemsRef = items;
     items.splice(2, 0, {
       nm_type: '@static_element@',
@@ -83,9 +99,6 @@ exports.index = function(req, res) {
       });
     }
 
-  })
-  .then(function() {
-    // return find({id: {$nin: feature}});
   })
   .then(function(items) {
 

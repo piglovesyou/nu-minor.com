@@ -10,6 +10,8 @@ module.exports = {
   'created': Date,
   'updated': Date,
   'summary': String,
+  'description': String,
+  'location': String,
   'creator': {
     'email': String,
     'displayName': String
