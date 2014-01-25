@@ -1,9 +1,6 @@
 
-var querystring = require('querystring');
 var util = require('util');
-var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 var Base = require('./base').Base;
-
 var Q = require('../moduleproxy/q');
 var youtube = require('youtube-feeds');
 var videos = Q.denodeify(youtube.feeds.videos.bind(youtube.feeds));
@@ -16,6 +13,7 @@ module.exports = new YouTube();
 
 
 function YouTube() {
+  Base.call(this);
   this.nmType = 'youtube';
   this.createdAtProperty = 'uploaded';
 }
@@ -28,7 +26,7 @@ YouTube.prototype.request = function() {
   });
 };
 
-YouTube.prototype.getItemsFromJson = function(data) {
+YouTube.prototype.getItemsFromResponse = function(data) {
   return data.items;
 };
 

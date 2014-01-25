@@ -6,13 +6,11 @@ var db = require('../src/db');
 var http = require('../src/denodeify/http');
 var find = Q.denodeify(db.item.find.bind(db.item));
 var count = Q.denodeify(db.item.count.bind(db.item));
+var twitter = require('../src/auth/twitter');
 
 describe('TwitterCollector', function() {
   return it('should have some data in DB.', function(done) {
-    var actualCount, twitter;
-    actualCount = 0;
-    twitter = require('../src/collector/twitter');
-    return twitter.promise()
+    return require('../src/collector/twitter').promise()
     .then(function() {
       return twitter.get('https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=NU_minor');
     }).then(function(items) {

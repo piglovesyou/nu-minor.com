@@ -15,17 +15,15 @@ module.exports.Base = Base;
 function Base() {
   /** @type {string} */
   this.nmType;
-  /** @type {?string} */
-  this.url;
   /** @type {string} */
   this.createdAtProperty = 'created_at';
 }
 
 Base.prototype.promise = function() {
   assert(this.nmType && this.createdAtProperty);
-  return Q.when(this.url)
+  return Q.when()
   .then(this.request.bind(this))
-  .then(this.getItemsFromJson.bind(this))
+  .then(this.getItemsFromResponse.bind(this))
   .then(this.insertItems_.bind(this))
   .fail(outError);
 };
@@ -39,10 +37,9 @@ Base.prototype.getItemsFromResponse = function(res) {
 
 /**
  * @protected
- * @param {string} opt_url .
  */
-Base.prototype.request = function(opt_url) {
-  return http.get(opt_url);
+Base.prototype.request = function() {
+  assert.fail('implement.');
 };
 
 /**
