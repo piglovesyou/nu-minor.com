@@ -22,9 +22,8 @@ describe('SoundCloudCollector', function() {
         return p.then(function() {
           return count({id: item.id});
         }).then(function(count) {
-          console.log(count);
           assert.equal(count, 1);
-        })
+        });
       }, Q());
     }).then(done);
   });

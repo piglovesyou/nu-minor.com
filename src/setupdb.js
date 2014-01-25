@@ -16,6 +16,7 @@ schemaMap.item = _.extend(
     require('./schema/youtube'),
     require('./schema/soundcloud'),
     require('./schema/twitter'),
+    require('./schema/googlecalendar'),
     require('./schema/base'));
 
 

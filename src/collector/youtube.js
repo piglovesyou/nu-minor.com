@@ -61,6 +61,7 @@ function insertItems(items) {
   .fail(outError);
 }
 
+// TODO: I don't want "max-results" thing any more
 function createOpt(pageIndex, perPage) {
   return {
     'author': 'NUminormusic',
