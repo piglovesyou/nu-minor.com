@@ -6,7 +6,6 @@ var Q = require('q');
 var db = require('../promise/db');
 var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
-var strftime = require('strftime');
 var moment = require('moment');
 moment.lang('ja');
 goog.require('goog.array');
