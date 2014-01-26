@@ -9,8 +9,3 @@ module.exports.items = {
   update: Q.denodeify(schema.item.update.bind(schema.item))
 };
 
-module.exports.users = {
-  findOne: Q.denodeify(schema.user.findOne.bind(schema.user)),
-  update: Q.denodeify(schema.user.update.bind(schema.user))
-};
-

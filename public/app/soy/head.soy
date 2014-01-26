@@ -3,7 +3,6 @@
 
 
 /**
- * @param isAuthed
  * param twitter
  */
 {template .main}
@@ -17,7 +16,6 @@
 {/template}
 
 /**
- * @param isAuthed
  * @param useFollowButton
  * param twitter
  */
@@ -28,10 +26,7 @@
       <p class="muted">The super super band</p>
     </div>
 
-    {let $rightSpan}
-      {if not $useFollowButton and not $isAuthed}1{else}5{/if}
-    {/let}
-    <div class="span{$rightSpan} pull-right">
+    <div class="span1 pull-right">
       {if $useFollowButton}
         <a class="follow-numinor" target="_blank" href="http://twitter.com/NU_minor">
           <span class="iconbefore">
@@ -39,16 +34,6 @@
           </span>
         </a>
       {/if}
-      // {if $isAuthed}
-      //   <a href="/auth/logout" class="app-userprofile" title="ログアウトします">
-      //     <img src="{$twitter.profile_image_url}" alt="{$twitter.screen_name}" />{$twitter.screen_name}
-      //   </a>
-      // {else}
-      //   <a href="/auth/auth" title="Twitter にログインすると、評価を付けることができます">
-      //     login
-      //   </a>
-      // {/if}
-      // <a class="app-menutoggle btn" href="javascript:void(0)">o</a>
     </div>
   </div>
 {/template}

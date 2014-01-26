@@ -11,30 +11,14 @@ var moment = require('moment');
 moment.lang('ja');
 goog.require('goog.array');
 goog.require('goog.string.linkify');
+var outError = require('../promise/promise').outError;
 
-
-var isAuthed = function(req) {
-  // Means we have already authed, fetched user profile.
-  return !!(req.session &&
-            req.session.twitter &&
-            req.session.twitter.id);
-};
-
-var whenFail = function(res) {
-  return function(reason) {
-    assert.fail(reason);
-    res.end(JSON.stringify(reason));
-  };
-};
 
 /*
  * GET home page.
  */
 
 exports.index = function(req, res) {
-
-  var isAuthed_ = isAuthed(req),
-      userId = isAuthed_ && req.session.twitter.id;
 
   var feature = [
     'La-bD1IhMto',
@@ -61,18 +45,7 @@ exports.index = function(req, res) {
 
     items = sortByIdAs(items, feature);
 
-    items.forEach(function(item) {
-      switch (item.nm_type) {
-        case 'googlecalendar':
-          item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
-          break;
-        case 'twitter':
-          // item.displayDate = moment(item.created_at, 'DD').fromNow();
-          item.displayDate = moment(item.created_at).fromNow();
-          item.displayDateDescription = moment(item.created_at).format('LLLL');
-          item.displayText = goog.string.linkify.linkifyPlainText(item.text);
-      }
-    });
+    items.forEach(extendItemForDisplay);
 
     itemsRef = items;
     items.splice(2, 0, {
@@ -91,29 +64,31 @@ exports.index = function(req, res) {
       href: 'https://soundcloud.com/nu-minor'
     });
 
-    if (userId) {
-      _.each(items, function(item) {
-        item.userLiked = _.contains(item.nm_like, userId);
-        item.userMarkedBad = _.contains(item.nm_bad, userId);
-      });
-    }
-
   })
   .then(function(items) {
-
     res.end(soy.render('app.soy.index', {
       isProduction: isProduction,
-      isAuthed: !!(isAuthed_ && req.session.oauth.access_token),
-      twitter: isAuthed_ ? req.session.twitter : null,
       items: itemsRef.concat(items ? _.shuffle(items) : [])
     }));
-
   })
-  .fail(whenFail);
+  .fail(outError);
 
 };
 
 
+/* destractive */
+function extendItemForDisplay(item) {
+  switch (item.nm_type) {
+    case 'googlecalendar':
+      item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
+      break;
+    case 'twitter':
+      // item.displayDate = moment(item.created_at, 'DD').fromNow();
+      item.displayDate = moment(item.created_at).fromNow();
+      item.displayDateDescription = moment(item.created_at).format('LLLL');
+      item.displayText = goog.string.linkify.linkifyPlainText(item.text);
+  }
+}
 
 goog.require('goog.array');
 var assert = require('assert');

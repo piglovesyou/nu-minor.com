@@ -3,13 +3,8 @@ var mongoose = require('mongoose');
 var conn = mongoose.connect('mongodb://localhost/nu-minor');
 var _ = require('underscore');
 
-
 var schemaMap = {};
 var modelMap = {};
-
-
-// user schema
-schemaMap.user = require('./user');
 
 // item schema
 schemaMap.item = _.extend(
@@ -18,9 +13,6 @@ schemaMap.item = _.extend(
     require('./twitter'),
     require('./googlecalendar'),
     require('./base'));
-
-
-
 
 // Initialize models
 _.each(schemaMap, function(schema, name) {

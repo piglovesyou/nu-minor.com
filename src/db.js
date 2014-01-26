@@ -8,8 +8,6 @@ var schemaMap = {};
 var modelMap = {};
 
 
-// user schema
-schemaMap.user = require('./schema/user');
 
 // item schema
 schemaMap.item = _.extend(
@@ -18,7 +16,6 @@ schemaMap.item = _.extend(
     require('./schema/twitter'),
     require('./schema/googlecalendar'),
     require('./schema/base'));
-
 
 
 
