@@ -68,12 +68,15 @@
  * @param location
  */
 {template .googlecalendar}
+  {let $calendarUrl: 'https://www.google.com/calendar/embed?src=e28kpufjili0uke9upgf6rvp34%40gmail.com&ctz=Asia/Tokyo' /}
   
-  <a href="https://www.google.com/calendar/embed?src=b225852svf6num52g7agnsh568%40group.calendar.google.com&ctz=Asia/Tokyo" target="_blank" class="app-item app-item-static_element app-item-static_element-link app-item-static_element-link-googlecalendar span{$span}{if $span == 6} pull-right{/if}">
+  <a href="{$calendarUrl}"
+     target="_blank"
+     class="app-item app-item-static_element app-item-static_element-link app-item-static_element-link-googlecalendar span{$span}{if $span == 6} pull-right{/if}">
     <h3>{$displayDate}</h3>
     <h2>{$summary}</h2>
-    {$description} {$location}
-    
+    {if isNonnull($description)}{$description} {/if}
+    {if isNonnull($location)}<span style="font-size:93%">@</span>{$location} {/if}
   </a>
 
 {/template}
@@ -111,8 +114,6 @@
       </div>
 
     </div>
-
-    // {call .appItemBar data="all"}{/call}
 
   </div>
 {/template}

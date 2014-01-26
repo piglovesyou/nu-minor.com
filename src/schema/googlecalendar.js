@@ -22,10 +22,12 @@ module.exports = {
     'self': Boolean
   },
   'start': {
-    'date': Date
+    'date': Date,
+    'dateTime': Date
   },
   'end': {
-    'date': Date
+    'date': Date,
+    'dateTime': Date
   },
   'transparency': String,
   'iCalUID': String,

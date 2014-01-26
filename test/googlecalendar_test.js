@@ -5,6 +5,7 @@ var db = require('../src/promise/db');
 var http = require('../src/promise/http');
 var querystring = require('querystring');
 var API_KEY = require('secret-strings').NU_MINOR.API_KEY;
+var CALENDAR_ID = require('secret-strings').NU_MINOR.CALENDAR_ID;
 
 describe('GoogleCalendarCollector', function() {
   return it('should have all items saved in DB.', function(done) {
@@ -12,8 +13,7 @@ describe('GoogleCalendarCollector', function() {
     .then(function() {
       return http.sGet(
         'https://www.googleapis.com/calendar/v3/calendars/' +
-        'b225852svf6num52g7agnsh568@group.calendar.google.com' +
-        '/events?' + querystring.stringify({
+        CALENDAR_ID + '/events?' + querystring.stringify({
           alwaysIncludeEmail: false,
           key: API_KEY
         }));

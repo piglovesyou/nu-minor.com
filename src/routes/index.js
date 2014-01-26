@@ -67,10 +67,10 @@ function extendItems(items) {
   items.forEach(function(item) {
     switch (item.nm_type) {
       case 'googlecalendar':
-        item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
+        item.displayDate = moment().add(
+            (item.start.dateTime || item.start.date).getTime() - Date.now()).calendar();
         break;
       case 'twitter':
-        // item.displayDate = moment(item.created_at, 'DD').fromNow();
         item.displayDate = moment(item.created_at).fromNow();
         item.displayDateDescription = moment(item.created_at).format('LLLL');
         item.displayText = goog.string.linkify.linkifyPlainText(item.text);
