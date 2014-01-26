@@ -54,6 +54,7 @@ app.configure('development', function() {
 
 // Routes
 app.get('/', routes.index);
+app.get('/update', require('./src/routes/update').update);
 app.get('/items/:itemId/view', routes.eachitem.view);
 
 
