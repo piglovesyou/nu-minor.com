@@ -1,14 +1,10 @@
 
 var Q = require('q');
-var db = require('../db');
+var db = require('../promise/db');
 var assert = require('assert');
 var _ = require('underscore');
 
 
-
-var findOne = Q.denodeify(db.item.findOne.bind(db.item));
-var findUsers = Q.denodeify(db.user.find.bind(db.user));
-var update = Q.denodeify(db.item.update.bind(db.item));
 
 var whenFail = function(res) {
   return function(reason) {
@@ -27,7 +23,7 @@ exports.view = function(req, res) {
   var item;
   var result;
 
-  var q = findOne({id: itemId}, {_id: 0})
+  var q = db.items.findOne({id: itemId}, {_id: 0})
   .then(function(i) {
     item = i;
   });
@@ -49,7 +45,7 @@ exports.view = function(req, res) {
           result[field] = [];
           return;
         }
-        return findUsers({id: {$in: item[field]}})
+        return db.users.find({id: {$in: item[field]}})
         .then(function(users) {
           if (!users) return;
           result[field] = users || [];
@@ -106,7 +102,7 @@ var swapUserId = function(itemId, userId, toPush, toPull) {
     pushInc = hadUserInPush ? -1 : 1;
     pullInc = hadUserInPull ? -1 : 0;
 
-    return update({
+    return db.items.update({
       id: itemId
     }, createSwapArg(userId, hadUserInPush, toPush, toPull));
   })

@@ -1,11 +1,9 @@
 
 var Q = require('../moduleproxy/q');
 var outError = require('../promise/promise');
-var db = require('../db');
+var db = require('../promise/db');
 var assert = require('assert');
 var _ = require('underscore');
-
-var findUser = Q.denodeify(db.user.findOne.bind(db.user));
 
 var whenFail = function(res) {
   return function(reason) {
@@ -21,7 +19,7 @@ exports.view = function(req, res) {
 
   var userId = req.params.userId;
 
-  findUser({id: userId}, {_id: 0})
+  db.users.findOne({id: userId}, {_id: 0})
   .fail(whenFail(res))
   .then(function(user) {
     res.end(JSON.stringify(user));
@@ -33,7 +31,7 @@ exports.view = function(req, res) {
 exports.userExistsMW = function(req, res, next) {
 
   var userId = req.params.userId;
-  findUser({id: userId})
+  db.users.findOne({id: userId})
   .fail(whenFail(res))
   .then(function(user) {
     !!user ? next(null, user) : res.end('not found');

@@ -3,7 +3,7 @@
 var soy = require('../soynode.js');
 var isProduction = process.env.NODE_ENV === 'production';
 var Q = require('q');
-var db = require('../db');
+var db = require('../promise/db');
 
 
 var SECRET = require('secret-strings').NU_MINOR;
@@ -19,9 +19,6 @@ var oa = new (require('oauth').OAuth)(
 var getOAuthRequestToken = Q.denodeify(oa.getOAuthRequestToken.bind(oa));
 var getOAuthAccessToken = Q.denodeify(oa.getOAuthAccessToken.bind(oa));
 var getWithOAuth = Q.denodeify(oa.get.bind(oa));
-
-var findOne = Q.denodeify(db.user.findOne.bind(db.user));
-var updateUser = Q.denodeify(db.user.update.bind(db.user));
 
 // /auth
 exports.index = function(req, res) {
@@ -68,7 +65,7 @@ exports.callback = function(req, res, next) {
       user_id: r[2].user_id,
       screen_name: r[2].screen_name
     };
-    return findOne({id: req.session.twitter.user_id});
+    return db.users.findOne({id: req.session.twitter.user_id});
   })
   .then(function(user) {
     if (user && user.id) {
@@ -84,7 +81,7 @@ exports.callback = function(req, res, next) {
       var user = JSON.parse(results[0]);
       _.extend(req.session.twitter, user);
       // We won't wait this step.
-      updateUser({ id: userId }, user, { upsert: true });
+      db.users.update({ id: userId }, user, { upsert: true });
       return;
     }).done();
   })

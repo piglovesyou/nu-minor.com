@@ -3,7 +3,7 @@
 
 var soy = require('../soynode.js');
 var Q = require('q');
-var db = require('../db');
+var db = require('../promise/db');
 var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
 var strftime = require('strftime');
@@ -12,7 +12,6 @@ moment.lang('ja');
 goog.require('goog.array');
 goog.require('goog.string.linkify');
 
-var find = Q.denodeify(db.item.find.bind(db.item));
 
 var isAuthed = function(req) {
   // Means we have already authed, fetched user profile.
@@ -57,7 +56,7 @@ exports.index = function(req, res) {
   ];
 
   var itemsRef;
-  find(null, null, {sort: {created_at: -1}})
+  db.items.find(null, null, {sort: {created_at: -1}})
   .then(function(items) {
 
     items = sortByIdAs(items, feature);
