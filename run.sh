@@ -18,7 +18,7 @@ LIBS_DIR=libs/
 
 PLOVR_DIR=${LIBS_DIR}plovr/
 PLOVR_REMOTE_DIR=http://plovr.googlecode.com/files/
-PLOVR_JAR=plovr-eba786b34df9.jar
+PLOVR_JAR=plovr-81ed862.jar
 PLOVR_JAR_PATH=${PLOVR_DIR}${PLOVR_JAR}
 
 SELENIUMSERVER_REMOTE_JAR=https://selenium.googlecode.com/files/selenium-server-standalone-2.32.0.jar
@@ -50,12 +50,12 @@ case $1 in
         svn co -r 2519 ${CLOSURELIBRARY_REMOTE_DIR} ${LIBS_DIR}closure-library
 
         # Download Closure Stylesheets
-        rm -rf ${CLOSURESTYLESHEETS_DIR}
-        wget -P ${CLOSURESTYLESHEETS_DIR} --no-check-certificate ${CLOSURESTYLESHEETS_REMOTE_DIR}${CLOSURESTYLESHEETS_JAR}
+        # rm -rf ${CLOSURESTYLESHEETS_DIR}
+        # wget -P ${CLOSURESTYLESHEETS_DIR} --no-check-certificate ${CLOSURESTYLESHEETS_REMOTE_DIR}${CLOSURESTYLESHEETS_JAR}
 
         # Download Selenium Server
-        rm -rf ${SELENIUMSERVER_DIR}
-        wget -P ${SELENIUMSERVER_DIR} --no-check-certificate ${SELENIUMSERVER_REMOTE_JAR}
+        # rm -rf ${SELENIUMSERVER_DIR}
+        # wget -P ${SELENIUMSERVER_DIR} --no-check-certificate ${SELENIUMSERVER_REMOTE_JAR}
 
         ;;
 

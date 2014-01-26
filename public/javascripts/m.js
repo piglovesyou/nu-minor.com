@@ -9,3 +9,6 @@ m.layout = function() {
   m._originalLayout();
 };
 m.layout();
+setTimeout(function() {
+  m.layout();
+}, 800);

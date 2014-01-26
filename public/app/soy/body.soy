@@ -7,35 +7,41 @@
  */
 {template .main}
   <div class="row app-items">
-
-    {let $featureList: [9, 3, 3, 6, 3, 3, 3, 3] /}
+    {let $featureList: [9, 3, 3, 6, 3] /}
     {foreach $span in $featureList}
-      {let $item: $items[index($span)] /}
-      {call .item data="$item"}{param span: $span /}{/call}
+      {call .item data="$items[index($span)]"}
+        {param span: $span /}
+      {/call}
     {/foreach}
     {for $i in range(length($featureList), length($items))}
-      {let $item: $items[$i] /}
-      {call .item data="$item"}{param span: 3 /}{/call}
+      {call .item data="$items[$i]"}
+        {param span: 3 /}
+      {/call}
     {/for}
-
   </div>
 {/template}
 
 /**
  * @param nm_type ''
+ * @param? span
  */
 {template .item}
   // Sould I "delegate" template ?
+  {let $min: 3 /}
   {if $nm_type == 'youtube'}
-    {call .youtube data="all"}{/call}
+    {call .youtube data="all"}
+      {param span: $span > $min ? $span : (randomInt(3) >= 1 ? $min * 2 : $min) /}
+    {/call}
   {elseif $nm_type == 'soundcloud'}
-    {call .soundcloud data="all"}{/call}
+    {call .soundcloud data="all"}
+      {param span: $span > $min ? $span : (randomInt(2) >= 1 ? $min * 2 : $min) /}
+    {/call}
   {elseif $nm_type == 'twitter'}
     {call .twitter data="all"}{/call}
   {elseif $nm_type == 'googlecalendar'}
-    {call .googlecalendar data="all"}{/call}
+    {call .googlecalendar data="all" /}
   {elseif $nm_type == '@static_element@'}
-    {call .static_element data="all"}{/call}
+    {call .static_element data="all" /}
   {/if}
 {/template}
 
@@ -98,14 +104,15 @@
       <img class="profile-image" src="{$user['profile_image_url']}" alt="" />
       <p class="text">{$displayText|noAutoescape}</p>
 
-      <div class="username">
-        <a title="{$displayDateDescription}"
-           class="updated_at"
+      <div class="meta">
+        <a class="updated_at"
+           title="{$displayDateDescription}"
            href="https://twitter.com/NU_minor/status/{$id_str}"
            target="blank_">
           {$displayDate}
         </a>
-        <a href="https://twitter.com/NU_minor"
+        <a class="username"
+           href="https://twitter.com/NU_minor"
            title="{$user.description}"
            target="blank_">
           <strong class="from_user">{$user['name']}</strong>
@@ -123,7 +130,7 @@
  * @param span ''
  */
 {template .soundcloud}
-  <div data-itemid="{$id}" class="app-item app-item-soundcloud span{$span}{if $span == 6} pull-right{/if}">
+  <div data-itemid="{$id}" class="app-item app-item-soundcloud span{$span}">
 
     <iframe width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{$id}&amp;color=ff6600&amp;auto_play=false&amp;show_artwork=true"></iframe>
 
@@ -137,7 +144,7 @@
  * @param span ''
  */
 {template .youtube}
-  <div data-itemid="{$id}" class="app-item app-item-youtube span{$span}{if $span == 6} pull-right{/if}">
+  <div data-itemid="{$id}" class="app-item app-item-youtube span{$span}">
 
     // <div style="height :2em; background: #666;"></div>
     <iframe src="http://www.youtube-nocookie.com/embed/{$id}?rel=0" frameborder="0" allowfullscreen></iframe>
@@ -178,4 +185,10 @@
  */
 {template .badInner}
 <span class="iconbefore {if $userMarkedBad}userMarked{else}userNotMarked{/if}">{$nm_bad.length}</span>
+{/template}
+
+/***/
+{template .soyweb}
+  {randomInt(2)}
+  yeah
 {/template}
