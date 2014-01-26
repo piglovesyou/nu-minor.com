@@ -1,10 +1,9 @@
 
 var assert = require('assert');
 var Q = require('../moduleproxy/q');
-var db = require('../db');
-var update = Q.denodeify(db.item.update.bind(db.item));
 var http = require('../promise/http');
 var outError = require('../promise/promise').outError;
+var db = require('../promise/db');
 
 
 
@@ -52,14 +51,16 @@ Base.prototype.insertItems_ = function(items) {
     item.created_at = item[me.createdAtProperty];
     return insertItem_(item);
   }))
-  .fail(outError);
+  .fail(function(e) {
+    console.log('------------------------');
+  });
 };
 
 /**
  * @private
  */
 function insertItem_(item) {
-  return update({ id: item.id },
+  return db.items.update({ id: item.id },
     item, { upsert: true });
 }
 

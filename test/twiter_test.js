@@ -2,10 +2,8 @@ var Q = require('q');
 var youtube = require('youtube-feeds');
 var assert = require('assert');
 var _ = require('underscore');
-var db = require('../src/db');
+var db = require('../src/promise/db');
 var http = require('../src/promise/http');
-var find = Q.denodeify(db.item.find.bind(db.item));
-var count = Q.denodeify(db.item.count.bind(db.item));
 var twitter = require('../src/auth/twitter');
 
 describe('TwitterCollector', function() {
@@ -17,7 +15,7 @@ describe('TwitterCollector', function() {
       assert(_.isArray(items));
       return items.reduce(function(p, item) {
         return p.then(function() {
-          return count({id: item.id});
+          return db.items.count({id: item.id});
         }).then(function(count) {
           assert.equal(count, 1);
         });

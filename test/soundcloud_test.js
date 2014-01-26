@@ -2,9 +2,8 @@ var Q = require('q');
 var _ = require('underscore');
 var youtube = require('youtube-feeds');
 var assert = require('assert');
-var db = require('../src/db');
+var db = require('../src/promise/db');
 var http = require('../src/promise/http');
-var count = Q.denodeify(db.item.count.bind(db.item));
 var querystring = require('querystring');
 var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 
@@ -25,7 +24,7 @@ describe('SoundCloudCollector', function() {
     }).then(function(items) {
       return items.reduce(function(p, item) {
         return p.then(function() {
-          return count({id: item.id});
+          return db.items.count({id: item.id});
         }).then(function(count) {
           assert.equal(count, 1);
         });
