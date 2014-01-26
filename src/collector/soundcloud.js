@@ -1,7 +1,7 @@
 
 var util = require('util');
 var querystring = require('querystring');
-var http = require('../denodeify/http');
+var http = require('../promise/http');
 var CLIENT_ID = require('secret-strings').NU_MINOR.SOUNDCLOUD_CLIENT_ID;
 var Base = require('./base').Base;
 

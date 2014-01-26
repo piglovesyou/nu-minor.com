@@ -1,7 +1,7 @@
 var util = require('util');
 var querystring = require('querystring');
 var Base = require('./base').Base;
-var http = require('../denodeify/http');
+var http = require('../promise/http');
 var API_KEY = require('secret-strings').NU_MINOR.API_KEY;
 
 

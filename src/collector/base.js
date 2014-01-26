@@ -3,7 +3,7 @@ var assert = require('assert');
 var Q = require('../moduleproxy/q');
 var db = require('../db');
 var update = Q.denodeify(db.item.update.bind(db.item));
-var http = require('../denodeify/http');
+var http = require('../promise/http');
 var outError = require('../promise/promise').outError;
 
 

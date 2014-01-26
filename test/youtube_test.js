@@ -9,8 +9,6 @@ var outError = require('../src/promise/promise').outError;
 
 describe('YoutubeCollector', function() {
   return it('should have all items saved in DB.', function(done) {
-    var total;
-    total = void 0;
     return require('../src/collector/youtube').promise().then(function() {
       return videos({
         author: 'NUminormusic'
