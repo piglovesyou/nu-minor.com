@@ -47,7 +47,9 @@
  * @param href ''
  */
 {template .static_element}
-  <a href="{$href}" target="_blank" class="app-item app-item-static_element app-item-static_element-{$role} app-item-static_element-{$role}-{$media} span{$span}{if $span == 6} pull-right{/if}">
+  <a href="{$href}"
+     target="_blank"
+     class="app-item app-item-static_element app-item-static_element-{$role} app-item-static_element-{$role}-{$media} span{$span}{if $span == 6} pull-right{/if}">
     {$label}
   </a>
 {/template}
@@ -84,6 +86,7 @@
  * @param displayText
  * @param displayDate
  * @param displayDateDescription
+ * @param id_str
  */
 {template .twitter}
   <div data-itemid="{$id}" class="app-item app-item-twitter span{$span}{if $span == 6} pull-right{/if}">
@@ -93,9 +96,18 @@
       <p class="text">{$displayText|noAutoescape}</p>
 
       <div class="username">
-        <strong class="from_user">{$user['name']}</strong>
-        <span class="updated_at" title="{$displayDateDescription}">{$displayDate}</span>
-        <span class="from_user_name"><s>@</s>{$user['screen_name']}</span>
+        <a title="{$displayDateDescription}"
+           class="updated_at"
+           href="https://twitter.com/NU_minor/status/{$id_str}"
+           target="blank_">
+          {$displayDate}
+        </a>
+        <a href="https://twitter.com/NU_minor"
+           title="{$user.description}"
+           target="blank_">
+          <strong class="from_user">{$user['name']}</strong>
+          <span class="from_user_name"><s>@</s>{$user['screen_name']}</span>
+        </a>
       </div>
 
     </div>

@@ -19,76 +19,74 @@ var outError = require('../promise/promise').outError;
  */
 
 exports.index = function(req, res) {
-
-  var feature = [
-    'La-bD1IhMto',
-
-    // @static_element@
-    '103989632'
-
-    // 'JphADRVX_W0',
-
-    // '102117201',
-    // '100169194',
-    // 'd7fTQMUZ6yc',
-    // 'phffZ2snf0A',
-    // 'S0U4rIi07qY',
-    // 'Ao399AaSV_E',
-
-    // '106166477',
-    // 'pl2DQWEFbp8'
-  ];
-
-  var itemsRef;
-  db.items.find(null, null, {sort: {created_at: -1}})
-  .then(function(items) {
-
-    items = sortByIdAs(items, feature);
-
-    items.forEach(extendItemForDisplay);
-
-    itemsRef = items;
-    items.splice(2, 0, {
-      nm_type: '@static_element@',
-      role: 'link',
-      media: 'youtube',
-      label: 'YouTube',
-      href: 'http://www.youtube.com/user/NUminormusic'
-    });
-
-    items.splice(5, 0, {
-      nm_type: '@static_element@',
-      role: 'link',
-      media: 'soundcloud',
-      label: 'SoundCloud',
-      href: 'https://soundcloud.com/nu-minor'
-    });
-
-  })
+  db.items.find(null, null, {sort: { updated_at: -1, created_at: -1 }})
+  .then(extendItems)
+  .then(sortItemsNicely)
+  .then(insertStaticLinks)
   .then(function(items) {
     res.end(soy.render('app.soy.index', {
       isProduction: isProduction,
-      items: itemsRef.concat(items ? _.shuffle(items) : [])
+      items: items
     }));
   })
   .fail(outError);
-
 };
 
+function sortItemsNicely(items) {
+  [
+    ['youtube', 0],
+    ['googlecalendar', 2]
+  ]
+  .forEach(function(pair) {
+    var found = goog.array.findIndex(items, function(i) { return i.nm_type == pair[0] });
+    if (found >= 0) moveElementTo(items, found, pair[1]);
+  });
+  return items;
+}
+
+function insertStaticLinks(items) {
+  items.splice(2, 0, {
+    nm_type: '@static_element@',
+    role: 'link',
+    media: 'youtube',
+    label: 'YouTube',
+    href: 'http://www.youtube.com/user/NUminormusic'
+  });
+  items.splice(6, 0, {
+    nm_type: '@static_element@',
+    role: 'link',
+    media: 'soundcloud',
+    label: 'SoundCloud',
+    href: 'https://soundcloud.com/nu-minor'
+  });
+  return items;
+}
 
 /* destractive */
-function extendItemForDisplay(item) {
-  switch (item.nm_type) {
-    case 'googlecalendar':
-      item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
-      break;
-    case 'twitter':
-      // item.displayDate = moment(item.created_at, 'DD').fromNow();
-      item.displayDate = moment(item.created_at).fromNow();
-      item.displayDateDescription = moment(item.created_at).format('LLLL');
-      item.displayText = goog.string.linkify.linkifyPlainText(item.text);
-  }
+function extendItems(items) {
+  items.forEach(function(item) {
+    switch (item.nm_type) {
+      case 'googlecalendar':
+        item.displayDate = moment().add(item.start.date.getTime() - Date.now()).calendar();
+        break;
+      case 'twitter':
+        // item.displayDate = moment(item.created_at, 'DD').fromNow();
+        item.displayDate = moment(item.created_at).fromNow();
+        item.displayDateDescription = moment(item.created_at).format('LLLL');
+        item.displayText = goog.string.linkify.linkifyPlainText(item.text);
+    }
+  });
+  return items;
 }
+
+function moveElementTo(array, from, to) {
+  array.splice(to, 0, array.splice(from, 1)[0]);
+}
+
+
+
+
+
 
 goog.require('goog.array');
 var assert = require('assert');
