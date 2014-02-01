@@ -71,22 +71,19 @@
  * @param span
  * @param displayDate
  * @param displayDateDescription
- * @param description
  * @param location
- * @param htmlLink
+ * @param displayURL
  */
 {template .googlecalendar}
   
-  <a href="{$htmlLink}"
+  <a href="{$displayURL}"
      title="{$displayDateDescription}{\n}
             {$summary}{\n}
-            {if $description}{$description}{\n}{/if}
             {if $location}@{$location}{/if}"
      target="_blank"
      class="app-item app-item-static_element app-item-static_element-link app-item-static_element-link-googlecalendar span{$span}{if $span == 6} pull-right{/if}">
     <h3>{$displayDate}</h3>
     <h2>{$summary}</h2>
-    {if $description}{$description} {/if}
     {if $location}<span style="font-size:93%">@</span>{$location} {/if}
   </a>
 

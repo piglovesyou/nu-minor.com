@@ -69,11 +69,15 @@ function extendItems(items) {
         var d = item.start.dateTime || item.start.date;
         item.displayDate = moment(d).fromNow();
         item.displayDateDescription = moment(d).format('LLLL');
+        item.displayURL = goog.string.linkify.findFirstUrl(item.description) ?
+            goog.string.trim(item.description) : item.htmlLink;
         break;
+
       case 'twitter':
         item.displayDate = moment(item.created_at).fromNow();
         item.displayDateDescription = moment(item.created_at).format('LLLL');
         item.displayText = goog.string.linkify.linkifyPlainText(item.text);
+        break;
     }
   });
   return items;
