@@ -376,7 +376,6 @@ $g_connpass_dark: #3d611c
     background: lighten(#e1c408, 10%)
 .app-item-static_element-link-googlecalendar
   background: #5497e1
-  padding: 2em 2.5em
   color: #DFE5E9
   text-align: inherit
   overflow: hidden
@@ -395,17 +394,29 @@ $g_connpass_dark: #3d611c
 .app-head
   padding-top: 70px
   padding-bottom: 50px
+.app-item-static_element-link-googlecalendar
+  padding: .7em 1em
 @media (max-width: 479px)
   .app-title h1
     float: none
-@media (max-width: 767px) 
+  .app-item-static_element-link-googlecalendar
+    padding: 1em 1.3em
+@media (min-width: 480px) and (max-width: 767px) 
   .app-head
     padding-top: 40px
     padding-bottom: 30px
+  .app-item-static_element-link-googlecalendar
+    padding: 1.2em 1.5em
 @media (min-width: 768px) and (max-width: 979px)
   .app-head
     padding-top: 50px
     padding-bottom: 40px
-// @media (min-width: 980px) and (max-width: 1199px)
-// @media (min-width: 1200px)
+  .app-item-static_element-link-googlecalendar
+    padding: 1.7em 2em
+@media (min-width: 980px) and (max-width: 1199px)
+  .app-item-static_element-link-googlecalendar
+    padding: 1.7em 2em
+@media (min-width: 1200px)
+  .app-item-static_element-link-googlecalendar
+    padding: 2em 2.5em
 

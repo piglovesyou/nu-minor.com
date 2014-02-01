@@ -30,7 +30,7 @@
   {let $min: 3 /}
   {if $nm_type == 'youtube'}
     {call .youtube data="all"}
-      {param span: $span > $min ? $span : (randomInt(3) >= 1 ? $min * 2 : $min) /}
+      {param span: $span > $min ? $span : (randomInt(2) >= 1 ? $min * 2 : $min) /}
     {/call}
   {elseif $nm_type == 'soundcloud'}
     {call .soundcloud data="all"}

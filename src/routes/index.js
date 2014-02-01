@@ -8,9 +8,10 @@ var isProduction = process.env.NODE_ENV === 'production';
 var _ = require('underscore');
 var moment = require('moment');
 moment.lang('ja');
-goog.require('goog.array');
-goog.require('goog.string.linkify');
 var outError = require('../promise/promise').outError;
+goog.require('goog.array');
+goog.require('goog.string');
+goog.require('goog.string.linkify');
 
 
 /*
@@ -69,7 +70,7 @@ function extendItems(items) {
         var d = item.start.dateTime || item.start.date;
         item.displayDate = moment(d).fromNow();
         item.displayDateDescription = moment(d).format('LLLL');
-        item.displayURL = goog.string.linkify.findFirstUrl(item.description) ?
+        item.displayURL = item.description && goog.string.linkify.findFirstUrl(item.description) ?
             goog.string.trim(item.description) : item.htmlLink;
         break;
 
