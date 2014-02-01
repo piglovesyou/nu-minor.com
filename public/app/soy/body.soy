@@ -70,19 +70,24 @@
  * @param summary
  * @param span
  * @param displayDate
+ * @param displayDateDescription
  * @param description
  * @param location
+ * @param htmlLink
  */
 {template .googlecalendar}
-  {let $calendarUrl: 'https://www.google.com/calendar/embed?src=e28kpufjili0uke9upgf6rvp34%40gmail.com&ctz=Asia/Tokyo' /}
   
-  <a href="{$calendarUrl}"
+  <a href="{$htmlLink}"
+     title="{$displayDateDescription}{\n}
+            {$summary}{\n}
+            {if $description}{$description}{\n}{/if}
+            {if $location}@{$location}{/if}"
      target="_blank"
      class="app-item app-item-static_element app-item-static_element-link app-item-static_element-link-googlecalendar span{$span}{if $span == 6} pull-right{/if}">
     <h3>{$displayDate}</h3>
     <h2>{$summary}</h2>
-    {if isNonnull($description)}{$description} {/if}
-    {if isNonnull($location)}<span style="font-size:93%">@</span>{$location} {/if}
+    {if $description}{$description} {/if}
+    {if $location}<span style="font-size:93%">@</span>{$location} {/if}
   </a>
 
 {/template}

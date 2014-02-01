@@ -66,8 +66,9 @@ function extendItems(items) {
   items.forEach(function(item) {
     switch (item.nm_type) {
       case 'googlecalendar':
-        item.displayDate = moment().add(
-            (item.start.dateTime || item.start.date).getTime() - Date.now()).calendar();
+        var d = item.start.dateTime || item.start.date;
+        item.displayDate = moment(d).fromNow();
+        item.displayDateDescription = moment(d).format('LLLL');
         break;
       case 'twitter':
         item.displayDate = moment(item.created_at).fromNow();
