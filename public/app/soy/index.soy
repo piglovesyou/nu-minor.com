@@ -20,6 +20,7 @@
       </div>
       <div class="container app-body-container">
         // {call .nav}{/call}
+        {call .feature /}
         {call app.soy.body.main data="all"}{/call}
         {call app.soy.foot.main data="all"}{/call}
       </div>
@@ -28,6 +29,27 @@
   {/call}
 {/template}
 
+/***/
+{template .feature}
+  <div class="row" style="margin-bottom: 20px">
+    <div class="span4" style="">
+      <h2>NU minor EP</h2>
+      <p>
+
+2014.10.15 RELEASE<br />
+CD/￥1000(Tax out)<br />
+iTunes,digital/￥750(Tax out) <br />
+
+      </p>
+    </div>
+    <div class="span8">
+      <a href="/images/nu_minor_ep.jpg">
+        <img src="/images/nu_minor_ep_1024.jpg" alt="NU minor EP" />
+      </a>
+    </div>
+  </div>
+  
+{/template}
 
 /***/
 {template .nav}
