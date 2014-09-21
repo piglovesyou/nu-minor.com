@@ -21,7 +21,7 @@
     "selenium-webdriver": "*",
     "moment": "*"
   },
-  scripts: {
+  "scripts": {
     "postinstall": "./run.sh build"
   }
 }
