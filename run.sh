@@ -71,6 +71,9 @@ case $1 in
         java -jar ${PLOVR_JAR_PATH} serve plovr.json
         ;;
 
+    build)
+        sass public/sass/main.sass:public/stylesheets/main.css
+
     all)
         redis-server redis.conf
         mongod &

@@ -20,5 +20,8 @@
     "youtube-feeds": "*",
     "selenium-webdriver": "*",
     "moment": "*"
+  },
+  scripts: {
+    "postinstall": "./run.sh build"
   }
 }
