@@ -3,25 +3,21 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app"
   },
   "dependencies": {
-    "closure": "*",
-    "express": "3.1.0",
-    "soynode": "*",
-    "jade": "*",
-    "oauth": "*",
-    "connect-redis": "1.4.5",
-    "node-sass": "0.4.4",
-    "mocha": "*",
-    "underscore": "*",
-    "q": "*",
-    "mongoose": "*",
-    "youtube-feeds": "*",
-    "selenium-webdriver": "*",
-    "moment": "2.5.1"
-  },
-  "scripts": {
-    "postinstall": "git submodule init; git submodule update; ./run.sh build"
+    "closure": "~1.0.3",
+    "connect-redis": "~1.4.5",
+    "express": "~3.1.0",
+    "jade": "~0.34.1",
+    "mocha": "~1.12.0",
+    "moment": "~2.5.1",
+    "mongoose": "~3.6.17",
+    "node-sass": "~0.4.4",
+    "oauth": "~0.9.10",
+    "q": "~0.9.6",
+    "selenium-webdriver": "~2.35.0",
+    "soynode": "~0.3.0",
+    "underscore": "~1.5.1",
+    "youtube-feeds": "~2.2.1"
   }
 }
