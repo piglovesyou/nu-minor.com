@@ -25,7 +25,7 @@ SELENIUMSERVER_REMOTE_JAR=https://selenium.googlecode.com/files/selenium-server-
 SELENIUMSERVER_DIR=${LIBS_DIR}selenium-server/
 
 CLOSURELIBRARY_DIR=${LIBS_DIR}closure-library/
-CLOSURELIBRARY_REMOTE_DIR=http://closure-library.googlecode.com/svn/trunk/
+CLOSURELIBRARY_REMOTE_ZIP=https://github.com/google/closure-library/archive/master.zip
 
 CLOSURETEMPLATE_DIR=${LIBS_DIR}closure-template/
 CLOSURETEMPLATE_REMOTE_DIR=http://closure-templates.googlecode.com/svn/trunk/
@@ -34,6 +34,13 @@ CLOSURESTYLESHEETS_JAR=closure-stylesheets-20111230.jar
 CLOSURESTYLESHEETS_DIR=${LIBS_DIR}closure-stylesheets/
 CLOSURESTYLESHEETS_REMOTE_DIR=https://closure-stylesheets.googlecode.com/files/
 CLOSURESTYLESHEETS_JAR_PATH=${CLOSURESTYLESHEETS_DIR}${CLOSURESTYLESHEETS_JAR}
+
+setup_closurelibrary() {
+    rm -rf ${CLOSURELIBRARY_DIR}
+    mkdir -p $LIBS_DIR
+    (cd ${LIBS_DIR} && wget ${CLOSURELIBRARY_REMOTE_ZIP} && unzip master.zip && mv closure-library-master closure-library && rm master.zip)
+}
+
 
 
 case $1 in
@@ -46,8 +53,7 @@ case $1 in
         wget -P ${PLOVR_DIR} ${PLOVR_REMOTE_DIR}${PLOVR_JAR}
 
         # Download Closure Library
-        rm -rf ${CLOSURELIBRARY_DIR}
-        svn co -r 2519 ${CLOSURELIBRARY_REMOTE_DIR} ${LIBS_DIR}closure-library
+	setup_closurelibrary
 
         # Download Closure Stylesheets
         # rm -rf ${CLOSURESTYLESHEETS_DIR}
@@ -98,6 +104,7 @@ case $1 in
         # JavaScript
         # java -jar ${PLOVR_JAR_PATH} build plovr.json
         # CSS
+        mkdir -p public/stylesheets
         sass -t compressed public/sass/main.sass:public/stylesheets/main-min.css
         ;;
 
