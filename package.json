@@ -16,7 +16,7 @@
     "oauth": "~0.9.10",
     "q": "~0.9.6",
     "selenium-webdriver": "~2.35.0",
-    "soynode": "~0.3.0",
+    "soynode": "*",
     "underscore": "~1.5.1",
     "youtube-feeds": "~2.2.1"
   }

@@ -1,13 +1,3 @@
-
-/**
- * @type {Object}
- */
-global.goog = require('closure').Closure({
-  CLOSURE_BASE_PATH: 'libs/closure-library/closure/goog/'
-});
-
-
-
 var express = require('express') ,
   http = require('http') ,
   path = require('path') ,
@@ -16,6 +6,15 @@ var express = require('express') ,
   _ = require('underscore');
   isProduction = process.env.NODE_ENV === 'production',
   youtube = require('youtube-feeds');
+
+/**
+ * @type {Object}
+ */
+global.goog = require('closure').Closure({
+  CLOSURE_BASE_PATH: path.join(__dirname, 'libs/closure-library/closure/goog/')
+});
+
+
 
 var routes = require('./src/routes');
 _.extend(routes, {
