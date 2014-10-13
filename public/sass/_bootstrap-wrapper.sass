@@ -30,10 +30,9 @@ $borderRadiusLarge:     0px
 $borderRadiusSmall:     0px
 
 // Buttons
-$btnBackground: #3ba5cc
-$btnBackgroundHighlight: $btnBackground
-$btnPrimaryBackground: #4acefe
-$btnPrimaryBackgroundHighlight: $btnPrimaryBackground
+$btnPrimaryBackground: #EB567D
+$btnPrimaryBackgroundHighlight: #EB567D
+
 
 
 
@@ -45,16 +44,14 @@ $btnPrimaryBackgroundHighlight: $btnPrimaryBackground
 // Overrides
 .btn
   padding: .4em .8em
-  color: darken($textColor, 5%)
+  color: darken(#fff, 5%)
   border: none
   text-shadow: none
   +user-select(none)
-  &:hover,
-  &:focus
-    color: lighten($textColor, 13%)
-    background: $btnPrimaryBackground
-.btn-primary
-  color: lighten($textColor, 10%)
+  // &:hover,
+  // &:focus
+  //   color: lighten($textColor, 13%)
+  //   background: $btnPrimaryBackground
 
 // .btn-primary
 //   background: $btnPrimaryBackground
